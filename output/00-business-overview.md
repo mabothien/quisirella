@@ -59,4 +59,6 @@ IG organic (Justin Davis)  ──┼──► Instagram DM ──► Chốt đơ
 Bài đăng sản phẩm organic  ──┘
 ```
 
+**3 chiến dịch Meta Ads (8M VND/tháng):** Phễu Tin nhắn (kiếm khách mới) + Phễu Profile (mồi pixel tạm) + Bán Retarget (chốt). Chi tiết mục đích, KPI, sunset: [`00-campaign-strategy.md`](00-campaign-strategy.md).
+
 Chi tiết kênh và hãng: xem [`00-brands-channels.md`](00-brands-channels.md).

@@ -51,7 +51,7 @@ A report fails if **any single dimension** fails — no averaging away problems.
 
 - **Lost-in-middle:** put the executive summary + verdicts at the **top** of every report and actionable recommendations at the **end**. Never bury verdicts mid-document.
 - **Poisoning:** one fabricated number in `output/` gets re-cited forever (Claude Projects reads these files as ground truth). If an API call fails, write the error + `data_status: unavailable` — never a plausible-looking number. If a bad number is found, **remove it at the source file**, don't append corrections.
-- **Clash:** when sources conflict, priority is fixed: `config/store_profile.yaml` > `.cursor/rules/quisirella-*` > `src/quisirella/skill/` (generic Meta) > external benchmarks. Example: skill says optimize CPA; Quisirella KPI (chi phi/tin nhan) wins.
+- **Clash:** when sources conflict, priority is fixed: `config/store_profile.yaml` = `config/campaign_strategy.yaml` (campaign verdicts) > `.cursor/rules/quisirella-*` > `src/quisirella/skill/` (generic Meta) > external benchmarks. Example: skill says optimize CPA; Quisirella KPI (chi phi/tin nhan) wins; Profile campaign uses cost/visit per campaign_strategy, not messaging CPA.
 - **Distraction:** load only what the task needs. Don't read all of `output/` to answer one campaign question.
 
 ### 6. Subagents only when isolation pays

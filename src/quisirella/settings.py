@@ -44,6 +44,11 @@ def load_relevance_rules() -> dict:
         return yaml.safe_load(f)
 
 
+def load_campaign_strategy() -> dict:
+    with open(CONFIG_DIR / "campaign_strategy.yaml", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
 def ensure_dirs() -> None:
     for d in (DATA_DIR, OUTPUT_DIR, CREDENTIALS_DIR):
         d.mkdir(parents=True, exist_ok=True)

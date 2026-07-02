@@ -10,9 +10,10 @@ You fetch Meta Ads data for Quisirella ad account `act_400356462876861`.
 When invoked:
 
 1. Read `.cursor/rules/quisirella-meta-data-fetch.mdc` for the checklist.
-2. Use Meta MCP or Graph API — **read-only only**.
-3. Save raw JSON to `data/meta_fetch/` (account) and `data/meta_fetch/active/{campaign_id}_*.json`.
-4. Required action types: messaging_conversation_started_7d, messaging_first_reply, depth_2/3/5, lead, link_click, post_save, omni_purchase (note unreliable for Quisirella).
+2. Read `config/campaign_strategy.yaml` — match ACTIVE campaigns by `ads_manager_name` / `name_pattern`; note `legacy_aliases` for older report names.
+3. Use Meta MCP or Graph API — **read-only only**.
+4. Save raw JSON to `data/meta_fetch/` (account) and `data/meta_fetch/active/{campaign_id}_*.json`.
+5. Required action types: messaging_conversation_started_7d, messaging_first_reply, depth_2/3/5, lead, link_click, post_save, omni_purchase (note unreliable for Quisirella).
 
 **Blocked:** `ads_create_*`, `ads_update_*`, `ads_activate_*`, or any mutating MCP tool.
 

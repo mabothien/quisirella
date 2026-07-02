@@ -6,11 +6,13 @@ The filesystem is the workflow's memory layer. Context windows hold working stat
 
 | Path | Role | Written by | Committed to git? |
 |---|---|---|---|
+| `config/campaign_strategy.yaml` | Campaign intent, KPI by role, sunset rules | human + agent | Yes |
 | `data/meta_fetch/` | Raw API JSON (scratch/offload) | meta-fetcher | No (gitignored) |
 | `data/meta_fetch/active/` | Per-campaign raw JSON | meta-fetcher | No |
 | `output/00-*.md` | Stable knowledge base (Claude Projects) | human + agent | Yes |
 | `output/01-06.md` | Periodic reports | report-writer | Yes |
 | `output/07-session-log.md` | Session memory (hooks append) | hooks + agent | Yes |
+| `output/08-dm-quality-log.md` | DM quality + orders ledger (manual) | human + agent | Yes |
 
 ## Scratch-pad rule (tool output offloading)
 

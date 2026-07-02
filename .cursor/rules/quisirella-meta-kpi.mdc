@@ -5,7 +5,7 @@ alwaysApply: false
 
 # Quisirella — KPI Meta Ads
 
-Doc truoc: `config/store_profile.yaml` (business_characteristics).
+Doc truoc: `config/store_profile.yaml` (business_characteristics), `config/campaign_strategy.yaml` (KPI theo campaign role).
 
 Quisirella chot don qua **Instagram DM** — khong dung purchase/ROAS pixel lam KPI chinh.
 
@@ -24,7 +24,23 @@ Quisirella chot don qua **Instagram DM** — khong dung purchase/ROAS pixel lam 
 - Chi phi/tin nhan = spend / messaging_conversation_started_7d
 - Ty le tin nhan/link = messaging_started / link_click (neu link_click > 0)
 - Reply rate = first_reply / messaging_started
-- Depth_3 rate = depth_3 / messaging_started
+- Depth_3 rate = depth_3 / messaging_started (= **engaged_rate** — proxy mess chat luong)
+
+## KPI theo campaign role
+
+Ground truth: `config/campaign_strategy.yaml` + `output/00-campaign-strategy.md`.
+
+| Campaign | funnel_role | KPI chinh | Nguong | Khong dung |
+|---|---|---|---|---|
+| Phễu_TinNhan_LAL1% | top_middle | chi phi/tin nhan | < 25.000 VND (sau 7d) | visit metrics |
+| Phễu_Profile_1806 | top_only | chi phi/visit | < 1.200 VND | chi phi/tin nhan, quality mess |
+| Ban_Retarget_30D | bottom | CPM, CTR, frequency | CPM ~80k, CTR >3%, freq <3.5/tuan | so sanh CPA voi Phieu |
+
+**KPI manual (Meta khong do):** quality_mess_rate (>40%), quality_mess_per_day (≥5 cho sunset), coc_inquiry_rate (>20%), orders_closed. Doc/ghi `output/08-dm-quality-log.md` — khong bia so.
+
+**Engaged proxy (tu dong):** `engaged_rate = depth_3 / messaging_started` — doi chieu voi quality_mess tay.
+
+**Sunset Profile:** Pause khi Phieu Tin nhan dat <25k/mess + ≥5 mess chat/ngay x 3 ngay lien tiep → chuyen 70k/ngay sang Phieu Tin nhan.
 
 ## Red flags (can review ngay)
 
@@ -36,6 +52,8 @@ Quisirella chot don qua **Instagram DM** — khong dung purchase/ROAS pixel lam 
 | Facebook placement > 15% spend (ACTIVE) | IG-first store — review loai FB |
 | Chi phi/lead > 100.000 VND | Lead Meta kem hieu qua |
 | Frequency > 2.5 trong 30 ngay | Co the ad fatigue |
+| Dung chi phi/tin nhan de penalize Phieu Profile | Sai vai tro — Profile toi uu visit, khong mess |
+| Khuyen scale Profile vi mess re | Sai — mess re tu Profile khong chat luong |
 
 ## Verdict taxonomy
 

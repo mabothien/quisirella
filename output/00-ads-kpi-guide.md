@@ -29,9 +29,20 @@ Quisirella chốt qua **Instagram DM** — đọc ads theo logic này, không th
 Chi phí/tin nhắn     = spend / messaging_started_7d
 Tỷ lệ tin nhắn/link  = messaging_started / link_click
 Reply rate           = first_reply / messaging_started
-Depth_3 rate         = depth_3 / messaging_started
+Depth_3 rate         = depth_3 / messaging_started  (= engaged_rate — proxy mess chat luong)
 Frequency            = impressions / reach
 ```
+
+## Đo mess chất lượng (2 lớp)
+
+| Lớp | Nguồn | Metric | Khi nào dùng |
+|---|---|---|---|
+| **Tự động** | Meta API | `engaged_rate = depth_3 / started` | Mọi lần fetch — proxy hội thoại tư vấn |
+| **Thủ công** | [`08-dm-quality-log.md`](08-dm-quality-log.md) | mess chất, đơn chốt, doanh thu | Sunset, quality rate chính xác |
+
+**Mục tiêu:** Tối đa mess chất lượng (khách tư vấn size/ship/cọc) — **không** volume. Chốt đơn phụ thuộc khách.
+
+Chi tiết taxonomy: [`00-campaign-strategy.md`](00-campaign-strategy.md) · sổ ghi: [`08-dm-quality-log.md`](08-dm-quality-log.md).
 
 ## Benchmark tham khảo (account Quisirella)
 
@@ -71,5 +82,7 @@ CPM/CPC luxury jewelry VN **cao hơn** e-commerce giá rẻ — không so benchm
 | **DM funnel** (phễu, tin nhắn) | Chi phí/tin nhắn, depth_3 |
 | **Product push** (Bán, Tiffany cụ thể) | Lead, depth_5 |
 | **Engagement/reach** (link_click >> tin nhắn) | Reach, post_save — **không scale nếu DM kém** |
+
+**Chi tiết 3 campaign hiện tại:** xem [`00-campaign-strategy.md`](00-campaign-strategy.md) — KPI theo `funnel_role` (Profile = cost/visit, không penalize mess kém).
 
 Số liệu thực tế kỳ gần nhất: xem `01-meta-ads-performance.md` và `06-active-campaigns-analysis.md`.

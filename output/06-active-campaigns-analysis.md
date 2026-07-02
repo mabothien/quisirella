@@ -1,18 +1,31 @@
 ---
 title: Phân tích 3 chiến dịch ACTIVE — Quisirella
-generated_at: 2026-07-02
-data_range: 2026-06-02 đến 2026-07-01
+generated_at: 2026-07-03
+data_range: 2026-06-30 đến 2026-07-02
 sources: [meta_graph_api]
 data_status: ok
 ad_account_id: act_400356462876861
 active_campaign_count: 3
+analysis_window: 3_days
 ---
 
-# 06 — Phân tích 3 chiến dịch ACTIVE
+# 06 — Phân tích 3 chiến dịch ACTIVE (3 ngày)
 
-Account `act_400356462876861`, kỳ **30 ngày** (02/06 → 01/07/2026). Chỉ gồm 3 campaign đang **ACTIVE** tại thời điểm fetch API.
+Account `act_400356462876861`, kỳ **3 ngày** (30/06 → 02/07/2026). Đánh giá theo [`config/campaign_strategy.yaml`](../config/campaign_strategy.yaml) và [`00-campaign-strategy.md`](00-campaign-strategy.md) — **funnel_role**, không penalize Profile vì mess kém.
 
-> Quisirella chốt đơn qua **Instagram DM** — KPI chính: **tin nhắn bắt đầu (7 ngày)**, không phải purchase Meta.
+> Quisirella chốt đơn qua **Instagram DM** — KPI chính: **tin nhắn bắt đầu (7 ngày)**. Purchase Meta không phản ánh doanh thu thật (chốt DM).
+
+**Caveat:** Kỳ 3 ngày — tất cả campaign đang **learning phase** (< 50 mess/tuần). Verdict mang tính sơ bộ, chưa đủ data để scale/pause dứt khoát.
+
+**Mapping tên:** Ads Manager vẫn dùng tên cũ — map qua `legacy_aliases` trong strategy.
+
+| Tên Ads Manager (API) | strategy_id | funnel_role | Objective thực tế (adset) |
+|---|---|---|---|
+| Chiến dịch phễu - target tin nhắn | `phieu_tinnhan_lal1` | top_middle | messaging |
+| Chiến dịch Lượt tương tác mới - 1806 | `phieu_profile_1806` | top_only | `destination_type: INSTAGRAM_PROFILE` — Lượt truy cập trang cá nhân IG |
+| Chiến dịch Lượt tương tác - Bán - Bản sao | `ban_retarget_30d` | bottom | engagement/messaging |
+
+> **Lưu ý metric 1806:** Objective cấp campaign hiển thị `OUTCOME_ENGAGEMENT` (nhóm ODAX), nhưng cấp **adset** có `optimization_goal: PROFILE_AND_PAGE_ENGAGEMENT` + `destination_type: INSTAGRAM_PROFILE` → **đúng là chiến dịch Lượt truy cập trang cá nhân IG** như thiết kế. Metric "Lượt truy cập trang cá nhân IG" là **cột Ads Manager** — API không expose riêng, chỉ có `link_click` (proxy). Số visit chính xác lấy từ Ads Manager (manual).
 
 ---
 
@@ -21,235 +34,232 @@ Account `act_400356462876861`, kỳ **30 ngày** (02/06 → 01/07/2026). Chỉ g
 | Chỉ số | Giá trị |
 |---|---:|
 | Campaign ACTIVE | **3** |
-| Tổng spend (3 ACTIVE) | **3.689.114 VND** |
-| % spend account (8,55M) | ~43,1% |
-| Tổng tin nhắn bắt đầu | **95** |
-| Chi phí/tin nhắn trung bình | **38.834 VND** |
-| Tổng lead Meta | 55 |
-| Purchase Meta (pixel) | 2 |
+| Tổng spend (3 ACTIVE) | **803.675 VND** |
+| Tổng tin nhắn bắt đầu | **35** |
+| Chi phí/tin nhắn trung bình (gộp) | **22.962 VND** |
+| Tổng lead Meta | 34 |
+| Purchase Meta (pixel) | 1 |
+| **Đơn chốt (manual)** | **3** |
+| Engaged mess proxy (depth_3/phễu) | **50%** (10/20) |
 
-**Xếp hạng nhanh:**
+**Xếp hạng theo chi phí/tin nhắn** (KPI primary — chỉ áp dụng full cho top_middle & bottom):
 
 | Tiêu chí | #1 | #2 | #3 |
 |---|---|---|---|
-| Chi phí/tin nhắn | phễu (16.799) | Bán - Bản sao (25.777) | 1806 (55.790) |
-| CTR | phễu (5,42%) | 1806 (4,16%) | Bán - Bản sao (4,01%) |
-| Volume tin nhắn | 1806 (50) | phễu (29) | Bán - Bản sao (16) |
-| Hiệu quả ngân sách | phễu | Bán - Bản sao | 1806 |
+| Chi phí/tin nhắn | Bán (17.031) | phễu (20.979) | 1806 (42.755) |
+| CTR | 1806 (5,23%) | phễu (5,05%) | Bán (4,28%) |
+| Volume tin nhắn | phễu (20) | Bán (10) | 1806 (5) |
+| Funnel depth_3 rate | phễu (50%) | Bán (20%) | 1806 (20%) |
 
-**Kết luận:** Campaign **phễu - target tin nhắn** là hiệu quả nhất cho funnel DM. Campaign **1806** chi tiêu nhiều nhất (75,6% budget ACTIVE) nhưng tối ưu **click/engagement** hơn **tin nhắn** — cần giảm hoặc tái cấu trúc.
+**Kết luận nhanh:**
+
+- **phễu tin nhắn** (`top_middle`): Chi phí/tin nhắn **20.979 VND** — dưới ngưỡng strategy < 25.000 VND. Funnel sâu (reply 80%, depth_3 50%). **Hold** — chờ thêm data learning.
+- **1806** (`top_only`): **Đúng vai trò Profile Visit** (`destination_type: INSTAGRAM_PROFILE`). Chi phí/lượt truy cập **769 VND** (Ads Manager, 278 visit) — **dưới ngưỡng < 1.200 VND**. Mess kém là **expected**, không penalize. **Hold** — đang hoàn thành vai trò mồi pixel giá rẻ.
+- **Bán retarget** (`bottom`): Chi phí/tin nhắn **17.031 VND** tốt nhất; CPM **68.757** trong ngưỡng ~80k. **Hold** — nhưng **66,7% spend vào Facebook Feed** cần review (IG-first store).
 
 ---
 
-## 2. Bảng so sánh side-by-side
+## 2. Bảng so sánh side-by-side (verbatim)
 
-| Chỉ số | phễu - target tin nhắn | Bán - Bản sao | Lượt tương tác mới - 1806 |
+| Chỉ số | phễu - target tin nhắn | Bán - Bản sao | 1806 |
 |---|---:|---:|---:|
+| strategy_id | `phieu_tinnhan_lal1` | `ban_retarget_30d` | `phieu_profile_1806` |
+| funnel_role | top_middle | bottom | top_only |
 | ID | `120253285175280110` | `120252990977040110` | `120252531135370110` |
-| Tạo ngày | 29/06/2026 | 25/06/2026 | 18/06/2026 |
-| Ngân sách | Lifetime 4.200.000 | — | Lifetime 3.950.000 |
-| **Spend** | 487.178 | 412.431 | 2.789.505 |
-| Impressions | 5.845 | 5.464 | 65.311 |
-| Reach | 3.672 | 3.766 | 40.125 |
-| Frequency | 1,59 | 1,45 | 1,63 |
-| Clicks | 317 | 219 | 2.720 |
-| **CTR** | **5,42%** | 4,01% | 4,16% |
-| CPC | 1.537 | 1.883 | **1.026** |
-| CPM | 83.350 | 75.482 | 42.711 |
-| **Tin nhắn bắt đầu** | **29** | 16 | 50 |
-| **Chi phí/tin nhắn** | **16.799** | 25.777 | 55.790 |
-| Lead Meta | 24 | 16 | 15 |
-| Chi phí/lead | 20.299 | 25.777 | 185.967 |
-| Purchase Meta | 1 | 1 | 0 |
-| Link click | 58 | 40 | 2.629 |
-| Tỷ lệ tin nhắn/link | **50,0%** | 40,0% | 1,9% |
-| Post save | 1 | 0 | **24** |
-| Video view | 6 | 342 | 252 |
+| **Spend** | 419.588 | 170.311 | 213.776 |
+| % spend 3 ACTIVE | 52,2% | 21,2% | 26,6% |
+| Impressions | 5.387 | 2.477 | 4.975 |
+| Reach | 3.390 | 1.440 | 4.237 |
+| Frequency | 1,59 | 1,72 | 1,17 |
+| Clicks | 272 | 106 | 260 |
+| **CTR** | **5,05%** | 4,28% | **5,23%** |
+| CPC | 1.543 | 1.607 | 822 |
+| CPM | 77.889 | 68.757 | 42.970 |
+| **Tin nhắn bắt đầu** | **20** | **10** | **5** |
+| **Chi phí/tin nhắn** | **20.979** | **17.031** | **42.755** |
+| Lead Meta | 20 | 13 | 1 |
+| Chi phí/lead | 20.979 | 13.101 | 213.776 |
+| Purchase Meta | 1 | 0 | 0 |
+| Link click | 54 | 19 | 262 |
+| **Lượt truy cập profile IG (AM)** | — | — | **278** |
+| Chi phí/truy cập profile (AM) | — | — | **769** |
+| Engaged rate (depth_3) | **50%** | 20% | 20% |
+| Post save | 1 | 0 | 3 |
+| Video view | 8 | 163 | 25 |
+
+*Nguồn: `data/meta_fetch/active/{id}_insights.json`. Lượt truy cập profile IG chính xác = cột Ads Manager (manual); API chỉ có link_click proxy.*
 
 ---
 
-## 3. Phân tích chi tiết từng campaign
+## 3. Funnel depth (3 ngày)
 
-### 3.1 Chiến dịch phễu - target tin nhắn
+| Campaign | Started | First reply | Depth_2 | Depth_3 | Depth_5 | Reply rate | Depth_3 rate |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| phễu tin nhắn | 20 | 16 | 16 | 10 | 1 | **80%** | **50%** |
+| Bán retarget | 10 | 5 | 8 | 2 | 1 | 50% | 20% |
+| 1806 | 5 | 4 | 3 | 1 | 0 | 80% | 20% |
 
-**Vai trò:** Campaign funnel tin nhắn — mới nhất, thiết kế đúng mục tiêu DM.
-
-| Điểm mạnh | Chi tiết |
-|---|---|
-| Chi phí/tin nhắn thấp nhất | 16.799 VND — thấp hơn trung bình account (51.795) **3,1×** |
-| CTR cao nhất | 5,42% — creative và targeting phù hợp |
-| Lead hiệu quả | 24 lead, chi phí/lead 20.299 VND |
-| Funnel sâu | 29 tin nhắn → 22 first reply → 20 depth_3 → 3 depth_5 |
-| 100% Instagram | Không lãng phí trên Facebook |
-
-**Placement (100% IG):**
-
-| Placement | Spend | % | CTR | CPC |
-|---|---:|---:|---:|---:|
-| Instagram Feed | 312.861 | 64,2% | 5,51% | 1.621 |
-| Instagram Reels | 88.329 | 18,1% | 5,22% | **1.359** |
-| Instagram Stories | 85.988 | 17,7% | 5,37% | 1.457 |
-
-Reels có CPC thấp nhất — có thể tăng tỷ trọng khi scale.
-
-**Adset:** 1 adset duy nhất ("Nhóm quảng cáo Lượt tương tác mới") — toàn bộ hiệu suất tập trung, dễ scale.
-
-**Rủi ro:** Lifetime budget 4,2M, đã spend 487k (**11,6%**) sau ~3 ngày — tốc độ burn cao (~162k/ngày). Nếu duy trì, hết budget trong ~24 ngày.
+**Nhận xét:** phễu có funnel sâu nhất (depth_3 rate 50%) — phù hợp vai trò **top_middle** lọc ý định mua. Bán retarget depth_3 thấp hơn nhưng vẫn trong learning — cần theo dõi thêm khi frequency tăng.
 
 ---
 
-### 3.2 Chiến dịch Lượt tương tác - Bán - Bản sao
+## 4. Phân tích theo funnel_role
 
-**Vai trò:** Campaign chuyển đổi sản phẩm bán — cân bằng tin nhắn và lead.
+### 4.1 phễu tin nhắn — `top_middle` (máy kiếm khách mới)
 
-| Điểm mạnh | Chi tiết |
-|---|---|
-| Chi phí/tin nhắn tốt | 25.777 VND — hạng 2 |
-| Lead = tin nhắn | 16 lead, 16 tin nhắn — tỷ lệ 1:1 |
-| Hội thoại sâu | depth_5 = 3 (18,8% tin nhắn đạt depth 5) |
-| 1 purchase Meta | Có signal conversion (cần đối chiếu DM thật) |
+**KPI strategy:**
 
-| Điểm yếu | Chi tiết |
-|---|---|
-| Facebook chiếm 30% spend | FB Feed 122k (29,6%) — không phù hợp luxury jewelry IG-first |
-| CPM cao | 75.482 VND |
-| Volume thấp | 5.464 impressions — mẫu nhỏ |
+| KPI | Ngưỡng | Thực tế 3 ngày | Đạt? |
+|---|---|---:|---|
+| Chi phí/tin nhắn | < 25.000 VND | **20.979** | Có (sơ bộ) |
+| Mess/tuần (learning) | ≥ 50 | ~47 (20 mess × 7/3) | Gần ngưỡng |
+| Quality mess rate | > 40% | **90%** (18/20 — 30/6+1/7; 2/7 N/A) | **Đạt** |
+| Engaged mess (depth_3 proxy) | — | **50%** (10/20) | Proxy tự động API |
+| Đơn chốt (kỳ) | — | **3** | manual — Business FB |
 
-**Placement:**
+**Mess chất lượng theo ngày** (manual — user, nguồn DM; chi tiết: [`08-dm-quality-log.md`](08-dm-quality-log.md)):
 
-| Placement | Spend | % | CTR | CPC |
-|---|---:|---:|---:|---:|
-| Facebook Feed | 122.162 | 29,6% | 4,61% | 1.420 |
-| Instagram Feed | 172.443 | 41,8% | 3,71% | 2.156 |
-| Instagram Reels | 74.587 | 18,1% | 4,27% | 1.963 |
-| Instagram Stories | 43.177 | 10,5% | 2,72% | 2.878 |
+| Ngày | Tin nhắn (API) | Mess chất (manual) | depth_3 (proxy) | Chi phí/mess | ≥ 5 chất? | < 25k/mess? |
+|---|---:|---:|---:|---:|---|---|
+| 30/06 | 10 | **10** | 5 | 13.207 | Đạt | Đạt |
+| 01/07 | 8 | **8** | 4 | 18.980 | Đạt | Đạt |
+| 02/07 | 2 | **N/A** | 1 | 67.839* | N/A | Không đạt* |
 
-**Khuyến nghị placement:** Loại Facebook Feed (122k spend, không rõ contribution tin nhắn). Stories CTR thấp nhất (2,72%) — review creative.
+*\*02/7: mess chất không xác định được — data nằm ở Business FB "đã chuyển đổi", không API được. Attribution mess API có thể tăng sau 1–2 ngày.*
 
-**Adset:** 1 adset ("Nhóm quảng cáo Lượt tương tác - Bán").
+**Sunset Profile (điều kiện phễu):** **2/3 ngày đạt** (30/6 + 1/7). 2/7 mess chất **N/A** → **chưa kích hoạt sunset** — theo dõi 3/7.
 
----
+**Điểm mạnh:** Chi phí/tin nhắn dưới target; CTR 5,05%; reply rate 80%; 100% spend trên Instagram (placement).
 
-### 3.3 Chiến dịch Lượt tương tác mới - 1806
+**Placement IG (3 ngày):**
 
-**Vai trò:** Campaign reach/engagement lớn — **không hiệu quả cho funnel DM**.
-
-| Điểm mạnh | Chi tiết |
-|---|---|
-| Volume tin nhắn cao nhất | 50 tin nhắn (52,6% tổng ACTIVE) |
-| CPC thấp nhất | 1.026 VND — delivery rẻ |
-| Reach rộng | 40.125 người |
-| Engagement tốt | 24 post save, 3.006 post engagement |
-| Reply rate cao | 43/50 first reply (86%) |
-
-| Điểm yếu | Chi tiết |
-|---|---|
-| Chi phí/tin nhắn cao nhất | 55.790 VND — cao gấp **3,3×** phễu |
-| Tối ưu click, không DM | 2.629 link click vs 50 tin nhắn (1,9%) |
-| Chi phí/lead rất cao | 185.967 VND/lead |
-| Budget sắp hết | 2,79M/3,95M lifetime (**70,6%** đã dùng) |
-| Spend chiếm 75,6% budget ACTIVE | Lãng phí tương đối nếu mục tiêu là DM |
-
-**Placement:**
-
-| Placement | Spend | % | CTR | CPC |
-|---|---:|---:|---:|---:|
-| Instagram Feed | 1.249.361 | 44,8% | 3,52% | 1.188 |
-| Instagram Reels | 957.354 | 34,3% | **4,58%** | **961** |
-| Instagram Stories | 516.406 | 18,5% | 3,69% | 1.153 |
-| Facebook Feed | 52.082 | 1,9% | 15,27% | 276 |
-| Facebook Reels | 14.302 | 0,5% | 12,54% | 409 |
-
-Reels hiệu quả nhất (CTR 4,58%, CPC 961) nhưng vẫn drive click hơn tin nhắn. FB Feed có CTR cao (15%) nhưng mẫu nhỏ — không scale.
-
-**Adset:** 1 adset ("Nhóm quảng cáo Lượt tương tác mới") — toàn bộ 2,79M spend tập trung một adset engagement generic.
-
-**Chẩn đoán:** Campaign này hoạt động như **awareness + engagement** (save, click, like) chứ không phải **messaging funnel**. Phù hợp nuôi warm audience, không phù hợp làm campaign conversion chính.
-
----
-
-## 4. Funnel tin nhắn (depth 2 → 3 → 5)
-
-| Giai đoạn | phễu | Bán - Bản sao | 1806 |
+| Placement | Spend | Tin nhắn | Chi phí/tin nhắn |
 |---|---:|---:|---:|
-| Tin nhắn bắt đầu (7d) | 29 | 16 | 50 |
-| First reply | 22 (76%) | 10 (63%) | 43 (86%) |
-| Depth 2 (≥2 tin) | 23 (79%) | 10 (63%) | 30 (60%) |
-| Depth 3 (≥3 tin) | 20 (69%) | 7 (44%) | 16 (32%) |
-| Depth 5 (≥5 tin) | 3 (10%) | 3 (19%) | 4 (8%) |
-| Messaging connection | 32 | 19 | 49 |
-| Order created (Meta) | 1 | 0 | 0 |
+| instagram feed | 266.758 | 11 | 24.233 |
+| instagram reels | 74.004 | 3 | 24.668 |
+| instagram stories | 78.826 | 6 | **13.138** |
 
-**Insight funnel:**
+**Giả thuyết testable:** Stories có chi phí/tin nhắn thấp nhất trên IG — có thể tăng tỷ trọng creative Stories *nếu* marginal efficiency duy trì sau 7 ngày (không pause Feed/Reels chỉ vì CPA trung bình cao hơn).
 
-- **phễu** có tỷ lệ depth_3 cao nhất (69%) — khách vào DM và chat sâu, phù hợp chốt đơn jewelry.
-- **Bán - Bản sao** có tỷ lệ depth_5 cao nhất (19%) — ít tin nhắn nhưng chất lượng hội thoại tốt.
-- **1806** nhiều tin nhắn bắt đầu nhưng depth_3 chỉ 32% — nhiều hội thoại nông, có thể do CTA không rõ hoặc creative không match intent mua.
+**Verdict: `hold`** — KPI primary đạt nhưng learning phase; chưa đủ 7 ngày học máy. Không scale mạnh trước khi có ≥ 50 mess/tuần ổn định.
 
 ---
 
-## 5. Budget pacing & trạng thái ngân sách
+### 4.2 1806 — `top_only` (mồi pixel / Profile Visit)
 
-| Campaign | Loại budget | Đã spend | Còn lại | % đã dùng | Nhịp spend/ngày* |
-|---|---|---:|---:|---:|---:|
-| phễu - target tin nhắn | Lifetime 4.200.000 | 487.178 | 3.712.822 | 11,6% | ~162.000 (3 ngày) |
-| Lượt tương tác mới - 1806 | Lifetime 3.950.000 | 2.789.505 | 1.160.495 | **70,6%** | ~199.000 (14 ngày) |
-| Bán - Bản sao | Không set lifetime | 412.431 | — | — | ~103.000 (4 ngày) |
+**Objective xác nhận (cấp adset):** `optimization_goal: PROFILE_AND_PAGE_ENGAGEMENT`, `destination_type: INSTAGRAM_PROFILE` → **đúng chiến dịch Lượt truy cập trang cá nhân IG**. Đã chạy từ **18/06** (~15 ngày, quá cửa sổ tạm 7–10 ngày).
 
-_*Ước tính từ ngày tạo campaign đến 01/07._
+**Lượt truy cập trang cá nhân IG theo ngày:**
 
-**Cảnh báo:**
+| Ngày | Lượt truy cập (Ads Manager) | Spend | Chi phí/truy cập (AM) |
+|---|---:|---:|---:|
+| 30/06 | **60** | 54.607 | **910** |
+| 01/07 | **128** | 87.441 | **683** |
+| 02/07 | **90** | 71.728 | **797** |
+| **Tổng** | **278** | 213.776 | **769** |
 
-1. **1806** còn ~1,16M lifetime — ước tính **6 ngày** nữa hết budget ở nhịp hiện tại.
-2. **phễu** burn nhanh — nếu không điều chỉnh, hết budget trước khi tối ưu xong creative/placement.
-3. **Bán - Bản sao** không có lifetime cap — cần set budget để tránh spend không kiểm soát.
+> Nguồn visit: Ads Manager (manual, user). API `link_click` = 262 (proxy, thấp hơn ~6%).
 
-**Phân bổ spend ACTIVE:**
+**KPI strategy (Profile Visit):**
 
-```
-1806        ████████████████████████████████████  75,6%  (2,79M)
-phễu        ██████                                 13,2%  (487k)
-Bán - sao   █████                                  11,2%  (412k)
-```
+| KPI | Ngưỡng | Thực tế 3 ngày | Đạt? |
+|---|---|---:|---|
+| Chi phí/truy cập | < 1.200 VND | **769** (AM) | **Đạt** |
+| Chi phí/tin nhắn | Loại trừ | 42.755 | Expected — không penalize |
+| Mess chất lượng | Không kỳ vọng | — | — |
 
-Đề xuất phân bổ mới: **phễu 50% / Bán 30% / 1806 20%** (hoặc pause 1806).
+**Chẩn đoán:** Campaign **đang hoàn thành đúng vai trò `top_only`** — traffic rẻ về trang IG (769đ/visit, dưới ngưỡng 1.200đ), nuôi pixel/LAL. Mess ít (5) là **đúng thiết kế**, không phải lỗi.
 
----
+**Sunset check (strategy):** phễu đạt < 25k/mess + ≥ 5 mess chất **2 ngày liên tiếp** (30/6, 1/7). Ngày 2/7 chưa đủ → **chưa kích hoạt sunset**. 1806 vẫn **hold** song song.
 
-## 6. Khuyến nghị hành động
-
-### Scale (ưu tiên cao)
-
-**phễu - target tin nhắn**
-- Tăng lifetime budget lên 6–8M hoặc duplicate cấu trúc sang sản phẩm mới.
-- Tăng tỷ trọng Reels (CPC thấp nhất: 1.359).
-- Giữ 100% Instagram, không thêm Facebook.
-
-### Giữ & tối ưu (ưu tiên trung bình)
-
-**Bán - Bản sao**
-- Loại placement Facebook Feed (~122k spend).
-- Set lifetime/daily budget cap.
-- Giữ nguyên cấu trúc — depth_5 tốt, phù hợp sản phẩm đang bán.
-
-### Giảm / tái cấu trúc (ưu tiên cao)
-
-**Lượt tương tác mới - 1806**
-- **Không scale thêm** — chi phí/tin nhắn 55.790 quá cao.
-- Giảm budget hoặc pause khi hết lifetime (~1,16M còn lại).
-- Chuyển phần budget sang phễu.
-- Nếu giữ: đổi CTA sang "Nhắn tin" thay vì link click; test creative funnel giống phễu.
-
-### Không nên làm
-
-- Scale 1806 vì volume tin nhắn cao — hiệu quả chi phí kém.
-- Tin 2 purchase Meta làm KPI (pixel không phản ánh DM thật).
-- Thêm Facebook placement cho luxury jewelry IG-first.
+**Verdict: `hold`** — 1806 đạt KPI riêng (visit < 1.200đ), không có lý do hiệu suất để tắt. Lý do tắt duy nhất = **hết vai trò tạm** khi phễu tin nhắn tự đứng được (sunset). Đã quá `max_days: 10` → cân nhắc sunset ngay khi xác nhận phễu ổn định + đủ mess chất.
 
 ---
 
-## Phụ lục: Nguồn dữ liệu
+### 4.3 Bán retarget — `bottom` (chốt đơn)
 
-Raw JSON: `data/meta_fetch/active/` — campaigns_status, `{id}_insights`, `{id}_placement`, `{id}_adsets`.
+**KPI strategy:**
 
-Báo cáo tổng account: [`output/01-meta-ads-performance.md`](01-meta-ads-performance.md).
+| KPI | Ngưỡng | Thực tế 3 ngày | Đạt? |
+|---|---|---:|---|
+| CPM | ~80.000 VND | **68.757** | Có |
+| CTR | > 3% | **4,28%** | Có |
+| Tần suất | < 3,5/tuần | 1,72 (3 ngày) | Có (sơ bộ) |
+| Coc inquiry rate | > 20% | *manual — n/a* | Chưa có |
+
+**Điểm mạnh:** Chi phí/tin nhắn **17.031 VND** — thấp nhất trong 3 campaign; CPM trong ngưỡng chấp nhận cho tệp nhỏ.
+
+**Red flag — Facebook placement:**
+
+| Platform | Spend | % spend | Tin nhắn |
+|---|---:|---:|---:|
+| **facebook feed** | **113.484** | **66,7%** | 4 |
+| instagram feed | 35.060 | 20,6% | 4 |
+| instagram reels | 10.034 | 5,9% | 1 |
+| instagram stories | 11.733 | 6,9% | 1 |
+
+**66,7% spend vào Facebook Feed** — vượt ngưỡng cảnh báo 15% cho store IG-first. Chi phí/tin nhắn FB: **28.371 VND** vs IG (6 mess): **9.471 VND**.
+
+**Giả thuyết testable:** Review loại Facebook placement hoặc giảm budget FB — IG rows hiệu quả mess hơn cho retarget. Không pause campaign (hàng cao cần nhiều chạm).
+
+**Verdict: `hold`** + **optimize placement** — giữ budget tổng, ưu tiên IG Feed/Reels/Stories.
+
+---
+
+## 5. Phân bổ ngân sách vs strategy
+
+| Campaign | % spend thực tế (3 ngày) | % strategy (daily) | Ghi chú |
+|---|---:|---:|---|
+| phễu tin nhắn | 52,2% | 52,5% | Khớp |
+| 1806 (Profile) | 26,6% | 26% | Khớp — visit 769đ đạt target |
+| Bán retarget | 21,2% | 19% | Gần khớp |
+
+Tổng phễu acquisition (phễu + 1806): **78,8%** vs strategy 70% — hơi lệch vì retarget spend thấp trong 3 ngày.
+
+---
+
+## 6. Verdict tổng hợp
+
+| Campaign | funnel_role | Verdict | Hành động cụ thể |
+|---|---|---|---|
+| phễu tin nhắn | top_middle | **hold** | Giữ ~140k/ngày; sunset 2/3 ngày đạt — chờ 3/7 xác nhận; quality 90% |
+| 1806 | top_only | **hold** | Đạt visit 769đ (AM), đúng vai trò mồi pixel; giữ song song đến sunset |
+| Bán retarget | bottom | **hold** | Giữ 50k/ngày; review loại FB Feed (66,7% spend); không pause |
+
+**Sunset Profile:** **Chưa kích hoạt** — 30/6 + 1/7 đạt cả 2 điều kiện. 2/7 mess chất **N/A** (Business FB). Cần **3 ngày liên tiếp** → theo dõi **3/7**.
+
+**Đơn chốt kỳ:** **3 đơn** (manual — Business FB "đã chuyển đổi"). Chốt phụ thuộc khách — không dùng làm KPI campaign.
+
+**Learning phase:** Cả 3 campaign — caveat bắt buộc trước mọi quyết định scale/pause.
+
+---
+
+## 7. KPI manual + proxy tự động
+
+| Metric | Campaign | Giá trị | Nguồn | Trạng thái |
+|---|---|---|---|---|
+| quality_mess_per_day | phễu | 30/6: **10**, 1/7: **8**, 2/7: **N/A** | user (DM) | 2/3 ngày |
+| quality_mess_rate | phễu | **90%** (18/20 — 2/7 loại trừ) | user | Đạt > 40% |
+| engaged_rate (depth_3) | phễu | **50%** (10/20) | Meta API | Proxy tự động |
+| profile_visit (AM) | 1806 | 30/6: **60**, 1/7: **128**, 2/7: **90** | user (AM) | 3/3 ngày |
+| cost_per_visit (AM) | 1806 | **769** VND | tính từ AM | Đạt < 1.200 |
+| orders_closed | account | **3** | Business FB | manual |
+| coc_inquiry_rate | retarget | n/a | user (DM) | Chưa có |
+
+Chi tiết ghi hàng ngày: [`08-dm-quality-log.md`](08-dm-quality-log.md)
+
+---
+
+## 8. Phụ lục nguồn dữ liệu
+
+| File | Nội dung |
+|---|---|
+| `data/meta_fetch/active/campaigns_status.json` | Mapping ID + objective/destination adset |
+| `data/meta_fetch/active/{id}_daily.json` | Breakdown theo ngày (time_increment=1) |
+| `data/meta_fetch/active/120253285175280110_insights.json` | phễu insights 3d |
+| `data/meta_fetch/active/120252531135370110_insights.json` | 1806 insights 3d |
+| `data/meta_fetch/active/120252990977040110_insights.json` | Bán insights 3d |
+| `data/meta_fetch/active/{id}_placement.json` | Placement breakdown |
+| `data/meta_fetch/active/{id}_adsets.json` | Adset level |
+
+Strategy reference: [`config/campaign_strategy.yaml`](../config/campaign_strategy.yaml) · [`00-campaign-strategy.md`](00-campaign-strategy.md) · [`08-dm-quality-log.md`](08-dm-quality-log.md)

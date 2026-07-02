@@ -1,0 +1,234 @@
+# Campaign strategy ground truth for Quisirella Meta Ads.
+# Agents load this file alongside store_profile.yaml before analysis.
+
+meta_ads:
+  ad_account_id: act_400356462876861
+  monthly_budget_vnd: 8000000
+  daily_budget_vnd: 267000
+  sales_channel: instagram_dm
+  business_goal: "Mess chat luong (hoi size/ship/coc) — khong phai volume mess"
+
+funnel:
+  current_split:
+    acquisition_pct: 70
+    retarget_pct: 30
+  target_split_after_profile_sunset:
+    acquisition_pct: 80
+    retarget_pct: 20
+  notes:
+    - "Hien tai: 70% tim khach moi (Phieu Tin nhan + Profile), 30% chot (Retarget)."
+    - "Sau 7-10 ngay tat Profile: con 2 campaign, ty le 80/20 (Tin nhan / Retarget)."
+
+campaigns:
+  - id: phieu_tinnhan_lal1
+    ads_manager_name: "Phễu_TinNhan_LAL1%"
+    name_pattern: "Phễu_TinNhan_LAL1"
+    funnel_role: top_middle
+    funnel_role_label: "Top + Middle — kiem khach moi + loc y dinh mua"
+    meta_objective: messaging_conversation_started
+    meta_objective_label: "Luot bat dau cuoc tro chuyen qua tin nhan"
+    business_purpose: >
+      Chien dich KIEM KHACH MOI chinh. May hoc tim dung nguoi co hanh vi inbox shop de mua.
+      Thay the chien dich Profile Visit cu (mess re nhung khong chot).
+    lifecycle: long_term
+    lifecycle_notes:
+      - "Chien dich lau dai."
+      - "Scale len 210.000 VND/ngay sau khi tat Profile."
+    daily_budget_vnd: 140000
+    monthly_budget_vnd: 4200000
+    budget_share_pct: 52.5
+    scale_target_daily_vnd: 210000
+    audience:
+      type: lookalike
+      source: "Khach da mua + nguoi da inbox 180 ngay"
+      lookalike_pct: 1
+      exclude:
+        - purchasers_30d
+      age_min: 22
+      age_max: 45
+      gender: [female, male]
+      gender_priority: female
+      gender_note: "Nu uu tien, KHONG loai nam (theo store_profile). Giu budget cho nam khi CPC/hieu qua tot."
+      geo: [HCM, HN]
+    creative:
+      - "Video Noi so — hang fake"
+      - "Video Noi so — mat tien"
+    kpi:
+      primary:
+        metric: cost_per_messaging_started
+        target_vnd: 25000
+        after_days: 7
+        notes: "Sau 7 ngay hoc may"
+      secondary:
+        metric: quality_mess_rate
+        target_pct: 40
+        definition: "Mess hoi chi tiet (size, ship, coc) — khong chi hoi gia"
+        tracking: manual
+      learning:
+        events_per_week: 50
+        event: messaging_started
+        notes: "Can 50 mess/tuan de thoat learning phase"
+    verdict_rules:
+      - "Scale khi primary KPI dat va con budget."
+      - "Khong danh gia bang visit metrics."
+      - "Red flag neu chi phi/tin nhan > 25.000 VND sau learning."
+
+  - id: phieu_profile_1806
+    ads_manager_name: "Phễu_Profile_1806"
+    name_pattern: "Phễu_Profile_1806"
+    funnel_role: top_only
+    funnel_role_label: "Top only — tao nhan biet + mồi pixel"
+    meta_objective: profile_visit
+    meta_objective_label: "Luot truy cap trang ca nhan Instagram"
+    business_purpose: >
+      Chien dich MOI PIXEL tam thoi, KHONG phai de ban. Tao traffic re de nuoi du lieu Lookalike
+      va giu do phu thuong hieu. Phieu Tin nhan moi tao — can du lieu ho tro trong giai doan hoc may.
+    lifecycle: temporary
+    lifecycle_notes:
+      - "Tam thoi 7-10 ngay."
+      - "TAT khi dieu kien sunset dat (xem sunset block)."
+      - "Ngan sach 70k/ngay chuyen sang Phieu Tin nhan."
+    daily_budget_vnd: 70000
+    monthly_budget_vnd: 2100000
+    budget_share_pct: 26
+    audience:
+      type: lookalike
+      source: "Giong het Phieu Tin nhan — LAL 1%"
+      lookalike_pct: 1
+      exclude:
+        - purchasers_30d
+      age_min: 22
+      age_max: 45
+      gender: [female, male]
+      gender_priority: female
+      gender_note: "Nu uu tien, KHONG loai nam (theo store_profile). Giu budget cho nam khi CPC/hieu qua tot."
+      geo: [HCM, HN]
+    creative:
+      - "Cung creative hoac awareness — khong ky vong mess chat luong"
+    kpi:
+      primary:
+        metric: cost_per_profile_visit
+        target_vnd: 1200
+      exclude_metrics:
+        - cost_per_messaging_started
+        - quality_mess_rate
+      notes: "Khong ky vong mess chat luong tu campaign nay."
+    historical_baseline:
+      visits: 2480
+      spend_vnd: 2600000
+      ctr_pct: 8.47
+      notes: "Ky chay truoc — 2.480 visit, 2,6 trieu VND"
+    sunset:
+      trigger_campaign: phieu_tinnhan_lal1
+      max_days: 10
+      conditions:
+        cost_per_messaging_started_vnd_lt: 25000
+        quality_mess_per_day_gte: 5
+        consecutive_days: 3
+      action: pause_and_reallocate_budget_to
+      reallocate_to: phieu_tinnhan_lal1
+      reallocate_daily_vnd: 70000
+    verdict_rules:
+      - "Mess kem = EXPECTED — khong penalize."
+      - "Danh gia bang cost/visit, CTR, reach."
+      - "Pause khi sunset conditions dat — chuyen budget sang Phieu Tin nhan."
+
+  - id: ban_retarget_30d
+    ads_manager_name: "Ban_Retarget_30D"
+    name_pattern: "Ban_Retarget_30D"
+    funnel_role: bottom
+    funnel_role_label: "Bottom — chot don"
+    meta_objective: messaging_conversation_started
+    meta_objective_alt: landing_page_view
+    meta_objective_label: "Tin nhan (hoac Luot xem — tuy cai dat)"
+    business_purpose: >
+      Chien dich CHOT DON cho khach am da tuong tac. Khong tim khach moi — chi nhac lai nguoi da biet Quisirella.
+      Hang 10-20tr can nhieu cham — khong tat han, chi giam budget neu frequency cao.
+    lifecycle: long_term_low_budget
+    lifecycle_notes:
+      - "Lau dai nhung ngan sach thap."
+      - "Giam xuong 30.000 VND/ngay neu tan suat cao — khong tat han."
+    daily_budget_vnd: 50000
+    monthly_budget_vnd: 1500000
+    budget_share_pct: 19
+    reduce_to_daily_vnd: 30000
+    reduce_trigger: frequency_per_week_gt_3_5
+    audience:
+      size_min: 1900
+      size_max: 2200
+      signals:
+        - ig_visit_30d
+        - video_view_75pct
+        - inboxed_not_purchased
+      exclude:
+        - purchasers
+      gender_note: "Tep warm tu hanh vi — gom ca nu va nam, khong loc gioi tinh"
+    creative:
+      type: carousel
+      products:
+        - "Micro Link 17.500.000 VND"
+        - "4 san pham best-seller khac"
+    kpi:
+      primary:
+        metric: cpm_vnd
+        target: 80000
+        tolerance: high
+        notes: "CPM cao chap nhan duoc vi tep nho"
+      secondary:
+        - metric: ctr_pct
+          target_gt: 3
+        - metric: frequency_per_week
+          target_lt: 3.5
+      quality:
+        metric: coc_inquiry_rate_pct
+        target_gt: 20
+        definition: "Ty le mess hoi coc tu tep retarget"
+        tracking: manual
+    verdict_rules:
+      - "CPM ~80k = acceptable cho retarget."
+      - "Giam budget (50k -> 30k) neu frequency > 3.5/tuan."
+      - "Khong pause han — hang cao can nhieu cham."
+
+legacy_aliases:
+  "phễu - target tin nhắn": phieu_tinnhan_lal1
+  "Chiến dịch phễu - target tin nhắn": phieu_tinnhan_lal1
+  "Lượt tương tác mới - 1806": phieu_profile_1806
+  "Chiến dịch Lượt tương tác mới - 1806": phieu_profile_1806
+  "Bán - Bản sao": ban_retarget_30d
+  "Chiến dịch Lượt tương tác - Bán - Bản sao": ban_retarget_30d
+
+agent_summary:
+  phieu_tinnhan: "May kiem tien chinh — nuoi lon"
+  phieu_profile: "Moi tam — se tat sau 7-10 ngay"
+  ban_retarget: "May chot — giu nho nhung deu"
+
+measurement:
+  quality_mess:
+    definition: >
+      Mess hoi tu van san pham cu the: size, chat lieu/authentic, ship/dong goi,
+      coc/thanh toan, giu hang — hoac nhan >=2 luot tu van.
+      KHONG tinh: hoi gia roi im, spam, comment dao.
+    tracking: manual
+    ledger: output/08-dm-quality-log.md
+  price_only_mess:
+    definition: "Khach chi hoi gia roi im — KHONG tinh chat luong. Ghi cot rieng 'Hoi gia roi im' de theo doi ty le khach chi quan tam gia."
+    tracking: manual
+    ledger: output/08-dm-quality-log.md
+  automated_proxy:
+    metric: onsite_conversion.messaging_user_depth_3_message_send
+    label: "engaged mess (hoi thoai >=3 luot)"
+    formula: "engaged_rate = depth_3 / messaging_started"
+    note: "Proxy tu dong tu API — doi chieu voi quality_mess tay de hieu chinh."
+  orders_revenue:
+    source: "Business FB 'da chuyen doi' + so tay — KHONG API duoc"
+    tracking: manual
+    ledger: output/08-dm-quality-log.md
+  business_goal_note: >
+    Toi da mess chat luong (khach co xu huong tu van), KHONG phai volume.
+    Chot don phu thuoc khach — khong dat KPI chot cung cho campaign.
+
+manual_kpi_tracking:
+  instructions: >
+    Mess chat luong + don chot: doc/ghi output/08-dm-quality-log.md.
+    Engaged proxy: tinh engaged_rate = depth_3 / messaging_started tu API.
+    Khong bia so. Ghi vao 08 hoac 07-session-log khi co du lieu moi.

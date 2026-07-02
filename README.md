@@ -36,7 +36,7 @@ Trong chat Cursor, gửi prompt ví dụ:
 
 ```
 Lấy insights Meta Ads 30 ngày gần nhất cho Quisirella.
-Phân tích theo config/store_profile.yaml, lọc theo config/relevance_rules.yaml.
+Phân tích theo config/store_profile.yaml, config/campaign_strategy.yaml, lọc theo config/relevance_rules.yaml.
 Chỉ dùng tool read-only. Ghi file 01-05 vào output/
 ```
 
@@ -55,6 +55,7 @@ Cursor rule [`.cursor/rules/quisirella-analysis.mdc`](.cursor/rules/quisirella-a
 
 ```
 Phân tích các campaign ACTIVE trên act_400356462876861.
+Đọc config/campaign_strategy.yaml — đánh giá theo funnel_role.
 So sánh chi phí/tin nhắn, funnel depth, placement. Verdict scale/giữ/giảm/pause.
 Ghi output/06-active-campaigns-analysis.md
 ```
@@ -72,6 +73,7 @@ Upload toàn bộ `output/*.md`. Claude đọc **theo thứ tự** trong [`outpu
 | `00-brands-channels.md` | Tiffany/Bvlgari ads vs Justin Davis IG organic |
 | `00-audience-pricing.md` | Khách hàng nữ/nam, 3 phân khúc giá |
 | `00-ads-kpi-guide.md` | Cách đọc KPI Meta Ads cho Quisirella |
+| `00-campaign-strategy.md` | Mục đích 3 chiến dịch, KPI theo vai trò, sunset |
 | `00-relevance-filter.md` | Insight Meta giữ / loại |
 
 **Phần B — Báo cáo ads (cập nhật định kỳ):**
@@ -108,6 +110,7 @@ Pipeline LangGraph: supervisor + 5 subagent (meta_ads, finance, audience, releva
 Sửa trực tiếp khi Quisirella thay đổi:
 
 - [`config/store_profile.yaml`](config/store_profile.yaml) — thương hiệu, phân khúc giá, triết lý
+- [`config/campaign_strategy.yaml`](config/campaign_strategy.yaml) — mục đích 3 chiến dịch, KPI theo vai trò, sunset
 - [`config/relevance_rules.yaml`](config/relevance_rules.yaml) — lọc benchmark Meta sai ngành
 
 ---
@@ -119,7 +122,7 @@ Sửa trực tiếp khi Quisirella thay đổi:
   mcp.json.example       # Template MCP (copy → mcp.json, điền secrets)
   mcp.json                # Local only — gitignored
   rules/                  # 6 Cursor rules phân tích Meta Ads expert-level
-config/                 # store_profile.yaml, relevance_rules.yaml
+config/                 # store_profile.yaml, campaign_strategy.yaml, relevance_rules.yaml
 output/                 # Markdown cho Claude Projects
 src/quisirella/         # Pipeline Python (tùy chọn)
 ```

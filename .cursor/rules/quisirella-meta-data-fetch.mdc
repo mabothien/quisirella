@@ -46,6 +46,11 @@ Trich tu response, khong bia:
 - `lead`, `link_click`, `post_save`, `video_view`
 - `omni_purchase` (ghi chu khong tin cay)
 
+## Tinh sau khi fetch (proxy chat luong)
+
+- `engaged_rate = messaging_user_depth_3 / messaging_conversation_started_7d`
+- Ghi vao bang metrics hoac tham chieu `output/08-dm-quality-log.md` cho mess chat tay + don chot
+
 ## Luu raw JSON
 
 - Account: `data/meta_fetch/`

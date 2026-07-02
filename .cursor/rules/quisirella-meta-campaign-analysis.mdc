@@ -5,7 +5,7 @@ alwaysApply: false
 
 # Quisirella — Phan tich Campaign
 
-Reference: `output/06-active-campaigns-analysis.md`. Ap dung rule `quisirella-meta-kpi.mdc` cho KPI.
+Reference: `output/06-active-campaigns-analysis.md`. Ap dung rule `quisirella-meta-kpi.mdc` cho KPI. Campaign roles: `config/campaign_strategy.yaml`.
 
 ## Step 0 — Truoc khi phan tich (Meta expert)
 
@@ -30,7 +30,23 @@ Xep hang theo **chi phi/tin nhan** (KPI primary), khong theo spend hay impressio
 
 ## Phan loai campaign Quisirella
 
+**Ground truth:** `config/campaign_strategy.yaml` + `output/00-campaign-strategy.md`. Map ten API qua `ads_manager_name` hoac `legacy_aliases`.
+
 **Brand trong ads:** Danh muc QC chi gom **Tiffany & Co.** (chu yeu) va **Bvlgari**. **Justin Davis khong co trong ads** — chi ban IG organic; khong phan tich/khuyen nghi ads cho Justin Davis.
+
+| Campaign (Ads Manager) | funnel_role | KPI chinh | Verdict logic |
+|---|---|---|---|
+| **Phễu_TinNhan_LAL1%** | top_middle | chi phi/tin nhan < 25k (sau 7d), quality mess > 40% (manual) | scale khi dat; red flag neu > 25k sau learning |
+| **Phễu_Profile_1806** | top_only | chi phi/visit < 1.200 VND | mess kem = **expected**; pause theo sunset rule |
+| **Ban_Retarget_30D** | bottom | CPM ~80k, CTR > 3%, freq < 3.5/tuan | giam 50k→30k neu freq cao; khong pause han |
+
+### Verdict theo vai tro (bat buoc)
+
+- **Profile (top_only):** Khong penalize vi chi phi/tin nhan cao hoac mess kem. Danh gia cost/visit, CTR, reach. Ap dung **sunset** khi Phieu Tin nhan dat <25k/mess + ≥5 mess chat/ngay x 3 ngay lien tiep → pause Profile, chuyen 70k sang Tin nhan.
+- **Tin nhan (top_middle):** KPI vang = chi phi/tin nhan. Hoi user hoac doc `07-session-log` cho quality mess (Meta khong do).
+- **Retarget (bottom):** CPM cao chap nhan duoc. Khong so sanh chi phi/tin nhan voi Phieu Tin nhan.
+
+### Phan loai generic (fallback neu campaign khong map duoc)
 
 | Loai | Dau hieu | Danh gia chinh |
 |---|---|---|
