@@ -38,3 +38,7 @@ Xem [`00-index-claude-knowledge.md`](00-index-claude-knowledge.md) cho thứ t�
 ## 2026-07-02 15:10:42 +0700
 
 - **File updated:** `01-meta-ads-performance.md` (1 edit(s))
+
+## 2026-07-02 16:30:00 +0700
+
+- **Cadence thay đổi:** Mở chat Cursor mới → hook `sessionStart` inject `AUTO-REFRESH DUE` nếu báo cáo 01–06 cũ hơn **12 giờ** (marker: `data/meta_fetch/.last_refresh`, cập nhật khi ghi file 01–06). Hành động đầu tiên agent: pipeline fetcher→analyst→writer full 01–06. Trong 12h: không auto-refresh, đọc `output/06` sẵn có. Escape: user nói `skip refresh`.
