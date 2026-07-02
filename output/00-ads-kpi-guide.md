@@ -9,6 +9,8 @@ sources: [store_profile.yaml, meta_ads_analysis_rules]
 
 Quisirella chốt qua **Instagram DM** — đọc ads theo logic này, không theo shop e-commerce thông thường.
 
+**Nền tảng:** Chỉ đánh giá placement **Instagram** (Feed, Reels, Stories). Policy & creative: `00-meta-ad-policy-ig.md`, `00-ig-ad-creative-guide.md`.
+
 ## Thứ tự ưu tiên KPI
 
 | Ưu tiên | KPI | Ghi chú |

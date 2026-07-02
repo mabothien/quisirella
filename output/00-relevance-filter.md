@@ -22,11 +22,21 @@ Meta thường đưa nhận định **generic e-commerce**. Quisirella là **lux
 - Fast fashion, Shopee/Lazada-style giá rẻ
 - FMCG, F&B, gaming, bất động sản, bảo hiểm
 - Trang sức mỹ ký dưới 500k
+- **Benchmark CPM/ROAS từ ngành khác** — kể cả "Meta average e-commerce"
+- **Competitive ads** shop không thuộc used luxury jewelry IG
+
+## Nền tảng — chỉ Instagram
+
+- Phân tích placement: **chỉ rows Instagram** (Feed, Reels, Stories)
+- Facebook placement trong breakdown → ghi nhận "review loại FB", **không** dùng làm creative benchmark
+- Creative/copy: xem `00-ig-ad-creative-guide.md` + `00-meta-ad-policy-ig.md`
 
 ## Tiêu chí GIỮ
 
 - Benchmark jewelry, luxury, resale, audience nữ/nam 18–45 thời trang cao cấp
-- Insight placement Instagram (Feed, Stories, Reels)
+- Insight placement Instagram (Feed, Stories, Reels) — **không** khuyên theo Facebook metrics
+- Policy/creative pre-owned luxury — `00-meta-ad-policy-ig.md`
+- Competitive pattern used luxury IG — `00-competitive-ig-used-luxury.md` (qualitative)
 - Hành vi mua hàng AOV từ 2 triệu VND+
 - Interest Tiffany & Co., Bvlgari, luxury
 - Targeting nữ (chính) **và** nam (phụ — quà tặng); không loại một giới

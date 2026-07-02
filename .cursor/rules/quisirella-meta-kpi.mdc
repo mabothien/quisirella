@@ -9,6 +9,8 @@ Doc truoc: `config/store_profile.yaml` (business_characteristics).
 
 Quisirella chot don qua **Instagram DM** — khong dung purchase/ROAS pixel lam KPI chinh.
 
+**Platform:** Chi danh gia placement **`instagram_*`** trong breakdown. Facebook rows — chi ghi "review loai FB", khong benchmark creative IG.
+
 ## Thu tu uu tien KPI
 
 1. **Primary:** `onsite_conversion.messaging_conversation_started_7d` → **chi phi/tin nhan** (VND)

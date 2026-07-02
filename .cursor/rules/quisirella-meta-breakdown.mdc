@@ -1,0 +1,41 @@
+---
+description: Breakdown Effect Meta Ads — marginal CPA, cap do danh gia, khuyen nghi testable. Doc khi phan tich placement/audience breakdown hoac diagnosis campaign.
+alwaysApply: false
+---
+
+# Quisirella — Breakdown Effect (Meta expert)
+
+Nguon day du: `@src/quisirella/skill/SKILL.md` va `@src/quisirella/skill/references/breakdown_effect.md`.
+
+## Nguyen tac
+
+Meta toi uu **chi phi bien** (marginal CPA — chi phi ket qua tiep theo), khong phai CPA trung binh tren breakdown.
+
+## Cap do danh gia (bat buoc)
+
+| Setup | Cap do |
+|---|---|
+| Advantage+ CBO | Campaign |
+| Auto placement (khong CBO) | Ad set |
+| Nhieu ad trong 1 ad set | Ad set |
+
+## Quy tac bao cao (bat buoc)
+
+- **KHONG** khuyen pause/giam budget segment chi vi CPA/tin-nhan trung binh cao hon trong breakdown.
+- Khuyen nghi = **gia thuyet co the test**, kem bang chung + tac dong len **toan campaign/ad set**.
+- Quisirella KPI: **chi phi/tin nhan** thay CPA purchase khi conflict — xem `quisirella-meta-kpi.mdc`.
+
+## Learning phase
+
+Ad set moi/sua lon: ~50 optimization events / 7 ngay. Trong learning — khong verdict scale/pause dut khoat.
+
+## Metric naming (Meta legal)
+
+- Reach → "Reach (Accounts Center accounts)"
+- Phan biet **Clicks (all)** vs **Link Clicks** — khong dung "clicks" chung.
+
+## Tham chieu skill
+
+- `src/quisirella/skill/references/learning_phase.md`
+- `src/quisirella/skill/references/pacing.md`
+- `src/quisirella/skill/references/auction_overlap.md`

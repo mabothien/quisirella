@@ -1,6 +1,27 @@
 # Rules for the relevance agent: filter out Meta insights/benchmarks
 # that do not belong to Quisirella's vertical (secondhand luxury jewelry, Instagram, Vietnam).
 
+platform:
+  primary: instagram
+  ad_placements: [instagram_feed, instagram_reels, instagram_stories]
+  notes:
+    - "Tu van chi so va creative chi ap dung Instagram placements."
+    - "Facebook placement chi de ghi nhan 'review loai FB' — khong benchmark creative IG."
+    - "Khong dung KPI Facebook de khuyen scale/giam cho Quisirella."
+
+competitive_intel:
+  allowed_verticals:
+    - "used / pre-owned luxury jewelry"
+    - "secondhand designer jewelry"
+    - "luxury resale trang suc hang hieu (IG)"
+  disallowed_sources:
+    - "fast fashion / Shopee-style e-commerce ads"
+    - "FMCG, my pham, F&B, gaming case studies"
+    - "Cross-industry ROAS/CPA benchmarks"
+  storage:
+    qualitative: "output/00-competitive-ig-used-luxury.md"
+    notes: "Khong so sanh CPM/CPC competitor voi Quisirella — chi hoc format/CTA/trust."
+
 relevant_verticals:
   - "jewelry / trang sức"
   - "luxury goods / hàng hiệu"
@@ -21,13 +42,17 @@ irrelevant_verticals:
 
 keep_criteria:
   - "Benchmark hoặc nhận định gắn với ngành jewelry, luxury, resale, hoặc audience nữ/nam 18-45 quan tâm thời trang cao cấp."
-  - "Insight về Instagram placements (feed, stories, reels) vì Quisirella bán trên Instagram."
+  - "Insight về Instagram placements (feed, stories, reels) vì Quisirella bán trên Instagram — chi danh gia IG rows trong breakdown."
+  - "Creative/copy khớp Meta Ad Standards cho pre-owned luxury — xem output/00-meta-ad-policy-ig.md."
+  - "Competitive pattern tu shop used luxury IG (output/00-competitive-ig-used-luxury.md), khong tu nganh khac."
   - "Insight về hành vi mua hàng giá trị cao (AOV từ 2 triệu VND trở lên)."
   - "Insight về tệp khách quan tâm Tiffany & Co., Bvlgari, thương hiệu luxury."
   - "Insight targeting nữ (chính) hoặc nam (phụ — quà tặng, street-luxury); không loại bỏ một giới tính."
 
 discard_criteria:
   - "Benchmark CPM/CPC/CTR lấy trung bình toàn ngành e-commerce không phân biệt vertical."
+  - "Khuyen nghi creative/placement dua tren Facebook metrics hoac shop khac nganh (khong phai used luxury IG)."
+  - "So sanh chi phi/tin nhan Quisirella voi competitor CPM/ROAS (chi so khac auction/budget)."
   - "Đề xuất tối ưu dựa trên giả định restock/tồn kho lớn (không đúng với hàng 1-của-1)."
   - "Đề xuất mở rộng tệp sang audience giá rẻ, không phù hợp phân khúc 2 triệu+."
   - "Đề xuất chỉ target nữ và loại bỏ hoàn toàn nam (Quisirella phủ cả hai giới tính)."

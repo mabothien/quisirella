@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "python .cursor/hooks/quisirella_hooks.py session-start"
+      }
+    ],
+    "sessionEnd": [
+      {
+        "command": "python .cursor/hooks/quisirella_hooks.py log-session-end"
+      }
+    ],
+    "afterFileEdit": [
+      {
+        "command": "python .cursor/hooks/quisirella_hooks.py log-file-edit"
+      }
+    ],
+    "stop": [
+      {
+        "command": "python .cursor/hooks/quisirella_hooks.py log-stop"
+      }
+    ],
+    "beforeMCPExecution": [
+      {
+        "command": "python .cursor/hooks/quisirella_hooks.py block-meta-writes",
+        "failClosed": false
+      }
+    ]
+  }
+}

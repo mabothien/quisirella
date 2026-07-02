@@ -6,6 +6,9 @@ credentials/
 # Data snapshots & generated reports
 data/
 
+# External reference repo (not part of this project)
+Agent-Skills-for-Context-Engineering/
+
 # Python
 __pycache__/
 *.pyc

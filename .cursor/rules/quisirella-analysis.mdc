@@ -21,10 +21,22 @@ Doc truoc moi lan phan tich:
 | Rule | File | Khi nao ap dung |
 |---|---|---|
 | KPI | `quisirella-meta-kpi.mdc` | Dat KPI, red flags, verdict taxonomy |
+| Breakdown | `quisirella-meta-breakdown.mdc` | Placement/audience breakdown, diagnosis — doc khi khuyen nghi budget |
+| IG platform | `quisirella-meta-ig-platform.mdc` | Chi Instagram — policy, creative, competitive used luxury |
 | Data fetch | `quisirella-meta-data-fetch.mdc` | Thu thap insights/breakdowns tu API/MCP |
 | Campaign | `quisirella-meta-campaign-analysis.mdc` | Phan tich campaign/adset/ad, so sanh ACTIVE |
 | Audience | `quisirella-meta-audience-placement.mdc` | Breakdown tuoi/gioi/placement x tier gia |
 | Output | `quisirella-meta-report-output.mdc` | Ghi file Markdown vao `output/` |
+
+**Meta expert skill:** `src/quisirella/skill/SKILL.md` + `references/` — ap dung khi diagnosis (Breakdown Effect, learning, auction). KPI Quisirella (chi phi/tin nhan) override KPI generic trong skill.
+
+**IG knowledge base:** `output/00-meta-ad-policy-ig.md`, `00-ig-ad-creative-guide.md`, `00-competitive-ig-used-luxury.md` — doc khi viet copy ad hoac tu van creative/placement.
+
+**Subagents** (`.cursor/agents/`): `meta-fetcher` (read-only fetch) → `meta-analyst` (diagnosis) → `report-writer` (ghi output/). Chi dung pipeline cho phan tich day du — cau hoi don gian thi doc truc tiep `output/01`/`06`.
+
+**Context engineering skill:** `.cursor/skills/quisirella-context-engineering/SKILL.md` — handoff contract giua subagents (bang so verbatim), filesystem memory (`data/` + `output/`), nen session log, quality gate bao cao. Doc khi chay pipeline hoac review bao cao.
+
+**Session memory:** `output/07-session-log.md` — doc dau phien; hooks tu dong append.
 
 Reference implementation: `output/06-active-campaigns-analysis.md`
 
@@ -43,9 +55,11 @@ Phan tich theo store_profile + relevance_rules. Chi read-only.
 Ghi file 01-05 vao output/
 ```
 
-**Phan tich ACTIVE campaigns:**
+**Phan tich ACTIVE (IG-only):**
 ```
-Phan tich cac campaign ACTIVE, so sanh chi phi/tin nhan va funnel depth.
+Phan tich campaign ACTIVE — chi metrics Instagram (Feed/Reels/Stories).
+Kiem tra copy theo 00-meta-ad-policy-ig + 00-ig-ad-creative-guide.
+Benchmark chi tu Quisirella (06) — khong e-commerce generic.
 Ghi output/06-active-campaigns-analysis.md
 ```
 

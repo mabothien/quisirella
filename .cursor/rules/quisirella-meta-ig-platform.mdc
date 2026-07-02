@@ -1,0 +1,26 @@
+---
+description: Tu van Meta Ads chi ap dung Instagram — placement, KPI, creative, policy. Doc khi breakdown placement, viet copy ad, hoac competitive.
+alwaysApply: false
+---
+
+# Quisirella — Instagram-only platform
+
+Quisirella ban tren **Instagram DM**. Tu van ads **chi ap dung IG** (Feed, Reels, Stories).
+
+## Knowledge base (doc khi can)
+
+| File | Noi dung |
+|---|---|
+| `output/00-meta-ad-policy-ig.md` | Meta Ad Standards checklist — luxury pre-owned |
+| `output/00-ig-ad-creative-guide.md` | Copy, format, CTA messaging |
+| `output/00-competitive-ig-used-luxury.md` | Competitor used luxury IG (qualitative only) |
+
+## Quy tac platform
+
+- Breakdown placement: **chi phan tich `instagram_*` rows** — khong khuyen scale/cut dua tren Facebook rows.
+- Facebook spend >15% ACTIVE → **review loai FB**, khong dung FB CTR lam creative benchmark.
+- CTA uu tien: **Send message** — tranh Learn More / link-first (red flag DM funnel).
+- Benchmark so: **chi account Quisirella** (`01`, `06`) — khong CPM ngành khác hoac competitor.
+- Competitive: chi **used luxury jewelry IG** — xem `config/relevance_rules.yaml` competitive_intel.
+
+Policy day du: https://transparency.meta.com/policies/ad-standards/
