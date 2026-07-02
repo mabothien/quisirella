@@ -1,0 +1,73 @@
+---
+title: Quisirella — Hướng dẫn đọc KPI Meta Ads
+generated_at: 2026-07-02
+purpose: claude_projects_knowledge_base
+sources: [store_profile.yaml, meta_ads_analysis_rules]
+---
+
+# Hướng dẫn đọc KPI Meta Ads cho Quisirella
+
+Quisirella chốt qua **Instagram DM** — đọc ads theo logic này, không theo shop e-commerce thông thường.
+
+## Thứ tự ưu tiên KPI
+
+| Ưu tiên | KPI | Ghi chú |
+|---|---|---|
+| **1 — Primary** | Tin nhắn bắt đầu (7 ngày) | `messaging_conversation_started_7d` |
+| | Chi phí/tin nhắn | spend ÷ tin nhắn — **KPI vàng** |
+| **2 — Secondary** | Lead Meta | Chi phí/lead |
+| | Funnel depth | first_reply → depth_2 → depth_3 → depth_5 |
+| **3 — Diagnostic** | CTR, CPC, CPM, reach, frequency | Không dùng làm KPI duy nhất |
+| **4 — Engagement** | post_save, link_click | Chỉ meaningful khi so với tin nhắn |
+| **5 — Deprioritize** | Purchase, ROAS Meta | Không tin cậy — ghi chú "chốt DM" |
+
+## Công thức
+
+```
+Chi phí/tin nhắn     = spend / messaging_started_7d
+Tỷ lệ tin nhắn/link  = messaging_started / link_click
+Reply rate           = first_reply / messaging_started
+Depth_3 rate         = depth_3 / messaging_started
+Frequency            = impressions / reach
+```
+
+## Benchmark tham khảo (account Quisirella)
+
+| Mức | Chi phí/tin nhắn |
+|---|---|
+| Tốt | < 20.000 VND |
+| Trung bình account | ~52.000 VND |
+| Kém | > 55.000 VND |
+
+CPM/CPC luxury jewelry VN **cao hơn** e-commerce giá rẻ — không so benchmark Shopee/FMCG.
+
+## Red flags
+
+| Tín hiệu | Ý nghĩa |
+|---|---|
+| link_click cao, tin nhắn thấp (<5%) | Campaign tối ưu click, không phải funnel DM |
+| Chi phí/tin nhắn > 50k | Cần review |
+| Lifetime budget > 70% spent | Sắp hết ngân sách |
+| Facebook > 15% spend (ACTIVE) | IG-first — review loại FB |
+| Frequency > 2.5 / 30 ngày | Có thể ad fatigue |
+
+## Verdict khi tư vấn campaign
+
+| Verdict | Khi nào |
+|---|---|
+| **scale** | Chi phí/tin nhắn thấp, funnel sâu, còn budget |
+| **hold** | Ổn định, chưa đủ data |
+| **optimize** | Tiềm năng nhưng placement/creative cần sửa |
+| **reduce** | Chi tiêu cao, DM kém |
+| **pause** | Không phù hợp DM, hết budget |
+| **discard_insight** | Benchmark Meta không relevant — xem `00-relevance-filter.md` |
+
+## Phân loại campaign
+
+| Loại | Đánh giá chính |
+|---|---|
+| **DM funnel** (phễu, tin nhắn) | Chi phí/tin nhắn, depth_3 |
+| **Product push** (Bán, Tiffany cụ thể) | Lead, depth_5 |
+| **Engagement/reach** (link_click >> tin nhắn) | Reach, post_save — **không scale nếu DM kém** |
+
+Số liệu thực tế kỳ gần nhất: xem `01-meta-ads-performance.md` và `06-active-campaigns-analysis.md`.

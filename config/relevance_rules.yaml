@@ -1,0 +1,39 @@
+# Rules for the relevance agent: filter out Meta insights/benchmarks
+# that do not belong to Quisirella's vertical (secondhand luxury jewelry, Instagram, Vietnam).
+
+relevant_verticals:
+  - "jewelry / trang sức"
+  - "luxury goods / hàng hiệu"
+  - "secondhand / resale / pre-owned"
+  - "accessories cao cấp"
+  - "e-commerce thời trang cao cấp"
+
+irrelevant_verticals:
+  - "fast fashion / thời trang giá rẻ"
+  - "mass-market e-commerce (Shopee/Lazada-style giá rẻ)"
+  - "FMCG / hàng tiêu dùng nhanh"
+  - "food & beverage"
+  - "gaming / app install"
+  - "bất động sản"
+  - "tài chính / bảo hiểm"
+  - "mỹ phẩm bình dân"
+  - "trang sức mỹ ký / phụ kiện giá rẻ dưới 500k"
+
+keep_criteria:
+  - "Benchmark hoặc nhận định gắn với ngành jewelry, luxury, resale, hoặc audience nữ/nam 18-45 quan tâm thời trang cao cấp."
+  - "Insight về Instagram placements (feed, stories, reels) vì Quisirella bán trên Instagram."
+  - "Insight về hành vi mua hàng giá trị cao (AOV từ 2 triệu VND trở lên)."
+  - "Insight về tệp khách quan tâm Tiffany & Co., Bvlgari, thương hiệu luxury."
+  - "Insight targeting nữ (chính) hoặc nam (phụ — quà tặng, street-luxury); không loại bỏ một giới tính."
+
+discard_criteria:
+  - "Benchmark CPM/CPC/CTR lấy trung bình toàn ngành e-commerce không phân biệt vertical."
+  - "Đề xuất tối ưu dựa trên giả định restock/tồn kho lớn (không đúng với hàng 1-của-1)."
+  - "Đề xuất mở rộng tệp sang audience giá rẻ, không phù hợp phân khúc 2 triệu+."
+  - "Đề xuất chỉ target nữ và loại bỏ hoàn toàn nam (Quisirella phủ cả hai giới tính)."
+  - "Đề xuất chạy quảng cáo Justin Davis (chỉ bán qua IG organic, không nằm danh mục QC Meta)."
+  - "Nhận định dựa trên conversion pixel khi event match quality thấp (dưới 5/10)."
+  - "So sánh với ngành hàng nằm trong danh sách irrelevant_verticals."
+
+notes:
+  - "Khi không chắc chắn một nhận định thuộc vertical nào, giữ lại nhưng gắn nhãn 'cần kiểm chứng' kèm lý do."

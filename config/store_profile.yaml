@@ -1,0 +1,83 @@
+# Ground truth knowledge base for Quisirella.
+# Every agent loads this file to analyze data in the correct store context.
+
+store:
+  name: Quisirella
+  business_type: "Cửa hàng trang sức đồ hiệu đã qua sử dụng (secondhand luxury jewelry)"
+  sales_platform: Instagram
+  market: Việt Nam
+  currency: VND
+
+brands:
+  - name: "Tiffany & Co."
+    lines:
+      - "Elsa Peretti"
+      - "Tiffany 1837"
+      - "Return to Tiffany"
+      - "Tiffany HardWear"
+  - name: "Bvlgari"
+    lines:
+      - "Save the Children"
+  - name: "Justin Davis"
+    lines: []
+    sales_channel: "instagram_organic_only"
+    notes: "Chi dang ban tren IG (post organic) — KHONG nam trong danh muc quang cao Meta"
+
+advertising:
+  catalog_brands:
+    - "Tiffany & Co."
+    - "Bvlgari"
+  excluded_from_ads:
+    - "Justin Davis"
+  primary_brand_in_ads: "Tiffany & Co."
+  notes:
+    - "Danh muc quang cao Meta/IG: Tiffany & Co. (chu yeu) va Bvlgari — KHONG bao gom Justin Davis."
+    - "Justin Davis chi ban qua bai dang IG organic, khong chay ads."
+    - "Khi phan tich campaign/ad insights: chi danh gia hieu qua quang ba Tiffany/Bvlgari."
+
+audience:
+  gender:
+    primary: "Nu (da so khach mua)"
+    secondary: "Nam (it hon nhung co — qua tang, street-luxury, phu kien cao cap)"
+    targeting_rule: "Phu ca nu va nam — KHONG loai bo mot gioi tinh. Nu uu tien nhung giu budget cho nam khi CPC/hieu qua tot."
+  age_core: "22–45"
+
+sourcing:
+  channels:
+    - name: "Yahoo! Auctions Japan"
+      url: "https://auctions.yahoo.co.jp/"
+    - name: "Mercari Japan"
+      url: "https://jp.mercari.com/"
+    - name: "ZZER 只二"
+  notes: "Hàng used tuyển chọn từ các sàn đấu giá và ký gửi uy tín tại Nhật và Trung Quốc."
+
+philosophy:
+  - "Chụp hình chi tiết sản phẩm rõ ràng, sắc nét để tạo lòng tin, giúp khách yên tâm mua online."
+  - "Đảm bảo 100% authentic."
+  - "Tuyển chọn mẫu mã được yêu thích theo trend hoặc nhiều năm không lỗi thời."
+  - "Hạn chế hoặc không nhập trang sức thiết kế vintage."
+
+materials:
+  primary: "Bạc (sterling silver)"
+  secondary:
+    - "Vàng"
+    - "Kim cương"
+
+price_tiers:
+  - id: tier_1
+    range_vnd: [2000000, 4000000]
+    label: "2 triệu - 4 triệu"
+    products: "Chủ yếu sản phẩm bạc từ Justin Davis (IG organic) và Tiffany & Co. line Elsa Peretti (ads)"
+  - id: tier_2
+    range_vnd: [4000000, 10000000]
+    label: "4 triệu - 10 triệu"
+    products: "Justin Davis (IG organic); ads: Tiffany 1837/RTT/Elsa Peretti, Bvlgari Save the Children"
+  - id: tier_3
+    range_vnd: [10000000, null]
+    label: "10 triệu trở lên"
+    products: "Sản phẩm bạc, vàng và nhẫn kim cương của Tiffany & Co. như HardWear, Return to Tiffany, Bvlgari Save the Children"
+
+business_characteristics:
+  - "Mỗi sản phẩm secondhand là 1-của-1 (one-of-one SKU), bán xong là hết, không restock."
+  - "Conversion chủ yếu chốt qua Instagram DM, nên Meta pixel/CAPI thường không ghi nhận đủ conversion."
+  - "ROAS thực phải đối chiếu doanh thu ghi trong Google Sheet với ad spend, không tin hoàn toàn ROAS Meta báo."

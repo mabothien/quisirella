@@ -1,0 +1,70 @@
+---
+description: Format xuat bao cao Markdown Meta Ads Quisirella (output/01-06)
+alwaysApply: false
+---
+
+# Quisirella — Output bao cao Markdown
+
+Ghi file vao `output/`. Ngon ngu: **tieng Viet**.
+
+## Frontmatter bat buoc (YAML)
+
+```yaml
+---
+title: ...
+generated_at: YYYY-MM-DD
+data_range: YYYY-MM-DD den YYYY-MM-DD
+sources: [meta_graph_api]
+data_status: ok | partial | unavailable
+ad_account_id: act_400356462876861
+---
+```
+
+Them field tuy ngữ cảnh: `active_campaign_count`, `previous_ad_account_id`.
+
+## File mapping
+
+**Knowledge base (Claude — cap nhat khi business thay doi):**
+
+| File | Noi dung |
+|---|---|
+| `00-index-claude-knowledge.md` | Chi muc — Claude doc truoc |
+| `00-business-overview.md` | Business, triet ly, 1-cua-1 |
+| `00-brands-channels.md` | Tiffany/Bvlgari ads vs Justin Davis IG |
+| `00-audience-pricing.md` | Khach hang, tier gia |
+| `00-ads-kpi-guide.md` | KPI Meta Ads |
+| `00-relevance-filter.md` | Loc insight Meta |
+
+**Bao cao ads (cap nhat dinh ky):**
+
+| File | Noi dung |
+|---|---|
+| `01-meta-ads-performance.md` | Account tong quan, campaigns co chi tieu, ACTIVE list |
+| `02-audience-insights.md` | Breakdown tuoi/gioi/placement x tier gia |
+| `03-finance-summary.md` | Ad spend + ROAS thuc (ghi partial neu chua co Sheets) |
+| `04-relevance-notes.md` | Bang verdict Meta insights (giu/loai/can kiem chung) |
+| `05-recommendations.md` | De xuat da loc, uu tien cao/trung/thap |
+| `06-active-campaigns-analysis.md` | Deep-dive ACTIVE campaigns (khi user yeu cau) |
+
+## Format so lieu
+
+- VND: dau cham ngan (8.546.101 VND)
+- CTR: % mot chu so thap phan (3,57%)
+- CPC/CPM: lam tron so nguyen VND
+- Chi phi/tin nhan: lam tron so nguyen
+
+## Cau truc section khuyen nghi
+
+1. Tom tat executive (bang KPI chinh)
+2. Bang so sanh / breakdown
+3. Phan tich chi tiet (tung campaign hoac segment)
+4. Funnel / xu huong (neu co)
+5. Khuyen nghi hanh dong (scale/giu/giam/pause)
+6. Phu luc nguon du lieu (duong dan raw JSON)
+
+## Quy tac chat luong
+
+- **Khong bia so** khi API loi — ghi loi + `data_status: unavailable`
+- Moi nhan dinh quan trong kem **so lieu cu the**
+- Link cheo giua file (vd. 01 → 06)
+- Purchase Meta: luon ghi chu "khong phan anh doanh thu that (chot DM)"

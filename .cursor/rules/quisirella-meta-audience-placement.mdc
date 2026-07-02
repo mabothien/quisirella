@@ -1,0 +1,62 @@
+---
+description: Audience breakdown va placement analysis Meta Ads x tier gia Quisirella
+alwaysApply: false
+---
+
+# Quisirella — Audience & Placement
+
+Doc truoc: `config/store_profile.yaml` (price_tiers, advertising, audience).
+
+## Danh muc quang cao vs ban hang IG
+
+| Kenh | Hang / san pham |
+|---|---|
+| **Meta Ads (danh muc QC)** | **Tiffany & Co.** (chu yeu), **Bvlgari** |
+| **IG organic (khong ads)** | **Justin Davis** — chi dang bai ban, khong chay quang cao |
+
+Justin Davis **khong nam trong danh muc quang cao**. Khong de xuat chay ads Justin Davis, khong danh gia hieu qua ads theo Justin Davis.
+
+## Map audience → tier gia (chi ap dung cho ads: Tiffany/Bvlgari)
+
+| Tier | Gia (VND) | Ads quang ba |
+|---|---|---|
+| tier_1 | 2 – 4 trieu | Tiffany Elsa Peretti |
+| tier_2 | 4 – 10 trieu | Tiffany 1837/RTT, Bvlgari Save the Children |
+| tier_3 | 10 trieu+ | Tiffany HardWear, RTT, vang/kim cuong, Bvlgari |
+
+_(Justin Davis thuoc tier 1–2 ve gia nhung ban qua IG organic — ngoai pham vi phan tich Meta Ads.)_
+
+## Gioi tinh — phu ca nu va nam
+
+| Gioi tinh | Vai tro | Targeting |
+|---|---|---|
+| **Nu** | Tep chinh, da so khach mua trang suc | Uu tien spend, creative Tiffany nu tinh / classic |
+| **Nam** | Thieu so nhung **co conversion** — qua tang, street-luxury | **Giu** — khong loai bo, khong cat budget ve 0 |
+
+**Quy tac phan tich breakdown gioi tinh:**
+- Bao cao spend%, CTR, CPC **ca nu va nam**
+- Nu thuong chiem spend nhieu hon — binh thuong
+- Nam co CPC thap hon hoac chi phi/tin nhan tot → **giu hoac test tang**, khong discard
+- **Cam de xuat:** "chi target nu", "loai nam", "nam khong relevant"
+
+## Breakdown bat buoc (file 02)
+
+- **Tuoi:** spend%, impressions, CTR, CPC → gan tier (Tiffany/Bvlgari)
+- **Gioi tinh:** bang day du female / male / unknown — nhan xet ca hai
+- **Placement:** spend%, CTR, CPC theo platform_position
+
+## Placement rules (IG-first)
+
+| Placement | Vai tro | Hanh dong |
+|---|---|---|
+| Instagram Feed | Showcase macro Tiffany (chi tiet, tem, hop) | **Giu** |
+| Instagram Reels | Video ngan macro, reach rong | **Uu tien** neu CPC thap |
+| Instagram Stories | Swipe → DM | **Review** neu CTR thap + spend cao |
+| Facebook | Luxury jewelry IG-native VN | **Giam/loai** neu > 15% spend |
+
+## Khong nen
+
+- Loai bo hoan toan targeting nam
+- De xuat quang cao Justin Davis (chi ban IG organic)
+- Mo rong mass audience gia re (AOV 2tr+)
+- Nham lan doanh thu/chuyen doi Justin Davis (IG) voi hieu qua ads Tiffany

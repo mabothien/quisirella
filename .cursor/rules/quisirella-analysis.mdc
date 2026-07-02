@@ -1,0 +1,61 @@
+﻿---
+description: Router phan tich Meta Ads Quisirella — doc config, chon rule con, prompt mau
+alwaysApply: true
+---
+
+# Quisirella — Meta Ads Analysis (Router)
+
+Doc truoc moi lan phan tich:
+
+1. `config/store_profile.yaml` — ground truth cua hang
+2. `config/relevance_rules.yaml` — loc benchmark Meta
+
+**Ad account:** `act_400356462876861` (quisirella)
+
+**Context cua hang (tom tat):**
+- Danh muc quang cao Meta: **Tiffany & Co.** (+ Bvlgari). **Justin Davis chi ban IG organic — khong ads**
+- Khach **chu yeu nu**, co **nam** — phu ca hai gioi tinh, khong loai nam
+
+## Rule con (doc khi phan tich)
+
+| Rule | File | Khi nao ap dung |
+|---|---|---|
+| KPI | `quisirella-meta-kpi.mdc` | Dat KPI, red flags, verdict taxonomy |
+| Data fetch | `quisirella-meta-data-fetch.mdc` | Thu thap insights/breakdowns tu API/MCP |
+| Campaign | `quisirella-meta-campaign-analysis.mdc` | Phan tich campaign/adset/ad, so sanh ACTIVE |
+| Audience | `quisirella-meta-audience-placement.mdc` | Breakdown tuoi/gioi/placement x tier gia |
+| Output | `quisirella-meta-report-output.mdc` | Ghi file Markdown vao `output/` |
+
+Reference implementation: `output/06-active-campaigns-analysis.md`
+
+## Safety
+
+- Chi tool **read-only** (insights, accounts, diagnostics, benchmarks)
+- **Cam:** `ads_create_*`, `ads_update_*`, `ads_activate_*`
+- Khong bia so khi API loi
+
+## Prompt mau
+
+**Bao cao tong 30 ngay:**
+```
+Lay insights Meta Ads 30 ngay cho Quisirella (act_400356462876861).
+Phan tich theo store_profile + relevance_rules. Chi read-only.
+Ghi file 01-05 vao output/
+```
+
+**Phan tich ACTIVE campaigns:**
+```
+Phan tich cac campaign ACTIVE, so sanh chi phi/tin nhan va funnel depth.
+Ghi output/06-active-campaigns-analysis.md
+```
+
+**Campaign cu the:**
+```
+Phan tich campaign [ten/ID]: delivery, funnel tin nhan, placement, verdict scale/giu/giam/pause.
+```
+
+## KPI chinh (tom tat)
+
+Tin nhan bat dau (7 ngay) > lead > engagement > purchase Meta (khong tin cay).
+
+Quisirella chot qua **Instagram DM** — xem chi tiet trong `quisirella-meta-kpi.mdc`.

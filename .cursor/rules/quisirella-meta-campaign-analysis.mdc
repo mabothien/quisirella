@@ -1,0 +1,53 @@
+---
+description: Framework phan tich campaign Meta Ads expert-level cho Quisirella
+alwaysApply: false
+---
+
+# Quisirella — Phan tich Campaign
+
+Reference: `output/06-active-campaigns-analysis.md`. Ap dung rule `quisirella-meta-kpi.mdc` cho KPI.
+
+## Quy trinh 6 buoc (moi campaign)
+
+1. **Status:** ACTIVE/PAUSED, objective, budget type (lifetime/daily/none), ngay tao
+2. **Delivery:** spend, impressions, reach, frequency
+3. **Hieu qua:** CTR, CPC, CPM
+4. **Conversion proxy:** tin nhan bat dau, lead, chi phi/tin nhan, chi phi/lead, ty le tin nhan/link
+5. **Funnel + placement:** bang depth (started → first_reply → depth_2/3/5) + placement breakdown
+6. **Verdict:** scale | hold | optimize | reduce | pause + hanh dong cu the
+
+## So sanh campaign (bat buoc khi >= 2 ACTIVE)
+
+Bang side-by-side: spend, CTR, CPC, tin nhan, chi phi/tin nhan, lead, link_click, post_save.
+
+Xep hang theo **chi phi/tin nhan** (KPI primary), khong theo spend hay impressions.
+
+## Phan loai campaign Quisirella
+
+**Brand trong ads:** Danh muc QC chi gom **Tiffany & Co.** (chu yeu) va **Bvlgari**. **Justin Davis khong co trong ads** — chi ban IG organic; khong phan tich/khuyen nghi ads cho Justin Davis.
+
+| Loai | Dau hieu | Danh gia chinh |
+|---|---|---|
+| **DM funnel** | Ten co "phieu", "tin nhan", CTA messaging | Chi phi/tin nhan, depth_3 rate |
+| **Product push** | Ten co "Ban", creative Tiffany/san pham cu the | Lead, depth_5, chi phi/lead |
+| **Engagement/reach** | Objective engagement, link_click >> tin nhan | post_save, reach — **khong scale neu DM kem** |
+
+Neu link_click / tin nhan > 20 → campaign dang toi uu click, khong phai funnel DM.
+
+## Adset analysis
+
+- 1 adset: hieu suat tap trung, de scale
+- Nhieu adset: xep hang theo chi phi/tin nhan, pause adset kem
+- Ghi ro adset keo/chim hieu suat
+
+## Budget pacing
+
+- Lifetime: `% spent = spend / lifetime_budget`
+- Canh bao neu > 70% spent
+- Uoc tinh ngay con lai: `(budget - spend) / (spend / so_ngay_chay)`
+
+## Loc Meta recommendations
+
+Doc `config/relevance_rules.yaml` — gan nhan **giu / loai / can kiem chung** truoc khi dua vao file 05.
+
+Cam de xuat: catalog/DPA restock, scale theo ROAS pixel, benchmark e-commerce gia re, **quang cao Justin Davis** (chi ban IG organic).

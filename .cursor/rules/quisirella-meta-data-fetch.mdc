@@ -1,0 +1,62 @@
+---
+description: Checklist thu thap du lieu Meta Ads read-only cho Quisirella (Graph API / MCP)
+alwaysApply: false
+---
+
+# Quisirella — Thu thap du lieu Meta Ads
+
+**Ad account:** `act_400356462876861` (quisirella). Khong dung account cu.
+
+Chi **read-only**. Cam: `ads_create_*`, `ads_update_*`, `ads_activate_*`.
+
+## Account level (bat buoc)
+
+```
+GET act_400356462876861/insights?date_preset=last_30d
+  fields=impressions,clicks,spend,reach,cpc,cpm,ctr,actions,cost_per_action_type
+
+GET act_400356462876861/campaigns
+  fields=id,name,status,objective,daily_budget,lifetime_budget,created_time
+```
+
+## Breakdown account (cho file 02)
+
+- `breakdowns=age`
+- `breakdowns=gender`
+- `breakdowns=publisher_platform,platform_position`
+
+## Per campaign (ACTIVE uu tien)
+
+Voi moi campaign ID:
+
+1. Campaign insights 30d (+ actions, cost_per_action_type)
+2. Placement breakdown (`publisher_platform,platform_position`)
+3. Adset insights (`level=adset`, fields=adset_name,adset_id,spend,impressions,clicks,ctr,cpc,actions)
+4. Ad insights — chi khi user hoi creative cu the (`level=ad`)
+
+## Action types bat buoc trong `actions`
+
+Trich tu response, khong bia:
+
+- `onsite_conversion.messaging_conversation_started_7d`
+- `onsite_conversion.messaging_first_reply`
+- `onsite_conversion.messaging_user_depth_2_message_send`
+- `onsite_conversion.messaging_user_depth_3_message_send`
+- `onsite_conversion.messaging_user_depth_5_message_send`
+- `lead`, `link_click`, `post_save`, `video_view`
+- `omni_purchase` (ghi chu khong tin cay)
+
+## Luu raw JSON
+
+- Account: `data/meta_fetch/`
+- ACTIVE campaigns: `data/meta_fetch/active/{campaign_id}_insights.json` (+ placement, adsets)
+
+## Loi thuong gap
+
+| Loi | Cach xu ly |
+|---|---|
+| `#200 ads_read permission` | Token thieu scope hoac chua gan ad account |
+| Account khong co trong `/me/adaccounts` | Dung `act_400356462876861`, khong phai account khac |
+| Khong co insights | Campaign moi chua co du lieu — ghi `data_status: partial` |
+
+Neu API loi: **khong bia so** — ghi loi trong output va `data_status: unavailable`.

@@ -1,0 +1,16 @@
+# Secrets & credentials
+.env
+credentials/
+.cursor/mcp.json
+
+# Data snapshots & generated reports
+data/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+venv/
+build/
+dist/

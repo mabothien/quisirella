@@ -1,0 +1,57 @@
+---
+description: KPI hierarchy va nguong danh gia Meta Ads cho Quisirella (DM-first, luxury jewelry VN)
+alwaysApply: false
+---
+
+# Quisirella — KPI Meta Ads
+
+Doc truoc: `config/store_profile.yaml` (business_characteristics).
+
+Quisirella chot don qua **Instagram DM** — khong dung purchase/ROAS pixel lam KPI chinh.
+
+## Thu tu uu tien KPI
+
+1. **Primary:** `onsite_conversion.messaging_conversation_started_7d` → **chi phi/tin nhan** (VND)
+2. **Secondary:** lead Meta, funnel depth (first_reply → depth_2 → depth_3 → depth_5)
+3. **Diagnostic:** CTR, CPC, CPM, frequency (= impressions/reach), reach
+4. **Engagement proxy:** post_save, link_click — chi co y nghia khi doi chieu voi tin nhan
+5. **Deprioritize:** purchase, omni_purchase, ROAS Meta — ghi chu "khong tin cay, chot DM"
+
+## Cong thuc bat buoc
+
+- Chi phi/tin nhan = spend / messaging_conversation_started_7d
+- Ty le tin nhan/link = messaging_started / link_click (neu link_click > 0)
+- Reply rate = first_reply / messaging_started
+- Depth_3 rate = depth_3 / messaging_started
+
+## Red flags (can review ngay)
+
+| Tin hieu | Y nghia |
+|---|---|
+| link_click cao + tin nhan thap (<5% ty le) | Campaign toi uu click, khong phai DM funnel |
+| Chi phi/tin nhan > 50.000 VND | Kem hon benchmark account (~52k) |
+| Lifetime budget > 70% spent | Sap het ngan sach — canh bao pacing |
+| Facebook placement > 15% spend (ACTIVE) | IG-first store — review loai FB |
+| Chi phi/lead > 100.000 VND | Lead Meta kem hieu qua |
+| Frequency > 2.5 trong 30 ngay | Co the ad fatigue |
+
+## Verdict taxonomy
+
+Gan nhan cho moi campaign/insight:
+
+| Verdict | Khi nao |
+|---|---|
+| **scale** | Chi phi/tin nhan thap, funnel depth tot, con budget |
+| **hold** | Hieu qua on dinh, chua du data de quyet dinh |
+| **optimize** | Co tiem nang nhung placement/creative/adset can sua |
+| **reduce** | Chi tieu cao, hieu qua DM kem — giam budget |
+| **pause** | Khong phu hop muc tieu DM, het lifetime budget |
+| **discard_insight** | Benchmark/recommendation Meta khong relevant (xem relevance_rules.yaml) |
+
+## Benchmark tham khao (account Quisirella, 30 ngay)
+
+- Chi phi/tin nhan tot: < 20.000 VND (vd. campaign phieu ~16.799)
+- Chi phi/tin nhan trung binh: ~52.000 VND (account level)
+- Chi phi/tin nhan kem: > 55.000 VND (vd. campaign 1806 ~55.790)
+
+Khong so sanh CPM/CPC voi e-commerce gia re — luxury secondhand VN co CPM cao hon la binh thuong.
