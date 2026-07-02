@@ -27,10 +27,11 @@ Doc truoc moi lan phan tich:
 | Campaign | `quisirella-meta-campaign-analysis.mdc` | Phan tich campaign/adset/ad, so sanh ACTIVE |
 | Audience | `quisirella-meta-audience-placement.mdc` | Breakdown tuoi/gioi/placement x tier gia |
 | Output | `quisirella-meta-report-output.mdc` | Ghi file Markdown vao `output/` |
+| IG organic copy | `quisirella-ig-organic-copy.mdc` | Viet lai caption Story/Post IG organic — than thien, chuyen nghiep, khong phien dien |
 
 **Meta expert skill:** `src/quisirella/skill/SKILL.md` + `references/` — ap dung khi diagnosis (Breakdown Effect, learning, auction). KPI Quisirella (chi phi/tin nhan) override KPI generic trong skill.
 
-**IG knowledge base:** `output/00-meta-ad-policy-ig.md`, `00-ig-ad-creative-guide.md`, `00-competitive-ig-used-luxury.md` — doc khi viet copy ad hoac tu van creative/placement.
+**IG knowledge base:** `output/00-meta-ad-policy-ig.md`, `00-ig-ad-creative-guide.md`, `00-ig-organic-copy-guide.md`, `00-competitive-ig-used-luxury.md` — doc khi viet copy ad, organic post/story, hoac tu van creative/placement.
 
 **Subagents** (`.cursor/agents/`): `meta-fetcher` (read-only fetch) → `meta-analyst` (diagnosis) → `report-writer` (ghi output/). Chi dung pipeline cho phan tich day du — cau hoi don gian thi doc truc tiep `output/01`/`06`.
 
@@ -66,6 +67,15 @@ Ghi output/06-active-campaigns-analysis.md
 **Campaign cu the:**
 ```
 Phan tich campaign [ten/ID]: delivery, funnel tin nhan, placement, verdict scale/giu/giam/pause.
+```
+
+**Viet lai caption Story/Post IG organic:**
+```
+Viet lai caption IG organic cho Quisirella (rule quisirella-ig-organic-copy).
+Giong: than thien, chuyen nghiep, khong phien dien. CTA mem inbox DM.
+San pham: [brand, line, loai, chat lieu, gia]
+Ban goc: [paste neu co]
+Tra 2 phien ban A (ngan) / B (day du) + hashtag + text overlay Story neu can.
 ```
 
 ## KPI chinh (tom tat)

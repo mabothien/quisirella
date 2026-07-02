@@ -1,0 +1,68 @@
+---
+description: Viet lai caption Story/Post Instagram organic Quisirella — giong than thien, chuyen nghiep, khong phien dien. Doc khi user yeu cau viet/sua noi dung dang IG.
+alwaysApply: false
+---
+
+# Quisirella — Viết lại Story / Post IG (organic)
+
+Knowledge base đầy đủ (Claude Projects): `output/00-ig-organic-copy-guide.md` — section **Rule cho Claude AI** + prompt mẫu. Context cửa hàng: `config/store_profile.yaml`, `output/00-business-overview.md`, `output/00-brands-channels.md`.
+
+**Phạm vi:** caption bài đăng organic, text overlay Story, mô tả Reels organic — **không** phải copy quảng cáo Meta (ads → `quisirella-meta-ig-platform.mdc` + `00-ig-ad-creative-guide.md`).
+
+## Giọng văn (bắt buộc)
+
+- **Thân thiện:** xưng "bạn" với khách; shop = "Quisirella" hoặc "mình" (nhất quán). CTA mềm, không áp lực.
+- **Chuyên nghiệp:** brand đúng chính tả, chất liệu, pre-owned/authentic, giá rõ (nếu có).
+- **Không phiến diện:** không stereotype giới/tuổi/giá; phủ nữ **và** nam (quà tặng); pre-owned = curated luxury, không "thanh lý/hàng cũ rẻ".
+
+## Quy tắc nội dung
+
+- Mỗi SKU **1-của-1** — nhấn "mẫu duy nhất", không FOMO toxic.
+- **Trust trước:** macro tem, nguồn Nhật, authentic trước khi nhấn giá.
+- **CTA:** inbox / DM Quisirella xem thêm ảnh, video 360°, giữ mẫu — không "MUA NGAY" nếu chốt qua DM.
+- **Justin Davis:** organic only — tone street-luxury bạc; không viết như quảng cáo Tiffany ads.
+- **Tránh:** fake/replica/1:1, personal attributes, hứa quá mức, "các nàng", "giá sốc", body shaming.
+
+## Output khi viết lại
+
+Trả **2 phiên bản** (A ngắn gọn / B đầy đủ hơn) trừ khi user chỉ yêu cầu 1.
+
+Mỗi phiên bản gồm:
+1. Caption (copy-paste ready)
+2. Text overlay Story (nếu user gửi Story hoặc yêu cầu)
+3. Hashtag gợi ý (3–8)
+4. 1 dòng ghi chú thay đổi so bản gốc (tone / trust / CTA)
+
+## Prompt mẫu (user copy-paste)
+
+**Viết lại caption post:**
+```
+Viết lại caption IG organic cho Quisirella theo rule quisirella-ig-organic-copy.
+Giọng: thân thiện, chuyên nghiệp, không phiến diện. CTA mềm inbox DM.
+
+Sản phẩm: [brand, line, loại, chất liệu, giá, tình trạng]
+Bản gốc (nếu có):
+[paste caption cũ]
+```
+
+**Viết lại Story (1–3 frame):**
+```
+Viết text overlay Story IG (1–3 frame) cho Quisirella — mỗi frame ≤2 dòng, đọc được mobile.
+Tone: thân thiện, chuyên nghiệp, không phiến diện. Frame cuối CTA inbox.
+
+Sản phẩm: [brand, line, giá]
+```
+
+**Rút gọn / mở rộng:**
+```
+[Rút gọn / Mở rộng] caption sau giữ giọng Quisirella organic. Không thêm áp lực mua.
+
+[paste]
+```
+
+**Nhiều góc cho cùng 1 SKU:**
+```
+Viết 3 góc caption organic cho cùng 1 SKU Quisirella:
+1) Trust/macro  2) Timeless/style  3) Quà tặng (inclusive, không chỉ nữ)
+Brand: [ ] · Giá: [ ]
+```
