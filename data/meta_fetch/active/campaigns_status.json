@@ -1,0 +1,35 @@
+{
+  "fetched_at": "2026-07-03T00:56:00+07:00",
+  "date_range": { "since": "2026-06-30", "until": "2026-07-02" },
+  "account": "act_400356462876861",
+  "note": "Ten campaign trong Ads Manager van la ten cu — map sang strategy qua legacy_aliases. Cac ten moi (Phễu_TinNhan_LAL1%, Phễu_Profile_1806, Ban_Retarget_30D) chua ton tai trong account.",
+  "active_campaigns": [
+    {
+      "id": "120253285175280110",
+      "ads_manager_name": "Chiến dịch phễu - target tin nhắn",
+      "strategy_id": "phieu_tinnhan_lal1",
+      "funnel_role": "top_middle",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "120252531135370110",
+      "ads_manager_name": "Chiến dịch Lượt tương tác mới - 1806",
+      "strategy_id": "phieu_profile_1806",
+      "funnel_role": "top_only",
+      "status": "ACTIVE",
+      "objective_campaign": "OUTCOME_ENGAGEMENT",
+      "adset_optimization_goal": "PROFILE_AND_PAGE_ENGAGEMENT",
+      "adset_destination_type": "INSTAGRAM_PROFILE",
+      "note": "Dung vai tro Profile Visit (destination = trang IG). Visit AM: 30/6=60, 1/7=128, 2/7=90, tong 278. Chi phi/visit ~769 VND (AM) duoi nguong 1.200.",
+      "created_time": "2026-06-18",
+      "days_running": 15
+    },
+    {
+      "id": "120252990977040110",
+      "ads_manager_name": "Chiến dịch Lượt tương tác - Bán - Bản sao",
+      "strategy_id": "ban_retarget_30d",
+      "funnel_role": "bottom",
+      "status": "ACTIVE"
+    }
+  ]
+}
