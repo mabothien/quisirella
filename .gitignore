@@ -5,6 +5,7 @@ credentials/
 
 # External reference repo (not part of this project)
 Agent-Skills-for-Context-Engineering/
+claude-ads/
 
 # Python
 __pycache__/

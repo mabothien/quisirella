@@ -75,3 +75,11 @@ Gan nhan cho moi campaign/insight:
 - Chi phi/tin nhan kem: > 55.000 VND (vd. campaign 1806 ~55.790)
 
 Khong so sanh CPM/CPC voi e-commerce gia re — luxury secondhand VN co CPM cao hon la binh thuong.
+
+## Budget & kill rules
+
+Reference: `src/quisirella/skill/references/unit_economics_budget_dm.md`
+
+- **3x Kill:** chi phi/tin nhan >3× muc tieu campaign (sau ≥7 ngay data) → flag reduce/pause
+- **20% scale:** khong tang budget >20% mot lan
+- **70/20/10:** phan bo theo campaign role + sunset Profile (xem campaign_strategy.yaml)

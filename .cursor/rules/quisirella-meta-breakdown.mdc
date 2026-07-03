@@ -22,7 +22,7 @@ Meta toi uu **chi phi bien** (marginal CPA — chi phi ket qua tiep theo), khong
 ## Quy tac bao cao (bat buoc)
 
 - **KHONG** khuyen pause/giam budget segment chi vi CPA/tin-nhan trung binh cao hon trong breakdown.
-- Khuyen nghi = **gia thuyet co the test**, kem bang chung + tac dong len **toan campaign/ad set**.
+- Khuyen nghi = **gia thuyet co the test** (IF/THEN/BECAUSE — xem `src/quisirella/skill/references/ab_test_dm.md`), kem bang chung + tac dong len **toan campaign/ad set**.
 - Quisirella KPI: **chi phi/tin nhan** thay CPA purchase khi conflict — xem `quisirella-meta-kpi.mdc`.
 
 ## Learning phase

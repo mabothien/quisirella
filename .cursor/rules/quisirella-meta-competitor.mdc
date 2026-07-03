@@ -1,0 +1,27 @@
+---
+description: Competitor ad intelligence qua Meta Ad Library cho used luxury IG VN. Doc khi user hoi doi thu, competitive, ad spy, hoac can gap messaging/creative.
+alwaysApply: false
+---
+
+# Quisirella — Competitor (Meta Ad Library, IG)
+
+Reference: `src/quisirella/skill/references/competitor_meta_ig.md`  
+Noi bo: `output/00-competitive-ig-used-luxury.md` · Loc: `config/relevance_rules.yaml`
+
+## Quy tac
+
+- **Chi** used luxury jewelry IG — khong benchmark nganh khac
+- **Khong** dung CPC/CPM doi thu lam muc tieu account
+- Insight → **gia thuyet test** (`ab_test_dm.md`), khong copy nguyen van
+- Ads Quisirella: Tiffany/Bvlgari only — khong ads Justin Davis
+
+## Quy trinh ngan
+
+1. Meta Ad Library (VN, IG) — creative, copy, CTA, format
+2. Doi chieu bang messaging themes vs Quisirella
+3. Andromeda lens: diversity that vs variant
+4. Liet ke gap + 1-2 gia thuyet test cu the
+
+## Output
+
+Snapshot markdown ngan hoac section trong `05-recommendations.md` — khong bia spend uoc luong.

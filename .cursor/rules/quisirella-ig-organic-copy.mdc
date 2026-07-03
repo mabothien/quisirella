@@ -7,6 +7,8 @@ alwaysApply: false
 
 Knowledge base đầy đủ (Claude Projects): `output/00-ig-organic-copy-guide.md` — section **Rule cho Claude AI** + prompt mẫu. Context cửa hàng: `config/store_profile.yaml`, `output/00-business-overview.md`, `output/00-brands-channels.md`.
 
+**Copy frameworks:** `src/quisirella/skill/references/copy_frameworks_ig.md` (AIDA/PAS/BAB/4P/FAB/Star-Story) — chon khung theo muc tieu post.
+
 **Phạm vi:** caption bài đăng organic, text overlay Story, mô tả Reels organic — **không** phải copy quảng cáo Meta (ads → `quisirella-meta-ig-platform.mdc` + `00-ig-ad-creative-guide.md`).
 
 ## Giọng văn (bắt buộc)

@@ -27,10 +27,14 @@ Doc truoc moi lan phan tich:
 | Data fetch | `quisirella-meta-data-fetch.mdc` | Thu thap insights/breakdowns tu API/MCP |
 | Campaign | `quisirella-meta-campaign-analysis.mdc` | Phan tich campaign/adset/ad, so sanh ACTIVE |
 | Audience | `quisirella-meta-audience-placement.mdc` | Breakdown tuoi/gioi/placement x tier gia |
+| Creative/Andromeda | `quisirella-meta-creative-andromeda.mdc` | Creative diversity, fatigue, Andromeda (IG) |
+| Competitor | `quisirella-meta-competitor.mdc` | Meta Ad Library, competitive gap used luxury IG |
 | Output | `quisirella-meta-report-output.mdc` | Ghi file Markdown vao `output/` |
 | IG organic copy | `quisirella-ig-organic-copy.mdc` | Viet lai caption Story/Post IG organic — than thien, chuyen nghiep, khong phien dien |
 
-**Meta expert skill:** `src/quisirella/skill/SKILL.md` + `references/` — ap dung khi diagnosis (Breakdown Effect, learning, auction). KPI Quisirella (chi phi/tin nhan) override KPI generic trong skill.
+**Meta expert skill:** `src/quisirella/skill/SKILL.md` + `references/` — ap dung khi diagnosis (Breakdown Effect, learning, auction, Andromeda, health score). KPI Quisirella (chi phi/tin nhan) override KPI generic trong skill.
+
+**References moi (claude-ads adapt):** `thinking_framework.md`, `andromeda_creative.md`, `health_score_dm.md`, `ab_test_dm.md`, `unit_economics_budget_dm.md`, `copy_frameworks_ig.md`, `competitor_meta_ig.md` — xem `output/00-claude-ads-learnings.md`.
 
 **IG knowledge base:** `output/00-campaign-strategy.md`, `output/00-meta-ad-policy-ig.md`, `00-ig-ad-creative-guide.md`, `00-ig-organic-copy-guide.md`, `00-competitive-ig-used-luxury.md` — doc khi viet copy ad, organic post/story, phan tich campaign, hoac tu van creative/placement.
 

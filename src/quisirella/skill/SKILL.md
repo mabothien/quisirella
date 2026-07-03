@@ -75,10 +75,15 @@ Use this skill when you need to **analyze and diagnose Meta Ads campaign perform
 - **Daily Spending Limit (DSL):** The current daily spending limit that advertisers can check, increase, or decrease.
 - **Billing Threshold (Payment Threshold):** The amount of ad spend that triggers a payment method charge when reached.
 
+## Thinking Gate (Before Analysis)
+
+Load `references/thinking_framework.md` first — mindset gate (OBSERVE/LISTEN/THINK/CONNECT/FEEL/ACCEPT/CREATE/GROW). Identify which principle is being skipped if analysis feels weak.
+
 ## Analysis Workflow
 
-**Reference Documents** (loaded automatically from `references/`):
-- `breakdown_effect.md` - The Breakdown Effect with examples (READ THIS FIRST)
+**Reference Documents** (loaded on-demand from `references/`):
+- `thinking_framework.md` - 10-Principle mindset gate (READ BEFORE DEEP ANALYSIS)
+- `breakdown_effect.md` - The Breakdown Effect with examples (READ THIS FIRST for breakdowns)
 - `core_concepts.md` - Ad Auction, Pacing, Learning Phase overview
 - `learning_phase.md` - Learning phase mechanics
 - `ad_relevance_diagnostics.md` - Quality, Engagement, Conversion rankings
@@ -87,6 +92,12 @@ Use this skill when you need to **analyze and diagnose Meta Ads campaign perform
 - `bid_strategies.md` - Spend-based, goal-based, manual bidding
 - `ad_auctions.md` - How auction winners are determined
 - `performance_fluctuations.md` - Normal vs. concerning fluctuations
+- `andromeda_creative.md` - Andromeda/GEM/Lattice, creative diversity rubric, fatigue (IG)
+- `health_score_dm.md` - DM Health Score 0-100 (supplements verdicts)
+- `ab_test_dm.md` - Hypothesis framework, Meta Experiments (messaging metric)
+- `unit_economics_budget_dm.md` - chi phi/tin nhan chain, 3x kill, 20% scale, 70/20/10
+- `copy_frameworks_ig.md` - AIDA/PAS/BAB/4P/FAB/Star-Story for IG copy
+- `competitor_meta_ig.md` - Meta Ad Library competitive framework
 
 ### Step 1: Identify the Correct Evaluation Level
 
@@ -130,5 +141,7 @@ Structure every analysis report as:
 3. **Learning Phase Status** - Current state per ad set
 4. **Performance Analysis** - Metrics with proper naming
 5. **Diagnosis** - Root causes with evidence
-6. **Recommendations** - Actionable, with expected impact, framed as testable hypotheses
+6. **Recommendations** - Actionable, with expected impact, framed as testable hypotheses (see `ab_test_dm.md`)
 7. **Breakdown Effect Notes** - Explicit callouts where this applies
+8. **DM Health Score** (optional) - 0-100 supplement per `health_score_dm.md` when sufficient data
+9. **Measurement Plan** - How to verify recommendations in 7-30 days (GROW principle)

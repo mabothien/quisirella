@@ -26,6 +26,8 @@ All must pass before proceeding. On failure: fix, don't ship.
 | **Policy compliance** (only when report contains ad copy) | Copy follows `00-meta-ad-policy-ig.md`: no personal attributes, no counterfeit-adjacent wording, CTA matches DM flow | "Dành cho cô nàng sang chảnh..." in suggested caption |
 | **Placement (degradation)** | Executive summary + verdicts at top; actionable recommendations at end; verdicts never buried mid-document | Key verdict only appears inside section 4 of 6 |
 | **Relevance filter** | Meta recommendations labeled giữ/loại/cần kiểm chứng per `config/relevance_rules.yaml`; no cross-vertical benchmarks | Citing generic e-commerce CPM as a target |
+| **Thinking gate** | Analysis applied thinking_framework.md — recommendations include measurement plan (GROW) | Recommendations with no way to verify success |
+| **Health score** (when analyst provides) | DM Health Score section matches `health_score_dm.md`; supplements verdicts, does not replace funnel_role | Score contradicts verdict without explanation |
 
 ## Output of the gate
 

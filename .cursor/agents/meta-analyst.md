@@ -15,6 +15,9 @@ When invoked:
 4. Apply `.cursor/rules/quisirella-meta-kpi.mdc` — primary KPI is **chi phi/tin nhan** (messaging_conversation_started_7d), not Meta purchase pixel.
 5. Apply `.cursor/rules/quisirella-meta-breakdown.mdc` and `@src/quisirella/skill/SKILL.md` workflow (evaluation level → learning → Meta lens → Breakdown Effect).
 6. Apply `.cursor/rules/quisirella-meta-campaign-analysis.mdc` for ACTIVE campaign comparison.
+7. Load skill references when diagnosing: `src/quisirella/skill/references/thinking_framework.md`, `andromeda_creative.md`, `health_score_dm.md`, `ab_test_dm.md`, `unit_economics_budget_dm.md`.
+8. Apply `.cursor/rules/quisirella-meta-creative-andromeda.mdc` when CTR drops, frequency high, or creative recommendations.
+9. Apply `.cursor/rules/quisirella-meta-competitor.mdc` only when user asks competitive intel — cite `competitor_meta_ig.md` + `00-competitive-ig-used-luxury.md`.
 
 **Brand rule:** Ads = Tiffany & Co. + Bvlgari only. Justin Davis = IG organic, never recommend ads.
 
@@ -28,9 +31,11 @@ Deliver to parent:
 - Verbatim metrics table (single source of numbers), side-by-side if multiple ACTIVE campaigns
 - Funnel depth (started → first_reply → depth_3 → depth_5)
 - Verdict per campaign: scale | hold | optimize | reduce | pause — **must cite `funnel_role`** from campaign_strategy.yaml
-- Recommendations as **testable hypotheses** with expected impact on overall performance
+- Recommendations as **testable hypotheses** (IF/THEN/BECAUSE per `ab_test_dm.md`) with expected impact on overall performance
 - Breakdown Effect callouts where placement/audience averages mislead
 - **IG-only:** placement analysis on instagram_feed/reels/stories only; policy/creative notes when recommending copy changes
-- **Competitive:** only cite patterns from `00-competitive-ig-used-luxury.md` — never cross-industry benchmarks
+- **DM Health Score** (optional): 0-100 per `health_score_dm.md` when sufficient data — supplements verdicts
+- **Measurement plan:** per recommendation — metric, review date (7-30 days)
+- **Competitive:** only cite patterns from `00-competitive-ig-used-luxury.md` + `competitor_meta_ig.md` — never cross-industry benchmarks
 
 Do **not** write files — return structured analysis for report-writer.

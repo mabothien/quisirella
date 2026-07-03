@@ -28,25 +28,26 @@ Upload **toàn bộ** `output/*.md` lên Claude Project.
 | 7 | [`00-ig-ad-creative-guide.md`](00-ig-ad-creative-guide.md) | Creative & copy quảng cáo Instagram (CTA DM) |
 | 8 | [`00-ig-organic-copy-guide.md`](00-ig-organic-copy-guide.md) | **Rule + prompt** viết caption Story/Post IG organic (Claude & Cursor) |
 | 9 | [`00-competitive-ig-used-luxury.md`](00-competitive-ig-used-luxury.md) | Competitive intel used luxury IG (qualitative) |
-| 10 | [`00-relevance-filter.md`](00-relevance-filter.md) | Insight Meta nào giữ / loại |
+| 10 | [`00-claude-ads-learnings.md`](00-claude-ads-learnings.md) | Bản đồ tích hợp claude-ads → Quisirella (Meta DM-first) |
+| 11 | [`00-relevance-filter.md`](00-relevance-filter.md) | Insight Meta nào giữ / loại |
 
 ## Phần B — Báo cáo ads (cập nhật định kỳ)
 
 | # | File | Nội dung |
 |---|---|---|
-| 11 | [`01-meta-ads-performance.md`](01-meta-ads-performance.md) | Hiệu suất account 30 ngày |
-| 12 | [`02-audience-insights.md`](02-audience-insights.md) | Breakdown tuổi/giới/placement (IG rows) |
-| 13 | [`03-finance-summary.md`](03-finance-summary.md) | Ad spend, ROAS thực (khi có Sheet) |
-| 14 | [`04-relevance-notes.md`](04-relevance-notes.md) | Verdict insight từng kỳ |
-| 15 | [`05-recommendations.md`](05-recommendations.md) | Đề xuất tối ưu kỳ này |
-| 16 | [`06-active-campaigns-analysis.md`](06-active-campaigns-analysis.md) | Deep-dive campaigns ACTIVE |
+| 12 | [`01-meta-ads-performance.md`](01-meta-ads-performance.md) | Hiệu suất account 30 ngày |
+| 13 | [`02-audience-insights.md`](02-audience-insights.md) | Breakdown tuổi/giới/placement (IG rows) |
+| 14 | [`03-finance-summary.md`](03-finance-summary.md) | Ad spend, ROAS thực (khi có Sheet) |
+| 15 | [`04-relevance-notes.md`](04-relevance-notes.md) | Verdict insight từng kỳ |
+| 16 | [`05-recommendations.md`](05-recommendations.md) | Đề xuất tối ưu kỳ này |
+| 17 | [`06-active-campaigns-analysis.md`](06-active-campaigns-analysis.md) | Deep-dive campaigns ACTIVE |
 
 ## Phần C — Nhật ký & sổ đo lường (Cursor / Claude)
 
 | # | File | Nội dung |
 |---|---|---|
-| 17 | [`07-session-log.md`](07-session-log.md) | Quyết định, file đã cập nhật, phiên phân tích gần nhất (hooks tự động) |
-| 18 | [`08-dm-quality-log.md`](08-dm-quality-log.md) | **Sổ ghi mess chất + đơn chốt + doanh thu** (manual + depth_3 proxy) |
+| 18 | [`07-session-log.md`](07-session-log.md) | Quyết định, file đã cập nhật, phiên phân tích gần nhất (hooks tự động) |
+| 19 | [`08-dm-quality-log.md`](08-dm-quality-log.md) | **Sổ ghi mess chất + đơn chốt + doanh thu** (manual + depth_3 proxy) |
 
 ## Quy tắc khi tư vấn
 
@@ -65,3 +66,5 @@ Upload **toàn bộ** `output/*.md` lên Claude Project.
 
 - Ad account: `act_400356462876861` (quisirella)
 - Nền tảng bán: Instagram · Thị trường: Việt Nam · Tiền tệ: VND
+
+**Skill references (repo):** `src/quisirella/skill/references/` — thinking_framework, andromeda_creative, health_score_dm, ab_test_dm, unit_economics_budget_dm, copy_frameworks_ig, competitor_meta_ig

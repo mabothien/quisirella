@@ -16,6 +16,8 @@ When invoked:
 5. Always note: Meta purchase ≠ real revenue (Quisirella closes via Instagram DM).
 6. Cross-link related files (e.g. 01 → 06); link `00-meta-ad-policy-ig` / `00-ig-ad-creative-guide` when recommending copy changes.
 7. Structure for readability: executive summary + verdicts at the **top**, actionable recommendations at the **end** — never bury verdicts mid-document.
+8. Include **DM Health Score** section when analyst provides it (`health_score_dm.md`).
+9. Include **Measurement plan** section when analyst provides review dates/metrics (GROW principle).
 
 **Quality gate (mandatory before writing):** run `.cursor/skills/quisirella-context-engineering/references/report-rubric.md` — deterministic checks D1–D6 first, then the rubric dimensions. A report fails if any single dimension fails; fix before writing, never ship a failing report to `output/`.
 

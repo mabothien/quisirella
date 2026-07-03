@@ -63,8 +63,10 @@ Them field tuy ngữ cảnh: `active_campaign_count`, `previous_ad_account_id`.
 2. Bang so sanh / breakdown
 3. Phan tich chi tiet (tung campaign hoac segment)
 4. Funnel / xu huong (neu co)
-5. Khuyen nghi hanh dong (scale/giu/giam/pause)
-6. Phu luc nguon du lieu (duong dan raw JSON)
+5. Khuyen nghi hanh dong (scale/giu/giam/pause) — dinh dang IF/THEN/BECAUSE khi co (`ab_test_dm.md`)
+6. DM Health Score (bo tro, neu du data) — `health_score_dm.md`
+7. Measurement plan (7-30 ngay) — metric + ngay doc lai
+8. Phu luc nguon du lieu (duong dan raw JSON)
 
 ## Quy tac chat luong
 

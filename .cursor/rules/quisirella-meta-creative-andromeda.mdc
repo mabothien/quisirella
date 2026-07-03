@@ -1,0 +1,31 @@
+---
+description: Andromeda creative diversity, fatigue, Entity-ID clustering cho Meta IG Quisirella. Doc khi phan tich creative, CTR giam, frequency cao, hoac truoc launch creative moi.
+alwaysApply: false
+---
+
+# Quisirella — Creative & Andromeda (IG)
+
+Reference day du: `src/quisirella/skill/references/andromeda_creative.md`
+
+**Platform:** Chi `instagram_feed`, `instagram_reels`, `instagram_stories`. KPI van la **chi phi/tin nhan** — creative la don bay retrieval.
+
+## Khi nao doc
+
+- CTR giam >20% trong 14 ngay
+- Frequency >2.5 (30 ngay) hoac >3.0 (7 ngay prospecting)
+- Truoc scale spend hoac launch bo creative moi
+- User hoi "creative fatigue", "diversity", "Andromeda"
+
+## Checklist nhanh
+
+1. Rubric 5 truc (0-10) — muc tieu ≥8 truoc scale
+2. Entity-ID clustering predictor — cat variant trung visual/headline/hook
+3. Format: co video 9:16 Reels/Stories?
+4. Refresh: creative moi trong 21 ngay?
+5. Khong danh gia bang EMQ/purchase — dung chi phi/tin nhan + engaged_rate
+
+## Lien ket
+
+- Ads copy: `output/00-ig-ad-creative-guide.md`
+- Organic: `copy_frameworks_ig.md` + `quisirella-ig-organic-copy.mdc`
+- Test concept: `ab_test_dm.md`

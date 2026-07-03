@@ -11,7 +11,7 @@ Reference: `output/06-active-campaigns-analysis.md`. Ap dung rule `quisirella-me
 
 1. **Cap do danh gia:** CBO → campaign; auto placement khong CBO → ad set (xem `quisirella-meta-breakdown.mdc`).
 2. **Learning phase:** ~50 optimization events / 7 ngay — caveat neu dang Learning / Learning limited.
-3. **Skill:** `@src/quisirella/skill/SKILL.md` khi can diagnosis sau (Breakdown Effect, pacing, overlap).
+3. **Skill:** `@src/quisirella/skill/SKILL.md` + `thinking_framework.md` khi can diagnosis sau (Breakdown Effect, pacing, overlap, Andromeda).
 
 ## Quy trinh 6 buoc (moi campaign)
 
