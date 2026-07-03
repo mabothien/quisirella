@@ -1,0 +1,217 @@
+{
+  "fetched_at": "2026-07-03T08:43:07Z",
+  "source": "pipeboard_meta_ads_mcp",
+  "tool": "get_insights",
+  "campaign_id": "120252990977040110",
+  "strategy_id": "ban_retarget_30d",
+  "time_range": {
+    "since": "2026-07-03",
+    "until": "2026-07-03"
+  },
+  "breakdown": "publisher_platform,platform_position",
+  "data": {
+    "data": [
+      {
+        "account_id": "400356462876861",
+        "account_name": "quisirella",
+        "campaign_id": "120252990977040110",
+        "campaign_name": "Chiến dịch Lượt tương tác - Bán - Bản sao",
+        "impressions": "165",
+        "clicks": "8",
+        "spend": "10687",
+        "cpc": "1335.875",
+        "cpm": "64769.69697",
+        "ctr": "4.848485",
+        "reach": "136",
+        "frequency": "1.213235",
+        "actions": [
+          {
+            "action_type": "link_click",
+            "value": "1"
+          },
+          {
+            "action_type": "onsite_conversion.total_messaging_connection",
+            "value": "1"
+          },
+          {
+            "action_type": "post_engagement",
+            "value": "15"
+          },
+          {
+            "action_type": "like",
+            "value": "1"
+          },
+          {
+            "action_type": "page_engagement",
+            "value": "16"
+          },
+          {
+            "action_type": "video_view",
+            "value": "14"
+          }
+        ],
+        "unique_clicks": "7",
+        "cost_per_action_type": [
+          {
+            "action_type": "video_view",
+            "value": "763.357143"
+          },
+          {
+            "action_type": "link_click",
+            "value": "10687"
+          },
+          {
+            "action_type": "like",
+            "value": "10687"
+          },
+          {
+            "action_type": "onsite_conversion.total_messaging_connection",
+            "value": "10687"
+          },
+          {
+            "action_type": "post_engagement",
+            "value": "712.466667"
+          },
+          {
+            "action_type": "page_engagement",
+            "value": "667.9375"
+          }
+        ],
+        "date_start": "2026-07-03",
+        "date_stop": "2026-07-03",
+        "publisher_platform": "facebook",
+        "platform_position": "feed"
+      },
+      {
+        "account_id": "400356462876861",
+        "account_name": "quisirella",
+        "campaign_id": "120252990977040110",
+        "campaign_name": "Chiến dịch Lượt tương tác - Bán - Bản sao",
+        "impressions": "84",
+        "clicks": "5",
+        "spend": "7250",
+        "cpc": "1450",
+        "cpm": "86309.52381",
+        "ctr": "5.952381",
+        "reach": "79",
+        "frequency": "1.063291",
+        "actions": [
+          {
+            "action_type": "link_click",
+            "value": "2"
+          },
+          {
+            "action_type": "onsite_conversion.total_messaging_connection",
+            "value": "2"
+          },
+          {
+            "action_type": "post_engagement",
+            "value": "7"
+          },
+          {
+            "action_type": "page_engagement",
+            "value": "7"
+          },
+          {
+            "action_type": "onsite_conversion.messaging_user_depth_2_message_send",
+            "value": "2"
+          },
+          {
+            "action_type": "onsite_conversion.messaging_first_reply",
+            "value": "1"
+          },
+          {
+            "action_type": "onsite_conversion.messaging_conversation_started_7d",
+            "value": "1"
+          },
+          {
+            "action_type": "video_view",
+            "value": "5"
+          }
+        ],
+        "unique_clicks": "4",
+        "cost_per_action_type": [
+          {
+            "action_type": "video_view",
+            "value": "1450"
+          },
+          {
+            "action_type": "link_click",
+            "value": "3625"
+          },
+          {
+            "action_type": "onsite_conversion.total_messaging_connection",
+            "value": "3625"
+          },
+          {
+            "action_type": "post_engagement",
+            "value": "1035.714286"
+          },
+          {
+            "action_type": "onsite_conversion.messaging_user_depth_2_message_send",
+            "value": "3625"
+          },
+          {
+            "action_type": "page_engagement",
+            "value": "1035.714286"
+          },
+          {
+            "action_type": "onsite_conversion.messaging_first_reply",
+            "value": "7250"
+          },
+          {
+            "action_type": "onsite_conversion.messaging_conversation_started_7d",
+            "value": "7250"
+          }
+        ],
+        "date_start": "2026-07-03",
+        "date_stop": "2026-07-03",
+        "publisher_platform": "instagram",
+        "platform_position": "feed"
+      },
+      {
+        "account_id": "400356462876861",
+        "account_name": "quisirella",
+        "campaign_id": "120252990977040110",
+        "campaign_name": "Chiến dịch Lượt tương tác - Bán - Bản sao",
+        "impressions": "16",
+        "clicks": "0",
+        "spend": "868",
+        "cpm": "54250",
+        "ctr": "0",
+        "reach": "16",
+        "frequency": "1",
+        "unique_clicks": "0",
+        "date_start": "2026-07-03",
+        "date_stop": "2026-07-03",
+        "publisher_platform": "instagram",
+        "platform_position": "instagram_reels"
+      },
+      {
+        "account_id": "400356462876861",
+        "account_name": "quisirella",
+        "campaign_id": "120252990977040110",
+        "campaign_name": "Chiến dịch Lượt tương tác - Bán - Bản sao",
+        "impressions": "11",
+        "clicks": "0",
+        "spend": "1275",
+        "cpm": "115909.090909",
+        "ctr": "0",
+        "reach": "11",
+        "frequency": "1",
+        "unique_clicks": "0",
+        "date_start": "2026-07-03",
+        "date_stop": "2026-07-03",
+        "publisher_platform": "instagram",
+        "platform_position": "instagram_stories"
+      }
+    ],
+    "paging": {
+      "cursors": {
+        "before": "MAZDZD",
+        "after": "MwZDZD"
+      }
+    }
+  },
+  "note": "Fetch xac minh xoa FB. FB feed van co spend hom nay -> chua propagate het hoac xoa giua ngay."
+}

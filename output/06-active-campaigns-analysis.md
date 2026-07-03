@@ -2,7 +2,8 @@
 title: Phân tích 3 chiến dịch ACTIVE — Quisirella
 generated_at: 2026-07-03
 data_range: 2026-06-30 đến 2026-07-02
-sources: [meta_graph_api]
+placement_window: last_7d
+sources: [meta_graph_api, pipeboard_meta_ads_mcp]
 data_status: ok
 ad_account_id: act_400356462876861
 active_campaign_count: 3
@@ -55,7 +56,7 @@ Account `act_400356462876861`, kỳ **3 ngày** (30/06 → 02/07/2026). Đánh g
 
 - **phễu tin nhắn** (`top_middle`): Chi phí/tin nhắn **20.979 VND** — dưới ngưỡng strategy < 25.000 VND. Funnel sâu (reply 80%, depth_3 50%). **Hold** — chờ thêm data learning.
 - **1806** (`top_only`): **Đúng vai trò Profile Visit** (`destination_type: INSTAGRAM_PROFILE`). Chi phí/lượt truy cập **769 VND** (Ads Manager, 278 visit) — **dưới ngưỡng < 1.200 VND**. Mess kém là **expected**, không penalize. **Hold** — đang hoàn thành vai trò mồi pixel giá rẻ.
-- **Bán retarget** (`bottom`): Chi phí/tin nhắn **17.031 VND** tốt nhất; CPM **68.757** trong ngưỡng ~80k. **Hold** — nhưng **66,7% spend vào Facebook Feed** cần review (IG-first store).
+- **Bán retarget** (`bottom`): Chi phí/tin nhắn **17.031 VND** tốt nhất; CPM **68.757** trong ngưỡng ~80k. **Hold** — placement **7 ngày:** FB **38,1%** spend (vẫn >15%, cần review); **3 ngày** từng lên **66,7%** FB — xem mục 9.
 
 ---
 
@@ -131,7 +132,9 @@ Account `act_400356462876861`, kỳ **3 ngày** (30/06 → 02/07/2026). Đánh g
 
 **Điểm mạnh:** Chi phí/tin nhắn dưới target; CTR 5,05%; reply rate 80%; 100% spend trên Instagram (placement).
 
-**Placement IG (3 ngày):**
+**Placement IG (7 ngày — Pipeboard, xem mục 9):** 100% spend Instagram; engine chính **IG Feed** (chi phí/mess ~21.153 VND trên row Feed).
+
+**Placement IG (3 ngày — Graph API cũ):**
 
 | Placement | Spend | Tin nhắn | Chi phí/tin nhắn |
 |---|---:|---:|---:|
@@ -189,16 +192,18 @@ Account `act_400356462876861`, kỳ **3 ngày** (30/06 → 02/07/2026). Đánh g
 
 **Điểm mạnh:** Chi phí/tin nhắn **17.031 VND** — thấp nhất trong 3 campaign; CPM trong ngưỡng chấp nhận cho tệp nhỏ.
 
-**Red flag — Facebook placement:**
+**Red flag — Facebook placement (7 ngày — Pipeboard MCP):**
 
-| Platform | Spend | % spend | Tin nhắn |
-|---|---:|---:|---:|
-| **facebook feed** | **113.484** | **66,7%** | 4 |
-| instagram feed | 35.060 | 20,6% | 4 |
-| instagram reels | 10.034 | 5,9% | 1 |
-| instagram stories | 11.733 | 6,9% | 1 |
+| Platform | Position | Spend | % spend | Mess started |
+|---|---|---:|---:|---:|
+| facebook | feed | 155.166 | **38,1%** (toàn FB) | 6 |
+| instagram | feed | 150.186 | 36,7% | 10 |
+| instagram | reels | 61.318 | 15,0% | 1 |
+| instagram | stories | 40.692 | 10,0% | 1 |
 
-**66,7% spend vào Facebook Feed** — vượt ngưỡng cảnh báo 15% cho store IG-first. Chi phí/tin nhắn FB: **28.371 VND** vs IG (6 mess): **9.471 VND**.
+**38,1% spend Facebook** (7 ngày) — vẫn vượt ngưỡng 15% IG-first; cần review loại FB. Lưu ý: cửa sổ **3 ngày** (mục trên) từng ghi **66,7%** FB — có thể do giai đoạn delivery lệch; không pause campaign chỉ vì CPA trung bình breakdown.
+
+**Placement IG 7 ngày:** IG Feed mess volume cao nhất (10); chi phí/mess IG Feed ≈ **15.019 VND** vs FB Feed ≈ **25.861 VND** trên row breakdown.
 
 **Giả thuyết testable:** Review loại Facebook placement hoặc giảm budget FB — IG rows hiệu quả mess hơn cho retarget. Không pause campaign (hàng cao cần nhiều chạm).
 
@@ -224,7 +229,7 @@ Tổng phễu acquisition (phễu + 1806): **78,8%** vs strategy 70% — hơi l�
 |---|---|---|---|
 | phễu tin nhắn | top_middle | **hold** | Giữ ~140k/ngày; sunset 2/3 ngày đạt — chờ 3/7 xác nhận; quality 90% |
 | 1806 | top_only | **hold** | Đạt visit 769đ (AM), đúng vai trò mồi pixel; giữ song song đến sunset |
-| Bán retarget | bottom | **hold** | Giữ 50k/ngày; review loại FB Feed (66,7% spend); không pause |
+| Bán retarget | bottom | **hold** | Giữ 50k/ngày; review loại FB (38,1% spend 7d, >15%); không pause |
 
 **Sunset Profile:** **Chưa kích hoạt** — 30/6 + 1/7 đạt cả 2 điều kiện. 2/7 mess chất **N/A** (Business FB). Cần **3 ngày liên tiếp** → theo dõi **3/7**.
 
@@ -259,7 +264,73 @@ Chi tiết ghi hàng ngày: [`08-dm-quality-log.md`](08-dm-quality-log.md)
 | `data/meta_fetch/active/120253285175280110_insights.json` | phễu insights 3d |
 | `data/meta_fetch/active/120252531135370110_insights.json` | 1806 insights 3d |
 | `data/meta_fetch/active/120252990977040110_insights.json` | Bán insights 3d |
-| `data/meta_fetch/active/{id}_placement.json` | Placement breakdown |
+| `data/meta_fetch/active/{id}_placement.json` | Placement breakdown (`publisher_platform,platform_position`) — **7 ngày**, Pipeboard MCP |
 | `data/meta_fetch/active/{id}_adsets.json` | Adset level |
 
 Strategy reference: [`config/campaign_strategy.yaml`](../config/campaign_strategy.yaml) · [`00-campaign-strategy.md`](00-campaign-strategy.md) · [`08-dm-quality-log.md`](08-dm-quality-log.md)
+
+---
+
+## 9. Placement breakdown IG (7 ngày — Pipeboard MCP)
+
+**Nguồn:** `get_insights` qua Pipeboard remote · `time_range=last_7d` · `breakdown=publisher_platform,platform_position` · fetch **2026-07-03**.
+
+> Chỉ đánh giá rows **`instagram_*`** cho creative/placement IG. Facebook rows — ghi nhận % spend, **review loại FB** nếu >15%, không dùng CTR FB làm benchmark IG.
+
+### 9.1 So sánh nhanh 3 ACTIVE
+
+| Campaign | strategy_id | IG spend % | FB spend % | Mess engine (IG) | Placement verdict |
+|---|---|---:|---:|---|---|
+| Phễu tin nhắn | `phieu_tinnhan_lal1` | **100%** | 0% | IG Feed | Tốt — IG-pure |
+| 1806 Profile | `phieu_profile_1806` | **92,5%** | 7,5% | Link click IG Feed/Reels | Đúng vai trò visit |
+| Bán retarget | `ban_retarget_30d` | 61,9% | **38,1%** | IG Feed | **Review loại FB** |
+
+### 9.2 Phễu tin nhắn — `120253285175280110`
+
+| Platform | Position | Spend | Impr | CTR | Mess | Depth 2 | Depth 3 |
+|---|---|---:|---:|---:|---:|---:|---:|
+| instagram | feed | 401.898 | 4.607 | 5,27% | **19** | 17 | 20 |
+| instagram | reels | 111.721 | 1.643 | 4,69% | 5 | 3 | 1 |
+| instagram | stories | 109.324 | 1.456 | 4,53% | 7 | 4 | 0 |
+
+- **100% spend IG** — không leak Facebook.
+- **IG Feed** ~64% spend, volume mess cao nhất; chi phí/mess row Feed ≈ **21.153 VND** (dưới ngưỡng < 25.000).
+- **Stories:** 7 mess nhưng depth_3 = 0 trên row — theo dõi nếu spend ~109k/tuần duy trì.
+
+### 9.3 1806 Profile Visit — `120252531135370110`
+
+| Platform | Position | Spend | Impr | CTR | Mess | Link click |
+|---|---|---:|---:|---:|---:|---:|
+| facebook | reels | 14.857 | 287 | 12,54% | 0 | 14 |
+| facebook | feed | 52.494 | 1.239 | 14,93% | 2 | 64 |
+| instagram | feed | 417.964 | 8.548 | 5,00% | 11 | **437** |
+| instagram | reels | 247.391 | 6.153 | 5,17% | 7 | 332 |
+| instagram | stories | 162.246 | 3.265 | 5,45% | 8 | 183 |
+
+- **FB 7,5% spend** — dưới 15%, không cần review gấp.
+- **Mess thấp expected** (`top_only`) — KPI là visit/link_click, không penalize.
+- **Link click** tập trung IG Feed + Reels — phù hợp mồi pixel/profile.
+
+### 9.4 Bán retarget — `120252990977040110`
+
+| Platform | Position | Spend | Impr | CTR | Mess | Depth 2 | Depth 3 |
+|---|---|---:|---:|---:|---:|---:|---:|
+| facebook | feed | 155.166 | 2.361 | 4,24% | 6 | 4 | 2 |
+| instagram | feed | 150.186 | 1.832 | 4,59% | **10** | 6 | 4 |
+| instagram | explore | 22 | 2 | 0% | 0 | 0 | 0 |
+| instagram | reels | 61.318 | 705 | 4,68% | 1 | 1 | 0 |
+| instagram | stories | 40.692 | 500 | 2,80% | 1 | 1 | 0 |
+
+- **FB 38,1% spend** — vượt 15%; **review loại FB** (giả thuyết testable, không pause campaign).
+- **IG Feed** mess tốt nhất (10); chi phí/mess row ≈ **15.019 VND** vs FB Feed ≈ **25.861 VND**.
+- **IG Reels** CTR cao (4,68%) nhưng mess mỏng — giữ cho reach, không scale mạnh nếu ưu tiên cost/mess.
+
+### 9.5 File raw
+
+| Campaign ID | File |
+|---|---|
+| `120253285175280110` | `data/meta_fetch/active/120253285175280110_placement.json` |
+| `120252531135370110` | `data/meta_fetch/active/120252531135370110_placement.json` |
+| `120252990977040110` | `data/meta_fetch/active/120252990977040110_placement.json` |
+
+PoC methodology: [`docs/mcp-poc-placement-breakdown.md`](../docs/mcp-poc-placement-breakdown.md)

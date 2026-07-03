@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "meta-ads": {
+      "command": "/opt/homebrew/bin/npx",
+      "args": ["-y", "@0xfabrica/mcp-meta-ads"],
+      "env": {
+        "PATH": "/opt/homebrew/bin:/usr/bin:/bin",
+        "META_APP_ID": "your-app-id",
+        "META_APP_SECRET": "your-app-secret",
+        "META_ACCESS_TOKEN": "EAA...",
+        "META_AD_ACCOUNT_ID": "act_400356462876861"
+      }
+    },
+    "meta-insights": {
+      "command": "/opt/homebrew/bin/uvx",
+      "args": ["meta-insights-mcp"],
+      "env": {
+        "PATH": "/opt/homebrew/bin:/usr/bin:/bin",
+        "META_ACCESS_TOKEN": "EAA...",
+        "META_BUSINESS_ID": "optional-business-id-for-list_business_assets"
+      }
+    }
+  }
+}

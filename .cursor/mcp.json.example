@@ -1,14 +1,7 @@
 {
   "mcpServers": {
     "meta-ads": {
-      "command": "npx",
-      "args": ["-y", "@0xfabrica/mcp-meta-ads"],
-      "env": {
-        "META_APP_ID": "your-app-id",
-        "META_APP_SECRET": "your-app-secret",
-        "META_ACCESS_TOKEN": "EAA...",
-        "META_AD_ACCOUNT_ID": "act_..."
-      }
+      "url": "https://meta-ads.mcp.pipeboard.co/?token=YOUR_PIPEBOARD_TOKEN"
     }
   }
 }

@@ -12,23 +12,22 @@ Không cần `ANTHROPIC_API_KEY`, không cần `META_ACCESS_TOKEN`, không cần
 
 ### Setup Meta Ads MCP trong Cursor
 
-Meta MCP chính thức (`https://mcp.facebook.com/ads`) **không login OAuth được từ Cursor** (lỗi `Dynamic registration is not available`). Dùng **System User token** + MCP stdio:
+**MCP chính:** [Pipeboard Meta Ads MCP](https://github.com/pipeboard-co/meta-ads-mcp) remote (`meta-ads.mcp.pipeboard.co`).
 
-1. Copy [`.cursor/mcp.json.example`](.cursor/mcp.json.example) → `.cursor/mcp.json`
-2. Điền `META_APP_ID`, `META_APP_SECRET`, `META_ACCESS_TOKEN`, `META_AD_ACCOUNT_ID` (dạng `act_...`)
-3. Reload Cursor → MCP server `meta-ads` phải hiện **Connected**
+1. Kết nối Meta tại [pipeboard.co](https://pipeboard.co) → **Connection Successful**
+2. Lấy API token tại [pipeboard.co/api-tokens](https://pipeboard.co/api-tokens)
+3. Copy [`.cursor/mcp.json.example`](.cursor/mcp.json.example) → `.cursor/mcp.json`, thay `YOUR_PIPEBOARD_TOKEN`
+4. Reload Cursor → MCP server `meta-ads` phải hiện **Connected**
 
-Token lấy từ: Meta Business Settings → System Users → Generate token → scope **`ads_read`** → gán ad account Quisirella.
+**Read-only:** [`.cursor/permissions.json`](.cursor/permissions.json) — chỉ tool đọc Pipeboard trong mcpAllowlist; tool ghi bị chặn qua `autoRun.block_instructions`.
 
-**Kiểm tra token** (PowerShell):
+**Breakdown placement/age/gender:** dùng Pipeboard `get_insights` + `breakdown` (PoC: [`docs/mcp-poc-placement-breakdown.md`](docs/mcp-poc-placement-breakdown.md)).
 
-```powershell
-curl.exe -s "https://graph.facebook.com/v21.0/act_YOUR_ID?fields=name,account_status&access_token=YOUR_TOKEN"
-```
+**Backup fabrica (local token):** [`.cursor/mcp.json.fabrica`](.cursor/mcp.json.fabrica) — `@0xfabrica/mcp-meta-ads` nếu Pipeboard down.
 
-Nếu lỗi `#200 ads_read permission` → token thiếu quyền hoặc chưa gán ad account cho System User. Token phải có scope `ads_read` (debug: `debug_token` không được chỉ có `pages_show_list`).
+**Lưu ý:** Token Pipeboard (`pk_...`) nằm trong `.cursor/mcp.json` (gitignored). Dữ liệu đi qua hạ tầng Pipeboard — không phải Graph API first-party trực tiếp từ máy bạn.
 
-Package MCP: [`@0xfabrica/mcp-meta-ads`](https://github.com/0xfabrica/mcp-meta-ads) (stdio, không cần OAuth browser).
+Meta MCP chính thức (`https://mcp.facebook.com/ads`) **không chạy được trên Cursor** với app tự cấu hình (DCR + redirect `cursor://` bị chặn).
 
 ### Bước 2 — Phân tích bằng Cursor AI
 

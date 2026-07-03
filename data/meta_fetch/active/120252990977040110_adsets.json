@@ -1,1 +1,49 @@
-{"data":[{"adset_name":"Nh\u00f3m qu\u1ea3ng c\u00e1o L\u01b0\u1ee3t t\u01b0\u01a1ng t\u00e1c - B\u00e1n","adset_id":"120252990977050110","spend":"170311","impressions":"2477","clicks":"106","ctr":"4.27937","cpc":"1606.707547","actions":[{"action_type":"onsite_conversion.lead","value":"13"},{"action_type":"offsite_complete_registration_add_meta_leads","value":"13"},{"action_type":"link_click","value":"19"},{"action_type":"offsite_search_add_meta_leads","value":"13"},{"action_type":"post_reaction","value":"3"},{"action_type":"onsite_conversion.messaging_conversation_replied_7d","value":"3"},{"action_type":"onsite_web_lead","value":"13"},{"action_type":"onsite_conversion.total_messaging_connection","value":"13"},{"action_type":"post_engagement","value":"185"},{"action_type":"post_interaction_gross","value":"3"},{"action_type":"page_engagement","value":"185"},{"action_type":"post_interaction_net","value":"3"},{"action_type":"onsite_conversion.messaging_user_depth_2_message_send","value":"8"},{"action_type":"onsite_conversion.messaging_first_reply","value":"5"},{"action_type":"onsite_conversion.messaging_user_depth_3_message_send","value":"2"},{"action_type":"onsite_conversion.post_net_like","value":"3"},{"action_type":"onsite_conversion.messaging_user_depth_5_message_send","value":"1"},{"action_type":"lead","value":"13"},{"action_type":"offsite_content_view_add_meta_leads","value":"13"},{"action_type":"onsite_conversion.messaging_conversation_started_7d","value":"10"},{"action_type":"onsite_conversion.lead_grouped","value":"13"},{"action_type":"video_view","value":"163"}],"date_start":"2026-06-30","date_stop":"2026-07-02"}],"paging":{"cursors":{"before":"MAZDZD","after":"MAZDZD"}}}
+{
+  "data": [
+    {
+      "id": "120252990977050110",
+      "name": "Nhóm quảng cáo Lượt tương tác - Bán",
+      "status": "ACTIVE",
+      "daily_budget": "0",
+      "lifetime_budget": "1500000",
+      "start_time": "2026-06-25T09:17:39+0700",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 22,
+        "age_range": [
+          22,
+          44
+        ],
+        "custom_audiences": [
+          {
+            "id": "120252835150710110",
+            "name": "QSR - Visit Profile 14N - 23/06"
+          }
+        ],
+        "geo_locations": {
+          "countries": [
+            "VN"
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "targeting_automation": {
+          "advantage_audience": 1,
+          "individual_setting": {
+            "age": 1,
+            "gender": 1
+          }
+        }
+      },
+      "created_time": "2026-06-25T09:17:39+0700"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVFIU3J0SV9KeEFyeUViMzlqYXd3ZATdvaUpUQl9najR2WUNEeVhqdVRJekthX0RxSEVJUkd0bURSdWx6WDdRX1lwb0FnR3NWRE04VTZAySV9mODQxUVZADaVFn",
+      "after": "QVFIU3J0SV9KeEFyeUViMzlqYXd3ZATdvaUpUQl9najR2WUNEeVhqdVRJekthX0RxSEVJUkd0bURSdWx6WDdRX1lwb0FnR3NWRE04VTZAySV9mODQxUVZADaVFn"
+    }
+  }
+}

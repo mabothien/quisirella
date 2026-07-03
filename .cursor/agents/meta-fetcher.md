@@ -11,11 +11,43 @@ When invoked:
 
 1. Read `.cursor/rules/quisirella-meta-data-fetch.mdc` for the checklist.
 2. Read `config/campaign_strategy.yaml` — match ACTIVE campaigns by `ads_manager_name` / `name_pattern`; note `legacy_aliases` for older report names.
-3. Use Meta MCP or Graph API — **read-only only**.
+3. Use Meta MCP (Pipeboard) or Graph API — **read-only only**.
 4. Save raw JSON to `data/meta_fetch/` (account) and `data/meta_fetch/active/{campaign_id}_*.json`.
 5. Required action types: messaging_conversation_started_7d, messaging_first_reply, depth_2/3/5, lead, link_click, post_save, omni_purchase (note unreliable for Quisirella).
 
-**Blocked:** `ads_create_*`, `ads_update_*`, `ads_activate_*`, or any mutating MCP tool.
+## MCP `meta-ads` (Pipeboard remote)
+
+**Nguồn:** `https://meta-ads.mcp.pipeboard.co` — token Pipeboard trong `.cursor/mcp.json` (gitignored). Dữ liệu qua hạ tầng Pipeboard; benchmark vẫn chỉ từ account Quisirella, không dùng số generic.
+
+**Tool đọc được phép** (xem `.cursor/permissions.json`):
+
+| Mục đích | Tool Pipeboard |
+|---|---|
+| Account / campaigns | `get_ad_accounts`, `get_account_info`, `get_campaigns`, `get_campaign_details` |
+| Adset / ad drill | `get_adsets`, `get_adset_details`, `get_ads`, `get_ad_details` |
+| Insights + breakdown | `get_insights`, `bulk_get_insights` |
+| Creative / Andromeda | `get_ad_creatives`, `get_creative_details`, `get_ad_image` |
+| IG organic (tách KPI ads) | `get_instagram_accounts`, `get_instagram_posts`, `get_instagram_account_insights` |
+| Targeting research | `search_interests`, `search_behaviors`, `search_demographics`, `search_geo_locations` |
+
+### Breakdown (placement, age, gender)
+
+Dùng **`get_insights`** với `breakdown`:
+
+| File output | Gọi MCP |
+|---|---|
+| Account age | `get_insights` object `act_400356462876861`, `breakdown=age`, `level=account`, `time_range=last_30d` |
+| Account gender | `breakdown=gender` |
+| Campaign placement IG | `get_insights` object `{campaign_id}`, `breakdown=publisher_platform,platform_position`, `level=campaign` |
+| Adset level | `level=adset` + filtering hoặc `get_adsets` + insights per adset |
+
+PoC runtime: [`docs/mcp-poc-placement-breakdown.md`](../docs/mcp-poc-placement-breakdown.md).
+
+**Fallback:** Graph API trực tiếp nếu MCP lỗi — ghi `data_status: partial` và lỗi verbatim.
+
+**Backup MCP:** fabrica local — [`.cursor/mcp.json.fabrica`](../.cursor/mcp.json.fabrica) (khôi phục nếu Pipeboard down).
+
+**Blocked (không gọi):** mọi tool `create_*`, `update_*`, `delete_*`, `duplicate_*`, `bulk_update_*`, `upload_*`, `add_users_to_audience`, `remove_users_from_audience`, `create_budget_schedule`, `upload_conversion_events`, và bất kỳ mutate nào khác.
 
 If API fails: report error clearly — **never fabricate numbers**. Set `data_status: unavailable` or `partial` in your summary.
 
