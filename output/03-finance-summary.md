@@ -1,73 +1,74 @@
 ---
 title: Tổng hợp tài chính — Quisirella
-generated_at: 2026-07-02
-data_range: 2026-06-02 đến 2026-07-01
-sources: [meta_graph_api, google_sheets — chưa tích hợp]
+generated_at: 2026-07-05
+data_range: 2026-06-01 đến 2026-06-30
+sources: [google_sheets, meta_graph_api]
 data_status: partial
+ad_account_id: act_400356462876861
 ---
 
 # 03 — Finance summary
 
 ## Trạng thái
 
-**Google Sheets chưa được tích hợp** (`GOOGLE_SHEET_ID` chưa cấu hình). Không có doanh thu thật, COGS, hay lợi nhuận gộp.
-
-**Ad spend Meta** đã lấy được từ Graph API.
+| Nguồn | Trạng thái | Ghi chú |
+|---|---|---|
+| **Google Sheets** | ok | `finance-fetcher` → `data/finance_fetch/bao_gia_2026_summary.json` |
+| **Meta Ads API** | partial | Cần `meta-fetcher` với `period: 2026-06` — token Graph trong `.env` hết hạn tại thời điểm test |
 
 ---
 
-## ROAS thực vs ROAS Meta
+## Tháng 6/2026 — Sheet (BÁO GIÁ 2026)
 
-| Chỉ số | Công thức | Kỳ này |
+Nguồn: `data/finance_fetch/bao_gia_2026_summary.json` — cells M8, K8, H8.
+
+| Chỉ số | Giá trị | Nguồn |
 |---|---|---:|
-| **Ad spend (Meta)** | Từ insights API | **8.546.101 VND** |
-| Doanh thu thật | Từ Google Sheet | _chưa có_ |
-| Purchase Meta (pixel) | 3 events | _không tin cậy_ |
-| Doanh thu Meta ước tính (3 × AOV giả định) | — | _không tính_ |
-| **ROAS thực** | Doanh thu Sheet / spend | _chưa tính được_ |
-| Gross profit | Doanh thu − COGS | _chưa có_ |
+| **Doanh thu đạt được** | **218.500.000 VND** | M8 |
+| **Lợi nhuận đạt được** | **45.647.766 VND** | K8 |
+| **Số lượng bán theo tháng** | **31** | H8 |
+| Quảng cáo (Sheet YTD ref) | 44.597.147 VND | D8 — *không dùng cho ROAS* |
 
 ---
 
-## Proxy conversion từ Meta (chưa phải doanh thu)
+## ROAS thực vs Meta spend
 
-| Chỉ số | Giá trị | Chi phí đơn vị |
-|---|---:|---:|
-| Tin nhắn bắt đầu (7 ngày) | 165 | 51.795 VND/tin nhắn |
-| Lead Meta | 103 | 82.972 VND/lead |
-| Purchase Meta | 3 | ~2.848.700 VND/purchase |
+| Chỉ số | Công thức | Tháng 6/2026 |
+|---|---|---:|
+| Meta spend | `data/meta_fetch/` (calendar month) | _chưa fetch — cần meta-fetcher_ |
+| Doanh thu Sheet | M8 | **218.500.000 VND** |
+| **ROAS thực** | Doanh thu / Meta spend | _chưa tính_ |
+| **Chi phí/đơn** | Meta spend / 31 đơn | _chưa tính_ |
 
-**Ví dụ tính ROAS thực (khi có Sheet):**
-
-Nếu kỳ này chốt **5 đơn** qua DM với doanh thu trung bình **6 triệu VND/đơn** (= 30 triệu VND):
-
-- ROAS thực = 30.000.000 / 8.546.101 = **3,51×**
-- Chi phí marketing / đơn = 8.546.101 / 5 = **1.709.220 VND**
-
-_(Số liệu ví dụ — thay bằng số thật từ Sheet.)_
+**Ví dụ** (khi có Meta spend): nếu spend tháng 6 = 8.000.000 VND → ROAS = 218.500.000 / 8.000.000 = **27,31×**; chi phí/đơn = 258.065 VND.
 
 ---
 
-## Phân bổ chi tiêu theo loại mục tiêu
+## YTD 2026 (Sheet — tham chiếu)
 
-| Loại campaign | Spend (VND) | % | Ghi chú |
-|---|---:|---:|---|
-| Engagement / tin nhắn | 5.775.633 | 67,6% | Phù hợp funnel DM |
-| Traffic | 2.770.468 | 32,4% | Chi phí/tin nhắn cao — xem xét cắt giảm |
-
----
-
-## Lưu ý cho Quisirella
-
-- Mỗi SKU là **1-của-1** — doanh thu tháng phụ thuộc số món bán, không phải volume ổn định.
-- **8,5 triệu VND ad spend / 30 ngày** cần đối chiếu số đơn chốt thực tế qua DM để đánh giá hiệu quả.
-- Khi tích hợp Sheet: map từng đơn với tier giá (2–4tr / 4–10tr / 10tr+) và nguồn lead (campaign/ad).
+| Chỉ số | Giá trị | Cell |
+|---|---|---:|
+| Doanh thu đạt được YTD | 1.247.050.000 VND | D6 |
+| Lợi nhuận đạt được YTD | 404.513.885 VND | D4 |
+| ROS | 32,44% | B2 |
+| Hàng tồn kho | 230.529.778 VND | D7 |
 
 ---
 
-## Việc cần làm để hoàn thiện file này
+## Lưu ý Quisirella
 
-1. Tạo Google Cloud service account + share Sheet tài chính
-2. Điền `.env`: `GOOGLE_SHEET_ID`, `GOOGLE_SHEET_RANGES`
-3. Ghi doanh thu từng đơn kèm: ngày, SKU, tier, nguồn DM/campaign
-4. Chạy lại báo cáo để tính ROAS thực và gross profit
+- Purchase Meta **không phản ánh doanh thu thật** (chốt qua Instagram DM).
+- Dòng **Quảng cáo** trên Sheet chỉ để tham chiếu — **ROAS dùng Meta API spend**.
+- SKU **1-của-1** — doanh thu tháng biến động; không benchmark như e-commerce volume.
+- **Không có** campaign-level ROAS từ Sheet — chỉ account-level.
+
+---
+
+## Pipeline đã dùng
+
+```bash
+python -m quisirella fetch-finance --month 2026-06
+# meta-fetcher: get_insights time_range 2026-06-01 → 2026-06-30 (chạy qua Cursor MCP)
+```
+
+Raw archive: `data/finance_fetch/monthly_tabs/` (21 tab Tháng 11/2024 → 7/2026).

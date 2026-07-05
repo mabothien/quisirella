@@ -30,6 +30,7 @@ Doc truoc moi lan phan tich:
 | Creative/Andromeda | `quisirella-meta-creative-andromeda.mdc` | Creative diversity, fatigue, Andromeda (IG) |
 | Competitor | `quisirella-meta-competitor.mdc` | Meta Ad Library, competitive gap used luxury IG |
 | Output | `quisirella-meta-report-output.mdc` | Ghi file Markdown vao `output/` |
+| Finance | `quisirella-meta-finance.mdc` | Ghép doanh thu Sheet + Meta spend, ROAS thực |
 | IG organic copy | `quisirella-ig-organic-copy.mdc` | Viet lai caption Story/Post IG organic — than thien, chuyen nghiep, khong phien dien |
 
 **Meta expert skill:** `src/quisirella/skill/SKILL.md` + `references/` — ap dung khi diagnosis (Breakdown Effect, learning, auction, Andromeda, health score). KPI Quisirella (chi phi/tin nhan) override KPI generic trong skill.
@@ -38,7 +39,9 @@ Doc truoc moi lan phan tich:
 
 **IG knowledge base:** `output/00-campaign-strategy.md`, `output/00-meta-ad-policy-ig.md`, `00-ig-ad-creative-guide.md`, `00-ig-organic-copy-guide.md`, `00-competitive-ig-used-luxury.md` — doc khi viet copy ad, organic post/story, phan tich campaign, hoac tu van creative/placement.
 
-**Subagents** (`.cursor/agents/`): `meta-fetcher` (read-only fetch) → `meta-analyst` (diagnosis) → `report-writer` (ghi output/). Chi dung pipeline cho phan tich day du — cau hoi don gian thi doc truc tiep `output/01`/`06`.
+**Subagents** (`.cursor/agents/`): `meta-fetcher` + `finance-fetcher` (song song, read-only) → `meta-analyst` (diagnosis + ROAS) → `report-writer` (ghi output/). Chi dung pipeline cho phan tich day du — cau hoi don gian thi doc truc tiep `output/01`/`06`.
+
+**Finance Sheet:** `config/finance_sheet.yaml` — tab BÁO GIÁ 2026 (doanh thu/lợi nhuận theo tháng). CLI: `python -m quisirella fetch-finance --month YYYY-MM`.
 
 **Context engineering skill:** `.cursor/skills/quisirella-context-engineering/SKILL.md` — handoff contract giua subagents (bang so verbatim), filesystem memory (`data/` + `output/`), nen session log, quality gate bao cao. Doc khi chay pipeline hoac review bao cao.
 
@@ -59,6 +62,14 @@ Reference implementation: `output/06-active-campaigns-analysis.md`
 Lay insights Meta Ads 30 ngay cho Quisirella (act_400356462876861).
 Phan tich theo store_profile + relevance_rules. Chi read-only.
 Ghi file 01-05 vao output/
+```
+
+**Bao cao thang + finance (Sheet + Meta):**
+```
+Fetch Meta Ads + Google Sheet thang 2026-06 cho Quisirella.
+meta-fetcher + finance-fetcher song song (calendar month 2026-06-01 → 2026-06-30).
+meta-analyst: ROAS thuc = doanh thu Sheet (cot M) / Meta spend.
+Ghi output/01-05 (03 co finance), cap nhat 06 neu ACTIVE.
 ```
 
 **Phan tich ACTIVE (IG-only):**

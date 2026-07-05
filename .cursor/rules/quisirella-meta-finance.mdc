@@ -1,0 +1,56 @@
+---
+description: Ghép doanh thu Google Sheet + Meta Ads spend — ROAS thực, unit economics DM-first
+alwaysApply: false
+---
+
+# Quisirella — Finance + Meta Ads
+
+Doc khi phan tich co doanh thu Sheet hoac ghi `output/03-finance-summary.md`.
+
+## Nguon du lieu
+
+| Metric | Nguon chinh | File |
+|---|---|---|
+| Ad spend | **Meta API** | `data/meta_fetch/` |
+| Doanh thu dat (thang) | **Sheet BÁO GIÁ 2026** cot M | `data/finance_fetch/bao_gia_2026_summary.json` |
+| Loi nhuan dat (thang) | Sheet cot K | same |
+| SL ban theo thang | Sheet cot H | same |
+| Quang cao (Sheet) | Cot D YTD | Chi **tham chieu** — khong thay Meta spend |
+| Tin nhan, funnel | Meta API | `data/meta_fetch/` |
+
+Mapping cell: `config/finance_sheet.yaml`.
+
+## Ky phan tich
+
+- **Calendar month** — Meta `time_range` since/until khop `finance-fetcher --month YYYY-MM`
+- Pre-2026: BÁO GIÁ 2026 chi co hang Thang 1–7/2026 — thang khac = `partial` hoac archive raw only
+
+## Cong thuc (analyst ghi vao bang verbatim)
+
+| Metric | Cong thuc |
+|---|---|
+| ROAS thuc | `doanh_thu_dat / meta_spend` (cung thang) |
+| Chi phi/don | `meta_spend / qty_sold_month` (neu H > 0) |
+| LTV:CAC proxy | `doanh_thu_dat / qty_sold / chi_phi_don` — tham chieu `unit_economics_budget_dm.md` |
+
+**Khong** campaign-level ROAS — Sheet khong map campaign. Funnel Meta van per-campaign.
+
+## Bang metrics mo rong (handoff)
+
+| Period | Meta Spend | Tin nhan | Chi phi/tin nhan | Doanh thu Sheet | Loi nhuan Sheet | SL ban | ROAS thuc | Chi phi/don | Meta source | Sheet source |
+|---|---|---|---|---|---|---|---|---|---|---|
+
+Sheet source: cite `bao_gia_2026_summary.json` + `source_cells` (vd. M8, K8).
+
+## Caveats bat buoc
+
+- Purchase Meta **khong** phan anh doanh thu that (chot DM)
+- Quang cao tren Sheet **khong** phai spend chinh thuc cho ROAS
+- SKU 1-cua-1 — doanh thu thang bien dong manh, khong so sanh nhu e-commerce volume
+
+## Pipeline
+
+1. `finance-fetcher`: `python -m quisirella fetch-finance --month YYYY-MM`
+2. `meta-fetcher`: insights cung `date_range`
+3. `meta-analyst`: bang tren + verdicts
+4. `report-writer`: `03-finance-summary.md`

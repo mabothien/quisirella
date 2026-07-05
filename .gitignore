@@ -4,6 +4,10 @@ credentials/
 .cursor/mcp.json
 .cursor/mcp.json.fabrica
 
+# Fetched data (regenerated each run)
+data/meta_fetch/
+data/finance_fetch/
+
 # External reference repo (not part of this project)
 Agent-Skills-for-Context-Engineering/
 claude-ads/

@@ -11,9 +11,10 @@ All must pass before proceeding. On failure: fix, don't ship.
 | D1 | Frontmatter complete | `title`, `generated_at`, `data_range`, `sources`, `data_status`, `ad_account_id` present (per `quisirella-meta-report-output.mdc`) |
 | D2 | `data_status` valid | One of `ok` / `partial` / `unavailable`; matches reality (any failed fetch ⇒ not `ok`) |
 | D3 | Number formatting | VND with dot separators (8.546.101), CTR one decimal with comma (3,57%), chi phí/tin nhắn integer |
-| D4 | Traceability | Every metric exists in a `data/meta_fetch/` file or the analyst's verbatim table — zero invented numbers |
+| D4 | Traceability | Every metric exists in `data/meta_fetch/`, `data/finance_fetch/`, or the analyst's verbatim table — zero invented numbers |
 | D5 | Account | `act_400356462876861` only |
 | D6 | Purchase caveat | Any Meta purchase/ROAS figure carries "không phản ánh doanh thu thật (chốt DM)" |
+| D7 | ROAS thuc (when finance) | ROAS thuc cites Sheet `revenue_actual` + Meta `spend` same month; Quảng cáo Sheet labeled reference-only |
 
 ## Stage 2 — Rubric (per-dimension pass/fail)
 

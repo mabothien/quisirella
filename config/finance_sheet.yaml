@@ -1,0 +1,40 @@
+# Google Sheet finance mapping — bảng giá quisirella
+# Credentials: .env GOOGLE_SHEET_ID + GOOGLE_SERVICE_ACCOUNT_FILE
+
+spreadsheet_id_env: GOOGLE_SHEET_ID
+
+primary_tab: "BÁO GIÁ 2026"
+summary_range: "'BÁO GIÁ 2026'!A1:N12"
+
+report_tab: REPORT
+report_range: "REPORT!A1:B12"
+
+# Monthly breakdown on BÁO GIÁ 2026 (rows 3–9 = Tháng 1–7/2026; row 10 = totals)
+monthly_table:
+  header_row: 2
+  first_data_row: 3
+  totals_row: 10
+  columns:
+    month_label: E
+    qty_sold_month: H
+    profit_actual: K
+    revenue_actual: M
+
+# YTD summary labels in columns A–D (matched by label text in column A or C)
+ytd_labels:
+  ros: "Tỷ suất lợi nhuận"
+  loi_nhuan_du_kien: "LỢI NHUẬN DỰ KIẾN"
+  loi_nhuan_dat: "LỢI NHUẬN ĐẠT ĐƯỢC"
+  doanh_thu_du_kien: "DOANH THU DỰ KIẾN"
+  doanh_thu_dat: "DOANH THU ĐẠT ĐƯỢC"
+  hang_ton_kho: "Hàng Tồn Kho"
+  quang_cao_ref: "Quảng cáo"
+
+archive_monthly_tabs:
+  pattern: "Tháng {n}/{yyyy}"
+  from:
+    month: 11
+    year: 2024
+  to:
+    month: 7
+    year: 2026

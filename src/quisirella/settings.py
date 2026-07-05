@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 CONFIG_DIR = PROJECT_ROOT / "config"
 DATA_DIR = PROJECT_ROOT / "data"
+FINANCE_FETCH_DIR = DATA_DIR / "finance_fetch"
 OUTPUT_DIR = PROJECT_ROOT / "output"
 CREDENTIALS_DIR = PROJECT_ROOT / "credentials"
 
@@ -29,6 +30,7 @@ GOOGLE_SHEET_ID = os.getenv("GOOGLE_SHEET_ID", "")
 GOOGLE_SERVICE_ACCOUNT_FILE = os.getenv(
     "GOOGLE_SERVICE_ACCOUNT_FILE", str(CREDENTIALS_DIR / "service_account.json")
 )
+# Deprecated: ranges live in config/finance_sheet.yaml (kept for legacy sheets.py callers)
 GOOGLE_SHEET_RANGES = [
     r.strip() for r in os.getenv("GOOGLE_SHEET_RANGES", "").split(",") if r.strip()
 ]
@@ -49,6 +51,11 @@ def load_campaign_strategy() -> dict:
         return yaml.safe_load(f)
 
 
+def load_finance_sheet() -> dict:
+    with open(CONFIG_DIR / "finance_sheet.yaml", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
 def ensure_dirs() -> None:
-    for d in (DATA_DIR, OUTPUT_DIR, CREDENTIALS_DIR):
+    for d in (DATA_DIR, FINANCE_FETCH_DIR, OUTPUT_DIR, CREDENTIALS_DIR):
         d.mkdir(parents=True, exist_ok=True)

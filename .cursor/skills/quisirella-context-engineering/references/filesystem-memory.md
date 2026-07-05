@@ -9,6 +9,9 @@ The filesystem is the workflow's memory layer. Context windows hold working stat
 | `config/campaign_strategy.yaml` | Campaign intent, KPI by role, sunset rules | human + agent | Yes |
 | `data/meta_fetch/` | Raw API JSON (scratch/offload) | meta-fetcher | No (gitignored) |
 | `data/meta_fetch/active/` | Per-campaign raw JSON | meta-fetcher | No |
+| `data/finance_fetch/` | Parsed + raw Google Sheet finance JSON | finance-fetcher | No (gitignored) |
+| `data/finance_fetch/monthly_tabs/` | Archive tab Tháng n/yyyy | finance-fetcher | No |
+| `config/finance_sheet.yaml` | Sheet cell mapping (BÁO GIÁ 2026) | human + agent | Yes |
 | `output/00-*.md` | Stable knowledge base (Claude Projects) | human + agent | Yes |
 | `output/01-06.md` | Periodic reports | report-writer | Yes |
 | `output/07-session-log.md` | Session memory (hooks append) | hooks + agent | Yes |

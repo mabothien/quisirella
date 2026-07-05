@@ -1,6 +1,6 @@
 # Subagent Handoff Contract — Quisirella Pipeline
 
-Pipeline: `meta-fetcher` → `meta-analyst` → `report-writer`. Each handoff is a structured artifact, never free prose containing numbers.
+Pipeline: `meta-fetcher` + `finance-fetcher` (parallel) → `meta-analyst` → `report-writer`. Each handoff is a structured artifact, never free prose containing numbers.
 
 ## Why: the telephone game problem
 
@@ -27,6 +27,23 @@ Fetcher returns a **manifest**, not data:
 
 Never paste raw JSON bodies into the response. The analyst greps/reads files itself.
 
+## Handoff 1b: finance-fetcher → parent/analyst
+
+```markdown
+## Finance fetch manifest
+- period: 2026-06
+- date_range: 2026-06-01 → 2026-06-30
+- files:
+  | File | Content | Rows/keys |
+  |---|---|---|
+  | data/finance_fetch/bao_gia_2026_summary.json | parsed monthly + YTD | 7 months |
+  | data/finance_fetch/manifest.json | fetch metadata | — |
+- errors: none
+- data_status: ok
+```
+
+Primary analyst source for revenue/profit: `bao_gia_2026_summary.json` → `months[]` where `month_key` matches period.
+
 ## Handoff 2: meta-analyst → report-writer
 
 Analyst returns analysis with a **verbatim metrics table** as the single source of numbers:
@@ -50,7 +67,7 @@ Analyst returns analysis with a **verbatim metrics table** as the single source 
 
 Requirements:
 
-- Every number in the table traces to a file in `data/meta_fetch/` (last column).
+- Every number in the table traces to a file in `data/meta_fetch/` or `data/finance_fetch/` (last column).
 - Verdicts reference table rows, not re-stated numbers.
 - If a metric is missing from raw data: write `n/a`, never estimate.
 

@@ -18,12 +18,13 @@ When invoked:
 7. Load skill references when diagnosing: `src/quisirella/skill/references/thinking_framework.md`, `andromeda_creative.md`, `health_score_dm.md`, `ab_test_dm.md`, `unit_economics_budget_dm.md`.
 8. Apply `.cursor/rules/quisirella-meta-creative-andromeda.mdc` when CTR drops, frequency high, or creative recommendations.
 9. Apply `.cursor/rules/quisirella-meta-competitor.mdc` only when user asks competitive intel — cite `competitor_meta_ig.md` + `00-competitive-ig-used-luxury.md`.
+10. When `data/finance_fetch/bao_gia_2026_summary.json` exists, apply `.cursor/rules/quisirella-meta-finance.mdc` — merge Sheet revenue with Meta spend for the **same calendar month**.
 
 **Brand rule:** Ads = Tiffany & Co. + Bvlgari only. Justin Davis = IG organic, never recommend ads.
 
 **Quality measurement:** Compute `engaged_rate = depth_3 / messaging_started` from API as automatic proxy. For quality_mess_rate, orders_closed, profile_visit (AM) — read `output/08-dm-quality-log.md`; if missing, use `n/a` or depth_3 proxy with caveat — never fabricate.
 
-**Handoff contract** (see `.cursor/skills/quisirella-context-engineering/references/subagent-handoff.md`): all numbers go in a **verbatim metrics table** with a data-source column tracing each row to a `data/meta_fetch/` file. Verdicts cite table rows. Missing metric = `n/a`, never an estimate. report-writer copies from this table exactly — no prose paraphrasing of numbers.
+**Handoff contract** (see `.cursor/skills/quisirella-context-engineering/references/subagent-handoff.md`): all numbers go in a **verbatim metrics table** with data-source columns tracing each row to `data/meta_fetch/` and/or `data/finance_fetch/bao_gia_2026_summary.json`. When finance data exists, include extended columns per `quisirella-meta-finance.mdc`: Doanh thu Sheet, Loi nhuan Sheet, SL ban, ROAS thuc, Chi phi/don. Verdicts cite table rows. Missing metric = `n/a`, never an estimate. report-writer copies from this table exactly — no prose paraphrasing of numbers.
 
 Deliver to parent:
 
@@ -36,6 +37,6 @@ Deliver to parent:
 - **IG-only:** placement analysis on instagram_feed/reels/stories only; policy/creative notes when recommending copy changes
 - **DM Health Score** (optional): 0-100 per `health_score_dm.md` when sufficient data — supplements verdicts
 - **Measurement plan:** per recommendation — metric, review date (7-30 days)
-- **Competitive:** only cite patterns from `00-competitive-ig-used-luxury.md` + `competitor_meta_ig.md` — never cross-industry benchmarks
+- **Unit economics (when finance data):** ROAS thuc, chi phi/don, Sheet vs Meta spend note per `quisirella-meta-finance.mdc`
 
 Do **not** write files — return structured analysis for report-writer.

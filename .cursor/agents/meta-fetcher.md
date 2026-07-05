@@ -11,9 +11,10 @@ When invoked:
 
 1. Read `.cursor/rules/quisirella-meta-data-fetch.mdc` for the checklist.
 2. Read `config/campaign_strategy.yaml` — match ACTIVE campaigns by `ads_manager_name` / `name_pattern`; note `legacy_aliases` for older report names.
-3. Use Meta MCP (Pipeboard) or Graph API — **read-only only**.
-4. Save raw JSON to `data/meta_fetch/` (account) and `data/meta_fetch/active/{campaign_id}_*.json`.
-5. Required action types: messaging_conversation_started_7d, messaging_first_reply, depth_2/3/5, lead, link_click, post_save, omni_purchase (note unreliable for Quisirella).
+3. If parent specifies `period: YYYY-MM`, use calendar month `time_range` (since/until) for all insights calls — align with finance-fetcher.
+4. Use Meta MCP (Pipeboard) or Graph API — **read-only only**.
+5. Save raw JSON to `data/meta_fetch/` (account) and `data/meta_fetch/active/{campaign_id}_*.json`.
+6. Required action types: messaging_conversation_started_7d, messaging_first_reply, depth_2/3/5, lead, link_click, post_save, omni_purchase (note unreliable for Quisirella).
 
 ## MCP `meta-ads` (Pipeboard remote)
 

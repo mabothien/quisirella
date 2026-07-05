@@ -9,6 +9,14 @@ alwaysApply: false
 
 Chi **read-only**. Cam: `ads_create_*`, `ads_update_*`, `ads_activate_*`.
 
+## Khoang thoi gian (calendar month)
+
+Khi parent truyen `period: YYYY-MM` (vd. `2026-06`):
+
+- Dung MCP `get_insights` voi `time_range: {since: "2026-06-01", until: "2026-06-30"}` — **khong** dung `last_30d`
+- Ghi `date_range` trong manifest khop finance-fetcher
+- Neu khong co period: mac dinh `last_30d` (giu hanh vi cu)
+
 ## Account level (bat buoc)
 
 ```

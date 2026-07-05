@@ -4,16 +4,19 @@ Usage:
     python -m quisirella auth                       # one-time Meta Business OAuth
     python -m quisirella run                        # last 30 days
     python -m quisirella run --since 2026-06-01 --until 2026-06-30
+    python -m quisirella fetch-finance              # full finance fetch
+    python -m quisirella fetch-finance --month 2026-06
 """
 
 from __future__ import annotations
 
 import argparse
 import asyncio
+import json
 import sys
 from datetime import date, timedelta
 
-from quisirella.settings import ANTHROPIC_API_KEY, OUTPUT_DIR, ensure_dirs
+from quisirella.settings import ANTHROPIC_API_KEY, FINANCE_FETCH_DIR, OUTPUT_DIR, ensure_dirs
 
 
 def main() -> None:
@@ -34,6 +37,12 @@ def main() -> None:
     run_p = sub.add_parser("run", help="Chạy pipeline phân tích đầy đủ")
     run_p.add_argument("--since", help="Ngày bắt đầu (YYYY-MM-DD), mặc định 30 ngày trước")
     run_p.add_argument("--until", help="Ngày kết thúc (YYYY-MM-DD), mặc định hôm nay")
+
+    ff_p = sub.add_parser("fetch-finance", help="Thu thập doanh thu từ Google Sheet")
+    ff_p.add_argument(
+        "--month",
+        help="Tháng phân tích (YYYY-MM), ghi vào manifest date_range",
+    )
 
     args = parser.parse_args()
     ensure_dirs()
@@ -58,6 +67,18 @@ def main() -> None:
         print("=" * 70)
         print(f"\nCác file Markdown nằm trong: {OUTPUT_DIR}")
         print("Upload các file này vào Claude Projects làm knowledge base.")
+        return
+
+    if args.command == "fetch-finance":
+        from quisirella.tools.finance_fetch import fetch_finance
+
+        try:
+            manifest = fetch_finance(period=args.month)
+        except Exception as exc:
+            sys.exit(f"fetch-finance thất bại: {exc}")
+        print(json.dumps(manifest, ensure_ascii=False, indent=2))
+        print(f"\nĐã ghi vào: {FINANCE_FETCH_DIR}")
+        return
 
 
 if __name__ == "__main__":
