@@ -14,8 +14,10 @@ The filesystem is the workflow's memory layer. Context windows hold working stat
 | `config/finance_sheet.yaml` | Sheet cell mapping (BÁO GIÁ 2026) | human + agent | Yes |
 | `output/00-*.md` | Stable knowledge base (Claude Projects) | human + agent | Yes |
 | `output/01-06.md` | Periodic reports | report-writer | Yes |
-| `output/07-session-log.md` | Session memory (hooks append) | hooks + agent | Yes |
+| `output/07-session-log.md` | Hook audit trail (file edits, session end) | hooks | Yes |
 | `output/08-dm-quality-log.md` | DM quality + orders ledger (manual) | human + agent | Yes |
+| `output/09-session-checkpoints.md` | User-triggered session summary (*lưu phiên*) | agent on `save_session` | Yes |
+| `config/intent_router.yaml` | Intent catalog, guards, pipelines | human + agent | Yes |
 
 ## Scratch-pad rule (tool output offloading)
 
@@ -34,7 +36,16 @@ Retrieval is targeted: `grep` for an action_type, `read` with line ranges. Never
 | Missing | Number needed but never fetched | Fetch and persist to `data/meta_fetch/` first; never estimate |
 | Under-retrieved | Read the file but missed the field | Grep for exact action_type keys (`messaging_conversation_started_7d`) |
 | Over-retrieved | Whole JSON dumped into context | Return references + summaries; read line ranges |
-| Buried | Fact exists somewhere in output/ | Check `00-index-claude-knowledge.md` first, then targeted file |
+| Buried | Fact exists somewhere in output/ | Check `00-index`, then `09` checkpoint, then targeted file |
+
+## Session checkpoints (`output/09-session-checkpoints.md`)
+
+**Memory gate:** Only written when user says *lưu phiên* (intent `save_session`). **No** auto-checkpoint on `sessionEnd`.
+
+- `sessionStart` hook injects the **latest** `## Checkpoint` block into agent context.
+- Template and rules: `.cursor/rules/quisirella-session-memory.mdc`
+- Cross-chat continuity: user opens new window → reads checkpoint from `09`, not full transcript.
+- Unrelated chats (no *lưu phiên*) → `09` unchanged.
 
 ## Session log compression policy (`output/07-session-log.md`)
 

@@ -12,13 +12,34 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 CONFIG_DIR = PROJECT_ROOT / "config"
 DATA_DIR = PROJECT_ROOT / "data"
 FINANCE_FETCH_DIR = DATA_DIR / "finance_fetch"
+INTENT_INDEX_DIR = DATA_DIR / "intent_index"
+KNOWLEDGE_INDEX_DIR = DATA_DIR / "knowledge_index"
 OUTPUT_DIR = PROJECT_ROOT / "output"
 CREDENTIALS_DIR = PROJECT_ROOT / "credentials"
+CURSOR_RULES_DIR = PROJECT_ROOT / ".cursor" / "rules"
+SKILL_DIR = PROJECT_ROOT / "src" / "quisirella" / "skill"
+INTENT_ROUTER_PATH = CONFIG_DIR / "intent_router.yaml"
+RAG_SYNONYMS_PATH = CONFIG_DIR / "rag_synonyms.yaml"
+RAG_EVAL_PATH = CONFIG_DIR / "rag_eval.yaml"
 
 load_dotenv(PROJECT_ROOT / ".env")
 
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 MODEL = os.getenv("QUISIRELLA_MODEL", "claude-sonnet-4-6")
+
+# Local embeddings (Phase B/C) — no OpenAI required
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "intfloat/multilingual-e5-small")
+RERANKER_MODEL = os.getenv("RERANKER_MODEL", "BAAI/bge-reranker-v2-m3")
+RAG_SCORE_FLOOR = float(os.getenv("RAG_SCORE_FLOOR", "0.35"))
+RAG_AMBIGUOUS_MARGIN = float(os.getenv("RAG_AMBIGUOUS_MARGIN", "0.05"))
+INTENT_SCORE_FLOOR = float(os.getenv("INTENT_SCORE_FLOOR", "0.3"))
+RAG_HYBRID_FETCH_K = int(os.getenv("RAG_HYBRID_FETCH_K", "30"))
+RAG_LLM_PROVIDER = os.getenv("RAG_LLM_PROVIDER", "none").strip().lower()
+RAG_LLM_MODEL = os.getenv("RAG_LLM_MODEL", "")
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+# Hugging Face Hub — faster downloads, higher rate limits (embeddings + reranker)
+HF_TOKEN = os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_HUB_TOKEN", "")
+RAG_HIGH_CONFIDENCE = float(os.getenv("RAG_HIGH_CONFIDENCE", "0.82"))
 
 META_MCP_URL = os.getenv("META_MCP_URL", "https://mcp.facebook.com/ads")
 META_APP_ID = os.getenv("META_APP_ID", "")
@@ -57,5 +78,15 @@ def load_finance_sheet() -> dict:
 
 
 def ensure_dirs() -> None:
-    for d in (DATA_DIR, FINANCE_FETCH_DIR, OUTPUT_DIR, CREDENTIALS_DIR):
+    from quisirella.retrieval.hf_hub import configure_hf_hub
+
+    configure_hf_hub(HF_TOKEN)
+    for d in (
+        DATA_DIR,
+        FINANCE_FETCH_DIR,
+        INTENT_INDEX_DIR,
+        KNOWLEDGE_INDEX_DIR,
+        OUTPUT_DIR,
+        CREDENTIALS_DIR,
+    ):
         d.mkdir(parents=True, exist_ok=True)

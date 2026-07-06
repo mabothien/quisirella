@@ -1,27 +1,56 @@
 ---
 title: Đề xuất tối ưu — Quisirella
-generated_at: 2026-07-02
-data_range: 2026-06-02 đến 2026-07-01
+generated_at: 2026-07-06
+data_range: 2026-07-01 đến 2026-07-05
 sources: [meta_graph_api, store_profile.yaml, relevance_rules.yaml]
 data_status: ok
+ad_account_id: act_400356462876861
 ---
 
 # 05 — Recommendations
 
-> Dựa trên dữ liệu Meta thật (8,55 triệu VND spend / 30 ngày), store profile Quisirella, và luật lọc relevance. Finance (ROAS thực) chờ Google Sheets.
+> Dựa trên dữ liệu Meta ACTIVE 01–05/07/2026, store profile Quisirella, và luật lọc relevance. Finance MTD: [`03-finance-summary.md`](03-finance-summary.md). ACTIVE deep-dive: [`06-active-campaigns-analysis.md`](06-active-campaigns-analysis.md).
+
+> Purchase Meta **không phản ánh doanh thu thật** (chốt qua Instagram DM).
 
 ---
 
-## Tóm tắt hiệu suất kỳ này
+## Ưu tiên 3–5 ngày tới (cập nhật 2026-07-06, verdict_window 04–05/07)
+
+Recency-based — verdict từ cửa sổ **04–05/07**, không từ full period khi latest days khác:
+
+1. **Retarget — Giữ IG-only**
+   - FB **đã tắt từ 04/07** (FB spend = 0 ngày 04 + 05) → **không khuyên tắt lại**.
+   - **Monitor:** chi phí/tin nhắn IG duy trì (window: **13.636 VND**); engaged rate **87,5%**.
+
+2. **phễu — Giữ**
+   - Window chi phí/tin nhắn **17.222 VND** — dưới ngưỡng 25.000 VND.
+   - **IF** dip ngày 05/07 kéo dài ≥ 3 ngày **THEN** review creative (format, CTA DM) — **không** pause placement IG chỉ vì CPA breakdown trung bình.
+
+3. **1806 — Giữ + sunset watch**
+   - Mess yếu **expected** (`top_only`) — đánh giá CTR **5,80%** + link click **537**, không penalize messaging.
+   - **IF** phễu < 25k/tin nhắn × 3 ngày + ≥ 5 mess chất/ngày **THEN** pause 1806 per [`campaign_strategy.yaml`](../config/campaign_strategy.yaml) sunset.
+
+### Measurement plan (đọc lại 13/07/2026)
+
+| Metric | Ngưỡng | Ghi chú |
+|---|---|---|
+| phễu chi phí/tin nhắn | < 25.000 VND | verdict_window baseline 17.222 |
+| Retarget chi phí/tin nhắn | < 20.000 VND | window 13.636 |
+| Retarget FB spend | = 0 | xác nhận IG-only duy trì |
+| Sunset 1806 | phễu 3 ngày đạt | manual mess chất từ DM |
+
+---
+
+## Tóm tắt hiệu suất kỳ ACTIVE (01–05/07)
 
 | KPI | Giá trị | Đánh giá |
 |---|---:|---|
-| Tổng spend | 8.546.101 VND | — |
-| Tin nhắn bắt đầu | 165 | ~51.795 VND/tin nhắn (account) |
-| Campaign tốt nhất (tin nhắn) | phễu - target tin nhắn | 16.799 VND/tin nhắn |
-| Campaign kém nhất (tin nhắn) | Lưu lượng truy cập mới | 138.523 VND/tin nhắn |
-| Placement tốt nhất (IG) | Reels | CPC 1.014, CTR 4,23% |
-| Core audience | Nữ 25–34 | 66% spend |
+| Tổng spend (3 ACTIVE) | 1.359.282 VND | 5 ngày |
+| Tin nhắn bắt đầu | 56 | ~24.273 VND/tin nhắn (account) |
+| Campaign tốt nhất (tin nhắn, period) | Retarget | 18.780 VND/tin nhắn |
+| Campaign tốt nhất (tin nhắn, window) | Retarget | **13.636 VND/tin nhắn** |
+| Profile visit proxy | 1806 | 537 link click, CTR 5,80% |
 
 ---
 
@@ -46,7 +75,7 @@ data_status: ok
 ### 4. Creative & trust (core positioning)
 
 - Tiếp tục ảnh **macro chi tiết** — lợi thế conversion online cho hàng 2tr+.
-- Caption: brand, line (Elsa Peretti / RTT / Justin Davis), chất liệu, **100% authentic**.
+- Caption: brand, line (Elsa Peretti / RTT / Justin Davis), chất liệu, **100% authentic**. Xem [`00-meta-ad-policy-ig.md`](00-meta-ad-policy-ig.md) · [`00-ig-ad-creative-guide.md`](00-ig-ad-creative-guide.md).
 
 ---
 
@@ -59,7 +88,7 @@ data_status: ok
 | Instagram Reels | 1.014 | **Tăng** — video ngắn macro sản phẩm, giá, CTA DM |
 | Instagram Feed | 1.533 | **Giữ** — carousel chi tiết cho Tier 2–3 |
 | Instagram Stories | 1.808 | **Review** — 37% spend IG nhưng CTR thấp nhất (2,77%) |
-| Facebook | — | **Giảm/loại** — chỉ 2,8% spend, không scale |
+| Facebook | — | **Không khuyên tắt Retarget** — đã IG-only từ 04/07 |
 
 ### 6. Phân bổ ngân sách theo tier giá
 
@@ -78,13 +107,14 @@ data_status: ok
 ### 8. Đo lường ROAS đúng cách
 
 - Ghi doanh thu từng đơn vào Google Sheet kèm nguồn lead (campaign/ad).
-- **ROAS thực = doanh thu Sheet / 8,55M spend** — không dùng 3 purchase Meta làm KPI.
+- **ROAS thực = doanh thu Sheet / Meta spend cùng tháng** — không dùng purchase Meta làm KPI.
+- Tháng 7: Sheet MTD 132M VND, Meta chỉ 5 ngày → xem [`03-finance-summary.md`](03-finance-summary.md).
 
 ---
 
 ## Ưu tiên thấp / dài hạn
 
-- Tích hợp **Google Sheets** → file 03 ROAS thực tự động.
+- Fetch Meta spend **full tháng 7** → cập nhật ROAS thực trong file 03.
 - Lưu snapshot hàng tháng (`data/quisirella.db`) để so sánh MoM.
 - Khi có `ANTHROPIC_API_KEY`: chạy `python -m quisirella run` pipeline agent tự động.
 
@@ -92,18 +122,19 @@ data_status: ok
 
 ## Không nên làm
 
-- Scale "1806" chỉ vì spend lớn — hiệu quả tin nhắn thấp hơn phễu.
-- Tin ROAS pixel (3 purchase / 2,8M chi phí) làm KPI.
-- So sánh CPM 49.764 VND với benchmark e-commerce giá rẻ.
+- Khuyên **tắt Facebook** cho Retarget khi FB spend = 0 từ 04/07.
+- Penalize 1806 vì mess kém — đúng vai trò `top_only` Profile Visit.
+- Tin ROAS pixel làm KPI — chốt DM.
+- So sánh CPM với benchmark e-commerce giá rẻ.
 - Dùng chiến lược catalog/DPA restock — hàng 1-của-1.
-- Mở rộng mass audience giá rẻ — không khớp AOV 2tr+.
+- Pause placement segment chỉ vì CPA trung bình cao hơn (Breakdown Effect).
 
 ---
 
 ## Checklist tháng tới
 
-- [ ] Scale campaign phễu, monitor chi phí/tin nhắn < 20k
-- [ ] Pause Traffic campaign nếu vẫn > 100k/tin nhắn
-- [ ] A/B Reels vs Stories với cùng sản phẩm
-- [ ] Test adset nữ 35–44 cho Tier 2–3
-- [ ] Ghi 165 tin nhắn → ? đơn chốt vào Sheet → tính ROAS thực
+- [ ] Monitor phễu chi phí/tin nhắn < 25k (window 17.222)
+- [ ] Xác nhận Retarget IG-only duy trì (FB = 0)
+- [ ] Theo dõi sunset 1806 khi phễu 3 ngày đạt
+- [ ] Fetch Meta spend full tháng 7 → ROAS thực
+- [ ] Ghi mess chất lượng vào [`08-dm-quality-log.md`](08-dm-quality-log.md)

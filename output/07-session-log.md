@@ -59,3 +59,10 @@ Xem [`00-index-claude-knowledge.md`](00-index-claude-knowledge.md) cho thứ t�
 - **Decisions:** phễu=hold · 1806=hold (Profile Visit đúng vai trò) · Bán=hold+review FB 66,7% spend
 - **Open items:** profile visit AM 30/6-1/7; mess chất 2/7; coc retarget
 
+## 2026-07-06 10:09:00 +0700
+
+- **Files updated:** `06-active-campaigns-analysis.md` (full rewrite 01–05/07), `03-finance-summary.md` (Tháng 7 MTD), `05-recommendations.md` (recency section top)
+- **data_range:** Meta 2026-07-01 → 2026-07-05; verdict_window 04–05/07; Sheet Tháng 7 MTD
+- **Key metrics:** spend 1.359.282 · mess 56 · Retarget window 13.636/mess · phễu window 17.222/mess · Sheet doanh thu 132M · 8 đơn
+- **Decisions:** phễu=Giữ · 1806=Giữ+sunset watch · Retarget=Giữ IG-only (FB off từ 04/07)
+

@@ -19,7 +19,8 @@ Quisirella ban tren **Instagram DM**. Tu van ads **chi ap dung IG** (Feed, Reels
 ## Quy tac platform
 
 - Breakdown placement: **chi phan tich `instagram_*` rows** — khong khuyen scale/cut dua tren Facebook rows.
-- Facebook spend >15% ACTIVE → **review loai FB**, khong dung FB CTR lam creative benchmark.
+- **Recency-first:** Khuyen placement (tat FB, review FB) chi khi **verdict window** (1–3 ngay cuoi) con FB spend > 0. Tong kỳ co FB nhung ngay cuoi FB = 0 → ghi trang thai da tat, **khong** lap lai khuyen tat.
+- Facebook spend >15% **trong verdict window** → review loai FB; neu chi >15% o ngay dau kỳ nhung 0% ngay cuoi → **hold IG-only**, khong khuyen tat lai.
 - CTA uu tien: **Send message** — tranh Learn More / link-first (red flag DM funnel).
 - Benchmark so: **chi account Quisirella** (`01`, `06`) — khong CPM ngành khác hoac competitor.
 - Competitive: chi **used luxury jewelry IG** — xem `config/relevance_rules.yaml` competitive_intel.

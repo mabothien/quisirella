@@ -1,0 +1,57 @@
+# Vietnamese / domain synonyms for query expansion (Phase C)
+# Keys match token in user query; values are alternate terms to append.
+
+synonyms:
+  loi nhuan:
+    - lợi nhuận
+    - lai
+    - lãi
+  doanh thu:
+    - revenue
+    - kiem duoc
+    - kiếm được
+  chi phi:
+    - chi phí
+    - spend
+    - tien ads
+    - tiền ads
+  tin nhan:
+    - tin nhắn
+    - mess
+    - messaging
+    - DM
+  pheu:
+    - phễu
+    - funnel
+  quang cao:
+    - quảng cáo
+    - ads
+    - meta ads
+  campaign:
+    - chiến dịch
+    - chien dich
+  retarget:
+    - retargeting
+    - remarketing
+  placement:
+    - vị trí
+    - vi tri
+    - reels
+    - stories
+    - feed
+  breakdown:
+    - Breakdown Effect
+    - marginal CPA
+  roas:
+    - doanh thu sheet
+    - chi phi ads
+  profile visit:
+    - profile visit
+    - visit profile
+  sunset:
+    - pause
+    - dừng campaign
+  caption:
+    - organic
+    - story
+    - post IG

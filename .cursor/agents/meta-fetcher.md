@@ -14,7 +14,8 @@ When invoked:
 3. If parent specifies `period: YYYY-MM`, use calendar month `time_range` (since/until) for all insights calls — align with finance-fetcher.
 4. Use Meta MCP (Pipeboard) or Graph API — **read-only only**.
 5. Save raw JSON to `data/meta_fetch/` (account) and `data/meta_fetch/active/{campaign_id}_*.json`.
-6. Required action types: messaging_conversation_started_7d, messaging_first_reply, depth_2/3/5, lead, link_click, post_save, omni_purchase (note unreliable for Quisirella).
+6. **Daily + platform (recency):** per ACTIVE campaign save `{id}_daily.json` (`time_increment=1`) and `{id}_placement_daily.json` (`time_increment=1` + `breakdowns=publisher_platform`) — required for recency-first analysis.
+7. Required action types: messaging_conversation_started_7d, messaging_first_reply, depth_2/3/5, lead, link_click, post_save, omni_purchase (note unreliable for Quisirella).
 
 ## MCP `meta-ads` (Pipeboard remote)
 

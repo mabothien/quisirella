@@ -5,6 +5,8 @@ credentials/
 .cursor/mcp.json.fabrica
 
 # Fetched data (regenerated each run)
+data/intent_index/
+data/knowledge_index/
 data/meta_fetch/
 data/finance_fetch/
 

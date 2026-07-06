@@ -21,7 +21,8 @@ All must pass before proceeding. On failure: fix, don't ship.
 | Dimension | Pass condition | Fail examples |
 |---|---|---|
 | **KPI hierarchy** | Chi phí/tin nhắn is the primary metric for verdicts; funnel depth (first_reply, depth_3, depth_5) present for messaging campaigns | Verdict justified by CTR or purchase pixel alone |
-| **IG-only** | Placement analysis covers `instagram_*` rows only; Facebook appears solely as "review loại FB"; creative advice follows `00-ig-ad-creative-guide.md` | Recommending creative changes based on Facebook Feed CTR |
+| **IG-only** | Placement analysis covers `instagram_*` rows for **verdict_window**; FB historical in period only as context; no "tắt FB" if latest days FB spend = 0 | Recommending tắt Facebook when user already off FB on latest days |
+| **Recency-first** | `06` frontmatter includes `verdict_window`; dual tables period vs latest window; verdicts cite latest window | Verdict from full-period FB % when latest days are IG-only |
 | **Breakdown Effect** | No pause/reduce recommendation for a segment based only on higher average cost; recommendations framed as testable hypotheses; evaluation level stated (campaign vs ad set) | "Pause Reels vì CPA cao hơn Feed" without marginal/time-series reasoning |
 | **Learning phase** | Campaigns/ad sets younger than ~7 days or without ~50 events carry a learning caveat; no definitive scale/pause verdict during learning | "Scale ngay" for a 3-day-old campaign without caveat |
 | **Policy compliance** (only when report contains ad copy) | Copy follows `00-meta-ad-policy-ig.md`: no personal attributes, no counterfeit-adjacent wording, CTA matches DM flow | "Dành cho cô nàng sang chảnh..." in suggested caption |
@@ -29,6 +30,7 @@ All must pass before proceeding. On failure: fix, don't ship.
 | **Relevance filter** | Meta recommendations labeled giữ/loại/cần kiểm chứng per `config/relevance_rules.yaml`; no cross-vertical benchmarks | Citing generic e-commerce CPM as a target |
 | **Thinking gate** | Analysis applied thinking_framework.md — recommendations include measurement plan (GROW) | Recommendations with no way to verify success |
 | **Health score** (when analyst provides) | DM Health Score section matches `health_score_dm.md`; supplements verdicts, does not replace funnel_role | Score contradicts verdict without explanation |
+| **RAG citation** (when policy recommendations present) | `rag_sources` table present in analyst handoff; each recommendation cites ≥1 `source_file` from RAG or direct rule read | Policy recommendation with no `rag_sources` row |
 
 ## Output of the gate
 

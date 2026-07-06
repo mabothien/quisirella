@@ -46,7 +46,21 @@ Primary analyst source for revenue/profit: `bao_gia_2026_summary.json` → `mont
 
 ## Handoff 2: meta-analyst → report-writer
 
-Analyst returns analysis with a **verbatim metrics table** as the single source of numbers:
+Analyst returns analysis with a **verbatim metrics table** as the single source of numbers.
+
+Optional **RAG sources** (Phase C — **bắt buộc** khi có khuyến nghị policy/KPI):
+
+```markdown
+## RAG sources (policy only — not numeric)
+| source_file | section_title | used_for |
+|---|---|---|
+| .cursor/rules/quisirella-meta-kpi.mdc | KPI hierarchy | primary metric chi phí/tin nhắn |
+| output/06-active-campaigns-analysis.md | Verdicts | campaign phễu hold |
+```
+
+- List every `source_file` from `search-knowledge` chunks used for verdicts or recommendations.
+- **Không** lấy số liệu từ RAG chunks — chỉ policy/context.
+- Writer rejects analyst output if policy recommendations lack `rag_sources` rows.
 
 ```markdown
 ## Metrics (verbatim — writer copies these exactly)
@@ -87,4 +101,14 @@ One agent's hallucination becomes the next agent's "fact". Checkpoints:
 
 ## When NOT to use the pipeline
 
-Simple lookups ("spend tháng này bao nhiêu?") — main agent reads `output/01` or `output/06` directly. The pipeline is for full analysis runs only. Do not add a 4th agent; 3 is the ceiling for this workflow.
+Simple lookups — classify intent first per `config/intent_router.yaml`:
+
+| Intent | Action |
+|---|---|
+| `finance_lookup` | `finance-fetcher` only — no Meta |
+| `meta_lookup` / `cached_read` | Read `output/01` or `06` if fresh; else minimal fetch |
+| `save_session` | Write `09` checkpoint — no fetch |
+| `ig_organic_copy` | Rule only — no fetch |
+| `full_business` / `ads_analysis` | Full pipeline below |
+
+Full pipeline: `meta-fetcher` + `finance-fetcher` (parallel when `full_business`) → `meta-analyst` → `report-writer`. Do not add a 4th agent.

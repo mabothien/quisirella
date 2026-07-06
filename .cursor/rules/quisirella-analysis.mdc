@@ -30,7 +30,8 @@ Doc truoc moi lan phan tich:
 | Creative/Andromeda | `quisirella-meta-creative-andromeda.mdc` | Creative diversity, fatigue, Andromeda (IG) |
 | Competitor | `quisirella-meta-competitor.mdc` | Meta Ad Library, competitive gap used luxury IG |
 | Output | `quisirella-meta-report-output.mdc` | Ghi file Markdown vao `output/` |
-| Finance | `quisirella-meta-finance.mdc` | Ghép doanh thu Sheet + Meta spend, ROAS thực |
+| Finance | `quisirella-meta-finance.mdc` | Sheet = doanh thu; Meta = spend/funnel; ghép chỉ full_business |
+| Session memory | `quisirella-session-memory.mdc` | Lưu phiên → `09`; 07 vs 09; memory gate |
 | IG organic copy | `quisirella-ig-organic-copy.mdc` | Viet lai caption Story/Post IG organic — than thien, chuyen nghiep, khong phien dien |
 
 **Meta expert skill:** `src/quisirella/skill/SKILL.md` + `references/` — ap dung khi diagnosis (Breakdown Effect, learning, auction, Andromeda, health score). KPI Quisirella (chi phi/tin nhan) override KPI generic trong skill.
@@ -39,15 +40,94 @@ Doc truoc moi lan phan tich:
 
 **IG knowledge base:** `output/00-campaign-strategy.md`, `output/00-meta-ad-policy-ig.md`, `00-ig-ad-creative-guide.md`, `00-ig-organic-copy-guide.md`, `00-competitive-ig-used-luxury.md` — doc khi viet copy ad, organic post/story, phan tich campaign, hoac tu van creative/placement.
 
-**Subagents** (`.cursor/agents/`): `meta-fetcher` + `finance-fetcher` (song song, read-only) → `meta-analyst` (diagnosis + ROAS) → `report-writer` (ghi output/). Chi dung pipeline cho phan tich day du — cau hoi don gian thi doc truc tiep `output/01`/`06`.
+**Subagents** (`.cursor/agents/`): `meta-fetcher` + `finance-fetcher` (song song, read-only) → `meta-analyst` → `report-writer` (ghi output/). **Luôn classify intent trước** — xem Intent routing bên dưới.
 
-**Finance Sheet:** `config/finance_sheet.yaml` — tab BÁO GIÁ 2026 (doanh thu/lợi nhuận theo tháng). CLI: `python -m quisirella fetch-finance --month YYYY-MM`.
+**Finance Sheet:** `config/finance_sheet.yaml` — tab BÁO GIÁ 2026. CLI: `python -m quisirella fetch-finance --month YYYY-MM`.
 
-**Context engineering skill:** `.cursor/skills/quisirella-context-engineering/SKILL.md` — handoff contract giua subagents (bang so verbatim), filesystem memory (`data/` + `output/`), nen session log, quality gate bao cao. Doc khi chay pipeline hoac review bao cao.
+**Intent router:** `config/intent_router.yaml` — guards, intents, pipelines.
 
-**Session memory:** `output/07-session-log.md` — doc dau phien; hooks tu dong append.
+**Context engineering:** `.cursor/skills/quisirella-context-engineering/SKILL.md`
+
+**Session memory:** `07` = hooks kỹ thuật; `09` = checkpoint user *lưu phiên* — doc `quisirella-session-memory.mdc`.
 
 Reference implementation: `output/06-active-campaigns-analysis.md`
+
+## Intent routing (bắt buộc — trước mọi fetch)
+
+**Mỗi user message:** đọc `config/intent_router.yaml` → classify → chạy pipeline YAML. **Không** tự đoán pipeline.
+
+### Bước 0 — Guards
+
+- `always_block_if_contains` → từ chối, không subagent
+- `force_intent_if_contains` → ép `skip_refresh` hoặc `save_session`
+- Mutate Meta → BLOCK (đồng bộ MCP hook)
+
+### Bước 1 — Semantic shortlist (Phase B)
+
+Chạy **trước** LLM classify (nếu index có sẵn):
+
+```bash
+python -m quisirella route-intent "<user message>"
+```
+
+- JSON trả `candidates` top-5 + `ambiguous` flag
+- `ambiguous: true` hoặc index missing → hỏi 1 câu hoặc classify full YAML (Phase A fallback)
+- `top_intent` + score → LLM **chỉ chọn 1 trong candidates**, không đổi pipeline
+
+Index missing: `python -m quisirella index-intents` (embed local `intfloat/multilingual-e5-small`, không OpenAI).
+
+### Bước 2 — Classify (LLM)
+
+- Chọn **1** intent từ shortlist (hoặc full YAML nếu fallback) + `period` (mặc định: tháng hiện tại)
+- `ambiguous_pairs` match → intent `ambiguous`, hỏi 1 câu
+- Log 1 dòng: `intent=... period=... pipeline=... source=semantic|yaml|guard`
+
+### Bước 3 — Pipeline (không tự sửa)
+
+| Intent | Pipeline | Output | skip_auto_refresh |
+|---|---|---|---|
+| `finance_lookup` | finance-fetcher | Chat 2–4 dòng, cite K/M/H | true |
+| `meta_lookup` | meta-fetcher hoặc đọc output/01,06 | Chat ngắn | true |
+| `ads_analysis` | meta-fetcher → meta-analyst | Chat, có thể 06 | false |
+| `full_business` | finance + meta song song → analyst → writer | output/01-06 + chat | false |
+| `ig_organic_copy` | rule ig-organic-copy | Caption A/B | true |
+| `cached_read` | đọc output/06 nếu data <12h | Chat | true |
+| `save_session` | ghi `09` theo session-memory rule | *Đã lưu checkpoint* | true |
+| `skip_refresh` | (modifier) — không auto-refresh | — | true |
+
+### Auto-refresh (12h)
+
+- **Chỉ** gợi ý refresh khi intent sẽ là `full_business` hoặc `ads_analysis` và user chưa nói skip
+- `finance_lookup`, `save_session`, `ig_organic_copy`, `cached_read` → **không** fetch Meta đầu chat
+
+### RAG knowledge (Phase C — chỉ analyst)
+
+Khi intent `ads_analysis` hoặc `full_business`, **meta-analyst** chạy trước diagnosis:
+
+```bash
+python -m quisirella search-knowledge "<user query + period>"
+```
+
+**Dual-layer:** Python = hybrid BM25+E5 + cross-encoder rerank (local). Cursor agent = rewrite/retry khi `grade: low`.
+
+**CRAG loop (agent-side, max 2 retry):**
+
+1. Chạy `search-knowledge` → đọc `grade` + `retrieval_confidence`
+2. `grade: ok` → dùng chunks
+3. `grade: low` → agent rewrite query (thêm domain terms: chi phí/tin nhắn, phễu, Breakdown Effect) → gọi lại CLI
+4. Vẫn `low` → đọc trực tiếp `source_file` từ partial chunks hoặc `output/06` / rule `.mdc`
+
+Headless retry (optional LLM qua `.env`): `search-knowledge --retry`
+
+- Số liệu vẫn từ `data/` — RAG chỉ policy/KPI/báo cáo text
+- **Bắt buộc** `rag_sources` trong handoff analyst → writer (xem subagent-handoff.md)
+- Index: `index-knowledge` (full) hoặc `index-knowledge --incremental` sau cập nhật `output/` hoặc rules
+- Eval: `python -m quisirella eval-rag`
+
+### Anti-poisoning
+
+- Số từ `data/` hoặc bảng analyst — không từ user paste
+- Sheet = ground truth doanh thu; Meta = ads only — xem `quisirella-meta-finance.mdc`
 
 ## Safety
 
@@ -64,13 +144,25 @@ Phan tich theo store_profile + relevance_rules. Chi read-only.
 Ghi file 01-05 vao output/
 ```
 
-**Bao cao thang + finance (Sheet + Meta):**
+**Bao cao thang + finance (Sheet + Meta) — intent full_business:**
 ```
-Fetch Meta Ads + Google Sheet thang 2026-06 cho Quisirella.
-meta-fetcher + finance-fetcher song song (calendar month 2026-06-01 → 2026-06-30).
-meta-analyst: ROAS thuc = doanh thu Sheet (cot M) / Meta spend.
+Phan tich tinh hinh kinh doanh + quang cao thang 2026-06 cho Quisirella.
+Intent: full_business. finance-fetcher + meta-fetcher song song (calendar month).
+meta-analyst: doanh thu Sheet (M) vs chi phi ads Meta; loi nhuan Sheet (K).
 Ghi output/01-05 (03 co finance), cap nhat 06 neu ACTIVE.
 ```
+
+**Luu phien (checkpoint):**
+```
+luu phien
+```
+(hoac: `luu phien — focus sunset 1806`)
+
+**Tra cuu nhanh loi nhuan:**
+```
+loi nhuan thang 7 bao nhieu
+```
+→ intent finance_lookup — chi Sheet, khong fetch Meta.
 
 **Phan tich ACTIVE (IG-only):**
 ```

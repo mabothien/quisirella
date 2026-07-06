@@ -11,7 +11,7 @@ Distilled and adapted from [Agent-Skills-for-Context-Engineering](https://github
 
 ## When to Use
 
-- Orchestrating the subagent pipeline: `meta-fetcher` → `meta-analyst` → `report-writer`
+- Orchestrating the subagent pipeline: classify intent (`config/intent_router.yaml`) → `meta-fetcher` / `finance-fetcher` → `meta-analyst` → `report-writer`
 - `output/07-session-log.md` has grown long and needs compaction
 - Reviewing a report before writing to `output/01-06`
 - Deciding whether a task needs a subagent at all

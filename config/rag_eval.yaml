@@ -1,0 +1,69 @@
+# Golden queries for RAG evaluation (Phase C)
+# Run: python -m quisirella eval-rag
+#      pytest tests/test_rag_retrieval.py -q
+
+intent_queries:
+  - query: "loi nhuan thang 7"
+    expect_intent: finance_lookup
+    via_guard: false
+  - query: "doanh thu thang 6"
+    expect_intent: finance_lookup
+    via_guard: false
+  - query: "chi phi quang cao thang nay"
+    expect_intent: meta_lookup
+    via_guard: false
+  - query: "campaign pheu co on khong"
+    expect_intent: ads_analysis
+    via_guard: false
+  - query: "phan tich tinh hinh kinh doanh"
+    expect_intent: full_business
+    via_guard: false
+  - query: "luu phien"
+    expect_intent: save_session
+    via_guard: true
+  - query: "lưu phiên"
+    expect_intent: save_session
+    via_guard: true
+  - query: "viet caption story Tiffany"
+    expect_intent: ig_organic_copy
+    via_guard: false
+  - query: "doc lai bao cao moi nhat"
+    expect_intent: cached_read
+    via_guard: false
+  - query: "tin nhan bao nhieu"
+    expect_intent: meta_lookup
+    via_guard: false
+
+knowledge_queries:
+  - query: "chi phi tin nhan pheu nguong"
+    expect_sources_any:
+      - quisirella-meta-kpi.mdc
+      - health_score_dm.md
+      - 00-campaign-strategy.md
+  - query: "Breakdown Effect placement"
+    expect_sources_any:
+      - quisirella-meta-breakdown.mdc
+  - query: "funnel_role Profile Visit"
+    expect_sources_any:
+      - campaign_strategy
+      - 00-campaign-strategy.md
+      - quisirella-meta-campaign-analysis.mdc
+  - query: "ROAS doanh thu sheet chi phi ads"
+    expect_sources_any:
+      - quisirella-meta-finance.mdc
+      - 03-finance-summary.md
+  - query: "Andromeda creative diversity fatigue"
+    expect_sources_any:
+      - andromeda_creative.md
+      - quisirella-meta-creative-andromeda.mdc
+  - query: "Instagram only placement reels stories"
+    expect_sources_any:
+      - quisirella-meta-ig-platform.mdc
+      - 00-meta-ad-policy-ig.md
+
+faithfulness_samples:
+  - claim: "Chi phi tin nhan la KPI chinh cho campaign phieu"
+    expect_faithful: true
+    expect_sources_any:
+      - quisirella-meta-kpi.mdc
+      - campaign_strategy

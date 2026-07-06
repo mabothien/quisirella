@@ -46,8 +46,9 @@ Upload **toàn bộ** `output/*.md` lên Claude Project.
 
 | # | File | Nội dung |
 |---|---|---|
-| 18 | [`07-session-log.md`](07-session-log.md) | Quyết định, file đã cập nhật, phiên phân tích gần nhất (hooks tự động) |
+| 18 | [`07-session-log.md`](07-session-log.md) | Hook audit trail — file edits, session metadata (tự động) |
 | 19 | [`08-dm-quality-log.md`](08-dm-quality-log.md) | **Sổ ghi mess chất + đơn chốt + doanh thu** (manual + depth_3 proxy) |
+| 20 | [`09-session-checkpoints.md`](09-session-checkpoints.md) | **Checkpoint user *lưu phiên*** — episodic memory chat mới (ưu tiên đọc trước khi tiếp tục) |
 
 ## Quy tắc khi tư vấn
 

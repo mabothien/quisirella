@@ -14,15 +14,41 @@ When invoked:
 3. Apply `.cursor/rules/quisirella-meta-ig-platform.mdc` — **Instagram-only** metrics and creative advice.
 4. Apply `.cursor/rules/quisirella-meta-kpi.mdc` — primary KPI is **chi phi/tin nhan** (messaging_conversation_started_7d), not Meta purchase pixel.
 5. Apply `.cursor/rules/quisirella-meta-breakdown.mdc` and `@src/quisirella/skill/SKILL.md` workflow (evaluation level → learning → Meta lens → Breakdown Effect).
-6. Apply `.cursor/rules/quisirella-meta-campaign-analysis.mdc` for ACTIVE campaign comparison.
+6. Apply `.cursor/rules/quisirella-meta-campaign-analysis.mdc` for ACTIVE campaign comparison — **recency-first:** verdicts from latest 1–3 days or post-setting-change window, not period aggregate alone.
 7. Load skill references when diagnosing: `src/quisirella/skill/references/thinking_framework.md`, `andromeda_creative.md`, `health_score_dm.md`, `ab_test_dm.md`, `unit_economics_budget_dm.md`.
 8. Apply `.cursor/rules/quisirella-meta-creative-andromeda.mdc` when CTR drops, frequency high, or creative recommendations.
 9. Apply `.cursor/rules/quisirella-meta-competitor.mdc` only when user asks competitive intel — cite `competitor_meta_ig.md` + `00-competitive-ig-used-luxury.md`.
 10. When `data/finance_fetch/bao_gia_2026_summary.json` exists, apply `.cursor/rules/quisirella-meta-finance.mdc` — merge Sheet revenue with Meta spend for the **same calendar month**.
 
+11. **RAG (Phase C):** Before diagnosis for `ads_analysis` / `full_business`:
+
+    ```bash
+    python -m quisirella search-knowledge "<parent query + period>"
+    ```
+
+    **CRAG loop (max 2 retries):**
+    - If JSON `grade` is `low`, rewrite the query yourself (add domain terms: chi phí/tin nhắn, phễu, Breakdown Effect, funnel_role) and run CLI again.
+    - If still `low`, read `source_file` paths from partial chunks directly (`output/06`, `.cursor/rules/quisirella-meta-*.mdc`).
+    - Optional headless: `search-knowledge --retry` (uses `RAG_LLM_PROVIDER` if set).
+
+    Use chunks for policy/KPI context only. **Numbers still from** `data/meta_fetch/` and `data/finance_fetch/`.
+
+    **Mandatory handoff section `rag_sources`:**
+
+    ```markdown
+    ## RAG sources (policy only — not numeric)
+    | source_file | section_title | used_for |
+    |---|---|---|
+    | .cursor/rules/quisirella-meta-kpi.mdc | KPI hierarchy | chi phí/tin nhắn verdict |
+    ```
+
+    Every policy recommendation must cite at least one `rag_sources` row.
+
 **Brand rule:** Ads = Tiffany & Co. + Bvlgari only. Justin Davis = IG organic, never recommend ads.
 
 **Quality measurement:** Compute `engaged_rate = depth_3 / messaging_started` from API as automatic proxy. For quality_mess_rate, orders_closed, profile_visit (AM) — read `output/08-dm-quality-log.md`; if missing, use `n/a` or depth_3 proxy with caveat — never fabricate.
+
+**Recency-first (mandatory):** Before placement verdicts, read `{campaign_id}_daily.json` and daily platform breakdown. Deliver **two metric layers** in the verbatim table: (1) `period` = full fetch range, (2) `verdict_window` = last 1–3 days or days since FB/placement change. Verdicts and placement recommendations use **verdict_window only**. If FB spend = 0 on latest day(s), state "FB off since YYYY-MM-DD" — do **not** recommend turning off Facebook.
 
 **Handoff contract** (see `.cursor/skills/quisirella-context-engineering/references/subagent-handoff.md`): all numbers go in a **verbatim metrics table** with data-source columns tracing each row to `data/meta_fetch/` and/or `data/finance_fetch/bao_gia_2026_summary.json`. When finance data exists, include extended columns per `quisirella-meta-finance.mdc`: Doanh thu Sheet, Loi nhuan Sheet, SL ban, ROAS thuc, Chi phi/don. Verdicts cite table rows. Missing metric = `n/a`, never an estimate. report-writer copies from this table exactly — no prose paraphrasing of numbers.
 

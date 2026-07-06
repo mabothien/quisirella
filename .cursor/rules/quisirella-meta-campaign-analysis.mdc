@@ -12,6 +12,24 @@ Reference: `output/06-active-campaigns-analysis.md`. Ap dung rule `quisirella-me
 1. **Cap do danh gia:** CBO → campaign; auto placement khong CBO → ad set (xem `quisirella-meta-breakdown.mdc`).
 2. **Learning phase:** ~50 optimization events / 7 ngay — caveat neu dang Learning / Learning limited.
 3. **Skill:** `@src/quisirella/skill/SKILL.md` + `thinking_framework.md` khi can diagnosis sau (Breakdown Effect, pacing, overlap, Andromeda).
+4. **Recency-first (bat buoc):** Verdict va khuyen nghi placement **theo cua so gan nhat** (1–3 ngay cuoi kỳ hoac sau khi doi setting), **khong** tu tong spend ca ky neu delivery da thay doi. Xem muc **Recency-first** ben duoi.
+
+## Recency-first — placement & verdict (bat buoc)
+
+Khi user da tat FB / doi placement / doi budget, so **tong kỳ** van con FB cu → **khong** khuyen "tat Facebook" neu **ngay gan nhat** FB spend = 0.
+
+| Layer | Cua so | Dung cho |
+|---|---|---|
+| **Verdict window** | 1–3 ngay cuoi (hoac tu ngay doi setting) | scale/hold/pause, chi phi/tin nhan, placement khuyen nghi |
+| **Period context** | Full `data_range` fetch | xu huong, learning, so sanh truoc/sau thay doi |
+
+**Checklist placement:**
+
+1. Doc `{campaign_id}_daily.json` + placement **theo ngay** (`time_increment=1` + `publisher_platform`) — file `{id}_placement_daily.json` neu co.
+2. Ghi bang: **ngay | IG spend | FB spend | % FB** — toi thieu 5 ngay hoac tu ngay doi setting.
+3. Chi khuyen **review loai FB** khi **verdict window** (ngay cuoi) co FB spend > 0 **hoac** FB > 15% spend **va** chua co bang chung user da tat.
+4. Neu FB = 0 tu ngay X tro di → ghi **"FB da tat tu YYYY-MM-DD — khong khuyen tat lai"**; danh gia chi tren IG rows.
+5. Bao cao `06` phai co 2 bang: **Period aggregate** + **Latest window** (ghi ro `verdict_window` trong frontmatter).
 
 ## Quy trinh 6 buoc (moi campaign)
 

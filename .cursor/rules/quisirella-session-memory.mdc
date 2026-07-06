@@ -1,0 +1,57 @@
+---
+description: Session memory — 07 vs 09, checkpoint lưu phiên thủ công, memory gate
+alwaysApply: false
+---
+
+# Quisirella — Session Memory
+
+Doc khi user nói **lưu phiên**, mở chat mới cần ngữ cảnh, hoặc triển khai intent `save_session`.
+
+## Hai tầng memory (tách bắt buộc)
+
+| File | Ai ghi | Nội dung | Chat mới đọc |
+|---|---|---|---|
+| `output/07-session-log.md` | Hooks tự động | File edit, session end metadata, agent stop | Tail 8–15 dòng (kỹ thuật) |
+| `output/09-session-checkpoints.md` | **Chỉ** intent `save_session` | Tóm tắt có chủ đích do user kích hoạt | **Checkpoint mới nhất** (ưu tiên cao) |
+
+**Memory gate:** Chat không Quisirella → user không gọi *lưu phiên* → `09` **không** thay đổi. `sessionEnd` **không** auto-checkpoint.
+
+## Intent `save_session`
+
+Khi user nói *lưu phiên*, *checkpoint*, *save session* (hoặc `guards.force_intent` trong `config/intent_router.yaml`):
+
+1. **Không** fetch Meta / Sheet
+2. **Không** chạy full pipeline
+3. Append block vào `output/09-session-checkpoints.md` (dưới marker `<!-- Checkpoints appended below -->`)
+4. Trả lời ngắn: *"Đã lưu checkpoint [timestamp]"*
+
+### Template checkpoint (bắt buộc)
+
+```markdown
+## Checkpoint YYYY-MM-DD HH:MM +07
+
+- **User focus:** ...
+- **Decisions:** ... (verbatim, có số)
+- **Key metrics:** ... (cite `data/` hoặc `output/`)
+- **Open items:** ...
+- **Files touched:** ...
+- **Intent summary:** ...
+```
+
+- **Không** lưu full transcript chat
+- **Không** dùng số user paste làm ground truth — chỉ số đã fetch/ghi file
+- User có thể thêm focus: *"lưu phiên — focus sunset 1806"* → ghi vào **User focus**
+
+## Chat mới (cross-window)
+
+Hook `sessionStart` inject checkpoint mới nhất từ `09`. Agent:
+
+1. Đọc checkpoint trước khi phân tích sâu
+2. Nếu checkpoint >7 ngày → hỏi: *"Tiếp tục từ checkpoint [date]?"*
+3. Số liệu mới nhất vẫn lấy từ `data/` hoặc fetch — checkpoint là **ngữ cảnh quyết định**, không thay data
+
+## Không làm
+
+- Auto-checkpoint khi `sessionEnd` hoặc sau `full_business`
+- Ghi `09` từ chat không liên quan Quisirella
+- Embed / vector index checkpoint (Phase B — deferred)
