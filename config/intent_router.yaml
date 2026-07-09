@@ -85,6 +85,9 @@ intents:
       - "phân tích tình hình kinh doanh"
       - "phân tích tình hình hoạt động"
       - "quảng cáo có đáng tiền không"
+      - "quang cao co dang tien khong xet loi nhuan sheet"
+      - "phan tich tinh hinh kinh doanh va quang cao thang 7"
+      - "tong hop doanh thu sheet meta spend ROAS that"
       - "tình hình tháng này sao rồi"
       - "báo cáo tổng tháng"
     pipeline:

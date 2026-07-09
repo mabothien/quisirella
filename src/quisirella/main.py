@@ -11,6 +11,7 @@ Usage:
     python -m quisirella index-knowledge          # rebuild knowledge RAG index
     python -m quisirella search-knowledge "..."   # search policy/report chunks
     python -m quisirella eval-rag                 # golden query evaluation (Phase C)
+    python -m quisirella test-prompts             # tiered prompt test suite
 """
 
 from __future__ import annotations
@@ -21,14 +22,17 @@ import json
 import sys
 from datetime import date, timedelta
 
-from quisirella.settings import ANTHROPIC_API_KEY, FINANCE_FETCH_DIR, OUTPUT_DIR, ensure_dirs
+from quisirella.settings import (
+    ANTHROPIC_API_KEY,
+    FINANCE_FETCH_DIR,
+    OUTPUT_DIR,
+    configure_utf8_stdio,
+    ensure_dirs,
+)
 
 
 def main() -> None:
-    # Windows consoles default to cp1252 which cannot print Vietnamese.
-    for stream in (sys.stdout, sys.stderr):
-        if stream and hasattr(stream, "reconfigure"):
-            stream.reconfigure(encoding="utf-8")
+    configure_utf8_stdio()
 
     parser = argparse.ArgumentParser(
         prog="quisirella",
@@ -74,6 +78,10 @@ def main() -> None:
 
     ev_p = sub.add_parser("eval-rag", help="Đánh giá golden queries (intent + knowledge)")
     ev_p.add_argument("--top", type=int, default=3, help="hit@k threshold (default 3)")
+
+    tp_p = sub.add_parser("test-prompts", help="Chạy bộ test prompt theo tier (config/rag_prompt_tests.yaml)")
+    tp_p.add_argument("--tier", help="Lọc tier: L1_simple, L2_medium, L3_hard, L4_expert, L5_edge")
+    tp_p.add_argument("--id", dest="case_id", help="Chạy một case theo id (vd. L3-01)")
 
     args = parser.parse_args()
     ensure_dirs()
@@ -176,6 +184,18 @@ def main() -> None:
             sys.exit(f"eval-rag thất bại: {exc}")
         print(json.dumps(result, ensure_ascii=False, indent=2))
         if not result.get("overall_pass"):
+            sys.exit(1)
+        return
+
+    if args.command == "test-prompts":
+        from quisirella.retrieval.prompt_tests import run_prompt_tests
+
+        try:
+            result = run_prompt_tests(tier=args.tier, case_id=getattr(args, "case_id", None))
+        except Exception as exc:
+            sys.exit(f"test-prompts thất bại: {exc}")
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        if result.get("status") != "ok":
             sys.exit(1)
         return
 

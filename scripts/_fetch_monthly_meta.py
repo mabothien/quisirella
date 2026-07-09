@@ -3,13 +3,19 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 import urllib.parse
 import urllib.request
 from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv()
+_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(_ROOT / "src"))
+from quisirella.settings import configure_utf8_stdio  # noqa: E402
+
+load_dotenv(_ROOT / ".env")
+configure_utf8_stdio()
 
 TOKEN = os.getenv("META_ACCESS_TOKEN", "")
 ACCT = "act_400356462876861"

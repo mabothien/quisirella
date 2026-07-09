@@ -3,6 +3,9 @@ title: Phân tích 3 chiến dịch ACTIVE — Quisirella
 generated_at: 2026-07-06
 data_range: 2026-07-01 đến 2026-07-06
 verdict_window: 2026-07-05 đến 2026-07-06
+ad_level_snapshot: 2026-07-08
+ad_level_data_range: 2026-07-01 đến 2026-07-07
+ad_level_refresh: full-day 07/07 (fetch 08/07)
 sources: [meta_graph_api]
 data_status: ok
 ad_account_id: act_400356462876861
@@ -126,6 +129,83 @@ Notation: Started → First reply → Depth_3 → Depth_5
 
 **Verdict: Giữ** — window **22.652 VND** dưới 25.000 VND. Volume **7 tin/2 ngày** — theo dõi nếu < 5 mess chất/ngày kéo dài 3 ngày.
 
+#### 7.1.1 Ad-level — test 2 quảng cáo song song (refresh full-day 07/07)
+
+> **Bối cảnh:** Cùng ad set `Nhóm quảng cáo Lượt tương tác mới` — test 7 ngày theo checkpoint 09. Fetch lại **08/07** — số 07/07 là **cả ngày** (không còn partial).
+
+**Ads ACTIVE:**
+
+| Ad | ad_id | Format | Created | CTA | SKU / concept |
+|---|---|---|---|---|---|
+| Nỗi sợ | 120253285175260110 | Static 1 ảnh | 29/06/2026 | `INSTAGRAM_MESSAGE` | Giáo dục fake — generic Tiffany/Bvlgari |
+| Nỗi sợ 2 | 120253603203850110 | Carousel 3 slide | 06/07/2026 17:22 | `INSTAGRAM_MESSAGE` | Tiffany T True narrow vàng hồng **size 51.5** |
+
+**Bảng PERIOD ad-level — 01–07/07/2026 (verbatim, refresh 08/07)**
+
+| Ad | Spend | Imp | Clicks | CTR | Tin nhắn | Chi phí/tin nhắn | depth_3 | engaged_rate | Source |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| Nỗi sợ | 785.708 | 10.276 | 483 | 4,70% | 40 | **19.643** | 21 | 52,5% | `ad_insights.json` |
+| Nỗi sợ 2 | 197.439 | 2.776 | 87 | 3,13% | 1 | 197.439 | 1 | n/a (n=1) | `ad_insights.json` |
+| Ad set total | 983.147 | 13.052 | 570 | 4,37% | 41 | 23.979 | 22 | 53,7% | `insights.json` |
+
+**Bảng VERDICT WINDOW ad-level — 06–07/07/2026 (verbatim)**
+
+| Ad | Spend | Tin nhắn | Chi phí/tin nhắn | engaged_rate |
+|---|---:|---:|---:|---:|
+| Nỗi sợ | 75.191 | 8 | **9.399** | 50,0% |
+| Nỗi sợ 2 | 197.439 | 1 | 197.439 | n/a (n=1) |
+
+**Ngày 07/07 — full day (verbatim)**
+
+| Ad | Spend | Imp | Clicks | CTR | Tin nhắn | Chi phí/tin nhắn | % spend ad set | Source |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| Nỗi sợ | 376 | 5 | 0 | 0% | 1 | 376 | **0,3%** | `ad_insights_2026-07-07.json` |
+| Nỗi sợ 2 | 122.697 | 1.636 | 57 | 3,48% | 1 | 122.697 | **99,7%** | `ad_insights_2026-07-07.json` |
+| Ad set | 123.073 | — | — | — | 2 | 61.537 | 100% | tổng 2 ad |
+
+**Timeline spend/ngày**
+
+| Ngày | Nỗi sợ spend | Nỗi sợ mess | Nỗi sợ 2 spend | Nỗi sợ 2 mess | % Nỗi sợ 2 |
+|---|---:|---:|---:|---:|---:|
+| 01/07 | 151.836 | 8 | — | — | — |
+| 02/07 | 135.765 | 2 | — | — | — |
+| 03/07 | 130.132 | 5 | — | — | — |
+| 04/07 | 154.510 | 13 | — | — | — |
+| 05/07 | 138.274 | 4 | — | — | — |
+| **06/07** | 74.815 | 7 | **74.742** | 0 | **50,0%** |
+| **07/07** | **376** | 1 | **122.697** | 1 | **99,7%** |
+
+**Funnel depth ad-level (period 01–07/07):** Started → First reply → Depth_3 → Depth_5
+
+| Ad | Started | First reply | Depth_3 | Depth_5 | Reply rate | Engaged rate |
+|---|---:|---:|---:|---:|---:|---:|
+| Nỗi sợ | 40 | 24 | 21 | 5 | 60,0% | 52,5% |
+| Nỗi sợ 2 | 1 | 1 | 1 | 0 | 100% (n=1) | n/a |
+
+**Chẩn đoán 07/07 (full day):**
+
+- Pattern **xác nhận** sau refresh: Meta explore carousel — không phải artifact partial-day (「Nỗi sợ 2」tăng từ 51k → **123k** spend).
+- **「Nỗi sợ」bị throttle cả ngày** — 376 VND / 5 imp; ad cũ vẫn period **19.643**/tin < 25k.
+- **「Nỗi sợ 2」KPI xấu ngày 2:** 2 ngày live = **197.439 VND / 1 mess**; 07/07 chủ yếu `video_view` (71) — Meta học engagement trước mess.
+- Ad set 07/07: **61.537 VND/mess** (2 mess) — ngày kém do exploration; **không** đánh giá campaign từ 1 ngày.
+
+**Verdict ad-level (`top_middle`) — refresh 08/07:**
+
+| Ad | Verdict | Lý do |
+|---|---|---|
+| Nỗi sợ | **Giữ** | Period **19.643**/tin; starvation 07/07 = learning side-effect |
+| Nỗi sợ 2 | **Giữ (test) + yellow flag** | Ngày 2/7; CPA **197k** — theo dõi 09–10/07; pause **chỉ khi hết hàng T 51.5** |
+| Ad set | **Giữ test** | Còn **5 ngày** đến review 13/07; nếu「Nỗi sợ 2」>60% spend × 3 ngày + CPA >75k → cân nhắc tách ad set |
+
+**Measurement plan ad-level (đọc lại 13/07/2026):**
+
+| Metric | Ngưỡng | Ghi chú |
+|---|---|---|
+| Chi phí/tin nhắn per ad | < 25.000 VND | Winner sau 7 ngày |
+| % spend split | Ghi nhận | Không force 50/50 |
+| Mess chất manual (SKU 51.5) | Ghi `08-dm-quality-log` | Success signal cho carousel |
+| Inventory T 51.5 | Còn hàng | Pause「Nỗi sợ 2」ngay khi hết |
+
 ---
 
 ### 7.2 1806 — `top_only`
@@ -182,10 +262,12 @@ Chi tiết finance + tỉ suất ads: [`03-finance-summary.md`](03-finance-summa
 
 | Metric | Campaign | Ngưỡng | Đọc lại |
 |---|---|---|---|
-| Chi phí/tin nhắn | phễu | < 25.000 VND | 13/07/2026 |
+| Chi phí/tin nhắn | phễu (campaign) | < 25.000 VND | 13/07/2026 |
+| Chi phí/tin nhắn | phễu per ad (Nỗi sợ / Nỗi sợ 2) | < 25.000 VND | 13/07/2026 |
 | Chi phí/tin nhắn | Retarget | < 20.000 VND | 13/07/2026 |
 | FB spend | Retarget | = 0 | 13/07/2026 |
 | Mess chất/ngày | phễu | ≥ 5 (manual) | 13/07/2026 |
+| % spend split ad-level | phễu | Ghi nhận | Daily đến 13/07 |
 
 ---
 
@@ -200,5 +282,12 @@ Chi tiết finance + tỉ suất ads: [`03-finance-summary.md`](03-finance-summa
 | `data/meta_fetch/active/120252990977040110_placement_daily.json` | Retarget platform/day |
 | `data/meta_fetch/account_insights_2026-07-01_2026-07-06.json` | Account 6 ngày |
 | `data/meta_fetch/fetch_manifest_2026-07-01_2026-07-06.json` | Manifest + metrics parsed |
+| `data/meta_fetch/active/120253285175280110_ads.json` | phễu — danh sách ad (2 ACTIVE) |
+| `data/meta_fetch/active/120253285175280110_ad_insights.json` | phễu — ad-level period 01–07/07 |
+| `data/meta_fetch/active/120253285175280110_ad_insights_2026-07-07.json` | phễu — ad-level full day 07/07 |
+| `data/meta_fetch/active/120253285175280110_ad_daily.json` | phễu — ad-level daily 01–07/07 |
+| `data/meta_fetch/active/120253285175280110_creatives.json` | phễu — creative per ad |
+| `data/meta_fetch/active/120253285175280110_adsets.json` | phễu — ad set config |
+| `data/meta_fetch/fetch_manifest_2026-07-01_2026-07-07.json` | Manifest ad-level 07/07 |
 
 Strategy: [`config/campaign_strategy.yaml`](../config/campaign_strategy.yaml)

@@ -129,6 +129,7 @@ copy .env.example .env
 | `route-intent "..."` | Intent shortlist (JSON) |
 | `search-knowledge "..."` | Hybrid retrieve + rerank (`--retry` CRAG) |
 | `eval-rag` | Golden query evaluation |
+| `test-prompts` | Tiered prompt tests (`--tier`, `--id`) |
 
 ---
 

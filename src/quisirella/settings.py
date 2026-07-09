@@ -21,6 +21,7 @@ SKILL_DIR = PROJECT_ROOT / "src" / "quisirella" / "skill"
 INTENT_ROUTER_PATH = CONFIG_DIR / "intent_router.yaml"
 RAG_SYNONYMS_PATH = CONFIG_DIR / "rag_synonyms.yaml"
 RAG_EVAL_PATH = CONFIG_DIR / "rag_eval.yaml"
+RAG_PROMPT_TESTS_PATH = CONFIG_DIR / "rag_prompt_tests.yaml"
 
 load_dotenv(PROJECT_ROOT / ".env")
 
@@ -75,6 +76,19 @@ def load_campaign_strategy() -> dict:
 def load_finance_sheet() -> dict:
     with open(CONFIG_DIR / "finance_sheet.yaml", encoding="utf-8") as f:
         return yaml.safe_load(f)
+
+
+def configure_utf8_stdio() -> str | None:
+    """Reconfigure stdout/stderr to UTF-8 (Windows defaults to cp1252).
+
+    Returns the stdout encoding after configuration (for diagnostics).
+    """
+    import sys
+
+    for stream in (sys.stdout, sys.stderr):
+        if stream and hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
+    return getattr(sys.stdout, "encoding", None)
 
 
 def ensure_dirs() -> None:
