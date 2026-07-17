@@ -1,20 +1,17 @@
 ---
 title: Phân tích 3 chiến dịch ACTIVE — Quisirella
-generated_at: 2026-07-06
-data_range: 2026-07-01 đến 2026-07-06
-verdict_window: 2026-07-05 đến 2026-07-06
-ad_level_snapshot: 2026-07-08
-ad_level_data_range: 2026-07-01 đến 2026-07-07
-ad_level_refresh: full-day 07/07 (fetch 08/07)
+generated_at: 2026-07-14
+data_range: 2026-07-08 đến 2026-07-14
+verdict_window: 2026-07-12 đến 2026-07-13
 sources: [meta_graph_api]
 data_status: ok
 ad_account_id: act_400356462876861
 active_campaign_count: 3
 ---
 
-# 06 — Phân tích 3 chiến dịch ACTIVE (01–06/07/2026)
+# 06 — Phân tích 3 chiến dịch ACTIVE (08–14/07/2026)
 
-Account `act_400356462876861`, kỳ **6 ngày** (01/07 → 06/07/2026). Đánh giá theo [`config/campaign_strategy.yaml`](../config/campaign_strategy.yaml) — **funnel_role**, không penalize Profile vì mess kém.
+Account `act_400356462876861`, kỳ PRIMARY **7 ngày** (08/07 → 14/07/2026). Đánh giá theo [`config/campaign_strategy.yaml`](../config/campaign_strategy.yaml) — **funnel_role**, không penalize Profile vì mess kém.
 
 > Quisirella chốt đơn qua **Instagram DM** — KPI chính: **tin nhắn bắt đầu (7 ngày)**. Purchase Meta **không phản ánh doanh thu thật** (chốt DM).
 
@@ -26,28 +23,29 @@ Account `act_400356462876861`, kỳ **6 ngày** (01/07 → 06/07/2026). Đánh g
 | Chiến dịch Lượt tương tác mới - 1806 | `phieu_profile_1806` | top_only | `INSTAGRAM_PROFILE` — Lượt truy cập trang cá nhân IG |
 | Chiến dịch Lượt tương tác - Bán - Bản sao | `ban_retarget_30d` | bottom | engagement/messaging |
 
-Liên quan: [`03-finance-summary.md`](03-finance-summary.md) · [`05-recommendations.md`](05-recommendations.md) · [`01-meta-ads-performance.md`](01-meta-ads-performance.md)
+Liên quan: [`05-recommendations.md`](05-recommendations.md) · [`01-meta-ads-performance.md`](01-meta-ads-performance.md)
 
 ---
 
 ## 1. Tóm tắt executive + verdicts
 
-| Chỉ số (PERIOD 01–06/07) | Giá trị |
+| Chỉ số (PERIOD 08–14/07) | Giá trị |
 |---|---:|
 | Campaign ACTIVE | **3** |
-| Tổng spend (3 ACTIVE = account) | **1.399.459 VND** |
-| Tổng tin nhắn bắt đầu | **62** |
-| Chi phí/tin nhắn trung bình (account) | **22.572 VND** |
+| Tổng spend account | **1.601.653 VND** |
+| Tổng tin nhắn bắt đầu | **60** |
+| Chi phí/tin nhắn trung bình (account) | **26.694 VND** |
+| Frequency (account) | **1.70** |
 
-**Verdict theo `verdict_window` (05–06/07)** — dùng cho quyết định hành động:
+**Verdict theo `verdict_window` (12–13/07)** — dùng cho quyết định hành động:
 
 | Campaign | funnel_role | Verdict | Lý do chính (window) |
 |---|---|---|---|
-| phễu tin nhắn | top_middle | **Giữ** | Chi phí/tin nhắn **22.652 VND** — dưới ngưỡng 25.000 VND |
-| 1806 Profile | top_only | **Giữ** | Mess yếu **expected**; CTR **5,87%**, link click **124** (2 ngày) |
-| Retarget | bottom | **Giữ** | IG-only; chi phí/tin nhắn **9.303 VND** excellent; engaged **85,7%** |
+| phễu tin nhắn | top_middle | **Giữ (gần scale)** | Chi phí/tin nhắn **16.856 VND** — dưới ngưỡng 25.000 VND |
+| 1806 Profile | top_only | **Sunset watch** | Hết ~18/07; quality mess n/a; **0** mess window (expected) |
+| Retarget | bottom | **Giữ** | Chi phí/tin **18.202 VND**; freq **1.142**; ad「chốt đơn」early |
 
-**Xếp hạng chi phí/tin nhắn (verdict_window):** Retarget (9.303) → phễu (22.652) → 1806 (n/a — Profile KPI)
+**Xếp hạng chi phí/tin nhắn (verdict_window):** Phễu (16.856) → Retarget (18.202) → Account (24.045) → 1806 (n/a — Profile KPI)
 
 ---
 
@@ -55,219 +53,165 @@ Liên quan: [`03-finance-summary.md`](03-finance-summary.md) · [`05-recommendat
 
 | Lớp | Kỳ | Mục đích |
 |---|---|---|
-| **PERIOD** | 01–06/07/2026 | Bối cảnh 6 ngày — funnel depth, CTR, placement lịch sử |
-| **VERDICT WINDOW** | 05–06/07/2026 | **Quyết định scale/giữ/giảm** — delivery gần nhất |
+| **PERIOD** | 08–14/07/2026 | Bối cảnh 7 ngày — CTR, freq, ad-level |
+| **VERDICT WINDOW** | 12–13/07/2026 | **Quyết định scale/giữ/giảm** — delivery gần nhất |
 
 **Quy tắc:** Verdict và khuyến nghị **chỉ** dựa trên `verdict_window`. PERIOD dùng cho xu hướng.
 
-**Retarget:** FB spend = 0 từ **04/07** (kể cả 06/07) → **không khuyên tắt Facebook** lần nữa.
+**Jul MTD 01–14 (tham chiếu):** spend **3.478.714** · mess **131** · chi phí/tin **26.555**.
 
 ---
 
-## 3. Bảng PERIOD — 01–06/07/2026 (verbatim)
+## 3. Bảng PERIOD — 08–14/07/2026 (verbatim)
 
-| Campaign | ID | funnel_role | Spend | Tin nhắn | Chi phí/tin nhắn | CTR | engaged_rate | Link click | Source |
-|---|---|---|---:|---:|---:|---:|---:|---:|---|
-| phễu tin nhắn | 120253285175280110 | top_middle | 730.810 | 35 | 20.880 | 4,67% | 48,6% | 77 | active/120253285175280110_insights.json |
-| 1806 Profile | 120252531135370110 | top_only | 394.183 | 11 | 35.835 | 5,79% | 18,2% | 547 | active/120252531135370110_insights.json |
-| Retarget | 120252990977040110 | bottom | 274.466 | 16 | 17.154 | 4,35% | 68,8% | 25 | active/120252990977040110_insights.json |
-| Account | — | — | 1.399.459 | 62 | 22.572 | 5,08% | 48,4% | 649 | account_insights_2026-07-01_2026-07-06.json |
-
----
-
-## 4. Bảng VERDICT WINDOW — 05–06/07/2026 (verbatim)
-
-| Campaign | Spend | Tin nhắn | Chi phí/tin nhắn | engaged_rate |
-|---|---:|---:|---:|---:|
-| phễu | 158.567 | 7 | 22.652 | 42,9% |
-| 1806 | 85.321 | 4 | n/a (profile KPI) | n/a |
-| Retarget | 65.124 | 7 | **9.303** | **85,7%** |
-| Account | 309.012 | 18 | 17.167 | 50,0% |
+| Campaign | ID | funnel_role | Spend | Tin nhắn | Chi phí/tin nhắn | Freq | CTR | Link click |
+|---|---|---|---:|---:|---:|---:|---:|---:|
+| phễu tin nhắn | 120253285175280110 | top_middle | 868.095 | 43 | 20.188 | 1.872 | 4,14% | 73 |
+| 1806 Profile | 120252531135370110 | top_only | 437.439 | 3 | n/a (profile) | 1.260 | 6,38% | 586 |
+| Retarget | 120252990977040110 | bottom | 296.119 | 14 | 21.151 | 1.323 | 3,08% | 21 |
+| Account | — | — | 1.601.653 | 60 | 26.694 | 1.70 | — | — |
 
 ---
 
-## 5. Timeline Facebook — Retarget (01–06/07)
+## 4. Bảng VERDICT WINDOW — 12–13/07/2026 (verbatim)
 
-Spend theo platform (VND, `120252990977040110_placement_daily.json`):
-
-| Ngày | IG spend | FB spend |
-|---|---:|---:|
-| 01/07 | 18.139 | 37.295 |
-| 02/07 | 23.162 | 33.004 |
-| 03/07 | 30.332 | 11.899 |
-| **04/07** | **55.511** | **0** |
-| **05/07** | **53.574** | **0** |
-| **06/07** | **11.550** | **0** |
-
-→ **Facebook đã tắt từ 04/07.** 06/07 tiếp tục IG-only.
+| Campaign | Spend | Tin nhắn | Chi phí/tin nhắn | Freq | CTR | Link click | Ghi chú |
+|---|---:|---:|---:|---:|---:|---:|---|
+| phễu | 286.556 | 17 | **16.856** | 1.347 | 3,56% | 20 | Dưới ngưỡng 25k |
+| 1806 | 151.426 | 0 | n/a (profile KPI) | 1.093 | 6,57% | 206 | top_only — không dùng cost/mess |
+| Retarget | 91.009 | 5 | **18.202** | 1.142 | 2,73% | 7 | Freq thấp; giữ |
+| Account | 528.991 | 22 | **24.045** | — | — | — | — |
 
 ---
 
-## 6. Funnel depth (PERIOD 01–06/07)
+## 5. MTD theo campaign (tham chiếu)
 
-Notation: Started → First reply → Depth_3 → Depth_5
-
-| Campaign | Started | First reply | Depth_3 | Depth_5 | Reply rate | Engaged rate |
+| Campaign | Spend | Tin nhắn | Chi phí/tin nhắn | Freq | CTR | Link click |
 |---|---:|---:|---:|---:|---:|---:|
-| phễu tin nhắn | 35 | 22 | 17 | 4 | 62,9% | **48,6%** |
-| 1806 Profile | 11 | 10 | 2 | 0 | 90,9% | 18,2% |
-| Retarget | 16 | 9 | 11 | 1 | 56,2% | **68,8%** |
-
-**Nhận xét:** Retarget engaged **68,8%** — tốt cho `bottom`. phễu **48,6%** — ổn cho `top_middle`. 1806 mess thấp **expected** — KPI là link click **547**, CTR **5,79%**.
+| phễu | 1.851.242 | 84 | 22.039 | 2.447 | — | — |
+| 1806 | 965.380 | 14 | n/a (profile) | 1.533 | 5,98% | 1.299 |
+| Retarget | 662.092 | 33 | 20.063 | 1.620 | — | — |
+| Account | 3.478.714 | 131 | 26.555 | — | — | — |
 
 ---
 
-## 7. Verdict chi tiết theo funnel_role
+## 6. Placement — IG-only (recency)
 
-### 7.1 phễu tin nhắn — `top_middle`
+| Campaign | Trạng thái placement (verdict window) | Khuyến nghị |
+|---|---|---|
+| Phễu | Delivery messaging / IG (theo fetch ACTIVE) | Giữ |
+| Retarget | Delivery retarget | Giữ — review「chốt đơn」sau 7 ngày từ 13/07 |
+| 1806 | Profile IG | Sunset watch — hết ~18/07 |
+
+> Không khuyến nghị “tắt Facebook” khi không có bằng chứng spend FB trên window trong handoff.
+
+---
+
+## 7. Deep-dive theo campaign
+
+### 7.1 phễu — `top_middle` (`120253285175280110`)
+
+#### 7.1.1 Ad-level (verbatim)
+
+| Ad | Status | PERIOD spend / mess / cost | WINDOW spend / mess / cost |
+|---|---|---:|---:|
+| Nỗi sợ | **ACTIVE** | 626.439 / 31 / **20.208** | 219.318 / 12 / **18.276** |
+| Nỗi sợ 3 | **ACTIVE** (created 13/07) | 75.344 / 4 / **18.836** | 67.238 / 4 / **16.810** |
+| Nỗi sợ 2 (`120253690578970110`) | kiểm tra delivery | 98.731 / 4 / **24.683** | **0** — flag check/pause nếu còn delivering |
+
+#### 7.1.2 Chẩn đoán
+
+- **Winner:**「Nỗi sợ」— PERIOD **20.208**/tin; window **18.276**/tin (12 mess).
+- **Nỗi sợ 3:** mới (13/07) — cost window **16.810** (n=4) tốt nhưng **learning caveat** (ad &lt; ~7 ngày; mẫu nhỏ) — **giữ**, chưa scale trên ad này.
+- **Nỗi sợ 2:** PERIOD còn spend (**98.731** / 4 / **24.683**) nhưng window **0** — **P0: check/pause nếu vẫn delivering**.
+- **Learning (campaign):** 43 mess/7 ngày PERIOD &lt; 50 → **giữ, gần scale** — chưa scale dứt khoát; scale ≤20% chỉ khi ổn định.
+
+**Verdict campaign: Giữ (gần scale)** — window cost/mess **16.856** &lt; 25.000.
+
+---
+
+### 7.2 1806 — `top_only` (`120252531135370110`)
+
+| KPI | Ngưỡng | PERIOD | VERDICT WINDOW | Ghi chú |
+|---|---|---:|---:|---|
+| Chi phí/tin nhắn | Loại trừ | n/a | n/a | **Expected — không dùng làm primary** |
+| Link click | — | **586** | **206** | CTR PERIOD **6,38%** · window **6,57%** |
+| Spend | — | 437.439 | 151.426 | Profile delivery |
+| Mess | — | 3 | 0 | Không penalize |
+| Freq | — | 1.260 | 1.093 | — |
+
+**Verdict: Sunset watch** — đúng vai trò `top_only`. Quality mess **n/a**. Lifetime end ~**18/07**.
+
+**Sunset (P1):** IF quality gate đạt **HOẶC** lifetime end ~18/07 → pause 1806; realloc ~70k sang Phễu. Cần cập nhật `08-dm-quality-log`.
+
+---
+
+### 7.3 Retarget — `bottom` (`120252990977040110`)
 
 | KPI | Ngưỡng | PERIOD | VERDICT WINDOW | Đạt? |
 |---|---|---:|---:|---|
-| Chi phí/tin nhắn | < 25.000 VND | 20.880 | **22.652** | **Có** |
-| Engaged rate | — | 48,6% | 42,9% | Ổn |
-| CTR | — | 4,67% | 4,38% | Ổn |
+| Chi phí/tin nhắn | tham chiếu / guard 40k | 21.151 | **18.202** | OK — dưới 40k |
+| Frequency | guard &gt; 3,5 | 1.323 | **1.142** | OK |
 
-**Verdict: Giữ** — window **22.652 VND** dưới 25.000 VND. Volume **7 tin/2 ngày** — theo dõi nếu < 5 mess chất/ngày kéo dài 3 ngày.
+#### Ad-level
 
-#### 7.1.1 Ad-level — test 2 quảng cáo song song (refresh full-day 07/07)
-
-> **Bối cảnh:** Cùng ad set `Nhóm quảng cáo Lượt tương tác mới` — test 7 ngày theo checkpoint 09. Fetch lại **08/07** — số 07/07 là **cả ngày** (không còn partial).
-
-**Ads ACTIVE:**
-
-| Ad | ad_id | Format | Created | CTA | SKU / concept |
-|---|---|---|---|---|---|
-| Nỗi sợ | 120253285175260110 | Static 1 ảnh | 29/06/2026 | `INSTAGRAM_MESSAGE` | Giáo dục fake — generic Tiffany/Bvlgari |
-| Nỗi sợ 2 | 120253603203850110 | Carousel 3 slide | 06/07/2026 17:22 | `INSTAGRAM_MESSAGE` | Tiffany T True narrow vàng hồng **size 51.5** |
-
-**Bảng PERIOD ad-level — 01–07/07/2026 (verbatim, refresh 08/07)**
-
-| Ad | Spend | Imp | Clicks | CTR | Tin nhắn | Chi phí/tin nhắn | depth_3 | engaged_rate | Source |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Nỗi sợ | 785.708 | 10.276 | 483 | 4,70% | 40 | **19.643** | 21 | 52,5% | `ad_insights.json` |
-| Nỗi sợ 2 | 197.439 | 2.776 | 87 | 3,13% | 1 | 197.439 | 1 | n/a (n=1) | `ad_insights.json` |
-| Ad set total | 983.147 | 13.052 | 570 | 4,37% | 41 | 23.979 | 22 | 53,7% | `insights.json` |
-
-**Bảng VERDICT WINDOW ad-level — 06–07/07/2026 (verbatim)**
-
-| Ad | Spend | Tin nhắn | Chi phí/tin nhắn | engaged_rate |
-|---|---:|---:|---:|---:|
-| Nỗi sợ | 75.191 | 8 | **9.399** | 50,0% |
-| Nỗi sợ 2 | 197.439 | 1 | 197.439 | n/a (n=1) |
-
-**Ngày 07/07 — full day (verbatim)**
-
-| Ad | Spend | Imp | Clicks | CTR | Tin nhắn | Chi phí/tin nhắn | % spend ad set | Source |
-|---|---:|---:|---:|---:|---:|---:|---:|---|
-| Nỗi sợ | 376 | 5 | 0 | 0% | 1 | 376 | **0,3%** | `ad_insights_2026-07-07.json` |
-| Nỗi sợ 2 | 122.697 | 1.636 | 57 | 3,48% | 1 | 122.697 | **99,7%** | `ad_insights_2026-07-07.json` |
-| Ad set | 123.073 | — | — | — | 2 | 61.537 | 100% | tổng 2 ad |
-
-**Timeline spend/ngày**
-
-| Ngày | Nỗi sợ spend | Nỗi sợ mess | Nỗi sợ 2 spend | Nỗi sợ 2 mess | % Nỗi sợ 2 |
-|---|---:|---:|---:|---:|---:|
-| 01/07 | 151.836 | 8 | — | — | — |
-| 02/07 | 135.765 | 2 | — | — | — |
-| 03/07 | 130.132 | 5 | — | — | — |
-| 04/07 | 154.510 | 13 | — | — | — |
-| 05/07 | 138.274 | 4 | — | — | — |
-| **06/07** | 74.815 | 7 | **74.742** | 0 | **50,0%** |
-| **07/07** | **376** | 1 | **122.697** | 1 | **99,7%** |
-
-**Funnel depth ad-level (period 01–07/07):** Started → First reply → Depth_3 → Depth_5
-
-| Ad | Started | First reply | Depth_3 | Depth_5 | Reply rate | Engaged rate |
-|---|---:|---:|---:|---:|---:|---:|
-| Nỗi sợ | 40 | 24 | 21 | 5 | 60,0% | 52,5% |
-| Nỗi sợ 2 | 1 | 1 | 1 | 0 | 100% (n=1) | n/a |
-
-**Chẩn đoán 07/07 (full day):**
-
-- Pattern **xác nhận** sau refresh: Meta explore carousel — không phải artifact partial-day (「Nỗi sợ 2」tăng từ 51k → **123k** spend).
-- **「Nỗi sợ」bị throttle cả ngày** — 376 VND / 5 imp; ad cũ vẫn period **19.643**/tin < 25k.
-- **「Nỗi sợ 2」KPI xấu ngày 2:** 2 ngày live = **197.439 VND / 1 mess**; 07/07 chủ yếu `video_view` (71) — Meta học engagement trước mess.
-- Ad set 07/07: **61.537 VND/mess** (2 mess) — ngày kém do exploration; **không** đánh giá campaign từ 1 ngày.
-
-**Verdict ad-level (`top_middle`) — refresh 08/07:**
-
-| Ad | Verdict | Lý do |
-|---|---|---|
-| Nỗi sợ | **Giữ** | Period **19.643**/tin; starvation 07/07 = learning side-effect |
-| Nỗi sợ 2 | **Giữ (test) + yellow flag** | Ngày 2/7; CPA **197k** — theo dõi 09–10/07; pause **chỉ khi hết hàng T 51.5** |
-| Ad set | **Giữ test** | Còn **5 ngày** đến review 13/07; nếu「Nỗi sợ 2」>60% spend × 3 ngày + CPA >75k → cân nhắc tách ad set |
-
-**Measurement plan ad-level (đọc lại 13/07/2026):**
-
-| Metric | Ngưỡng | Ghi chú |
-|---|---|---|
-| Chi phí/tin nhắn per ad | < 25.000 VND | Winner sau 7 ngày |
-| % spend split | Ghi nhận | Không force 50/50 |
-| Mess chất manual (SKU 51.5) | Ghi `08-dm-quality-log` | Success signal cho carousel |
-| Inventory T 51.5 | Còn hàng | Pause「Nỗi sợ 2」ngay khi hết |
-
----
-
-### 7.2 1806 — `top_only`
-
-| KPI | Ngưỡng | PERIOD | Ghi chú |
-|---|---|---:|---|
-| Chi phí/truy cập profile | < 1.200 VND | *Ads Manager* | KPI primary |
-| Chi phí/tin nhắn | Loại trừ | 35.835 | **Expected thấp** |
-| Link click | — | **547** | CTR **5,79%** |
-
-**Verdict: Giữ** — đúng vai trò `top_only`. Window: **124 link click**, CTR **5,87%**.
-
-**Sunset watch:** phễu < 25k × 3 ngày + ≥ 5 mess chất/ngày → pause 1806 per strategy.
-
----
-
-### 7.3 Retarget — `bottom`
-
-| KPI | Ngưỡng | PERIOD | VERDICT WINDOW | Đạt? |
+| Ad | Status | PERIOD | WINDOW | Ghi chú |
 |---|---|---:|---:|---|
-| Chi phí/tin nhắn | tham chiếu | 17.154 | **9.303** | **Excellent** |
-| Engaged rate | — | 68,8% | **85,7%** | Rất tốt |
-| FB placement | IG-first | FB 01–03/07 | **IG-only 04–06/07** | Đã tối ưu |
+| chốt đơn | **ACTIVE** (13/07) | 19.551 / 1 / **19.551** | 15.854 / 1 / **15.854** | Early — learning caveat |
+| cũ còn hàng | **PAUSED** | — | — | Giữ PAUSED |
 
-**Verdict: Giữ** — campaign hiệu quả nhất trong window. Không khuyên tắt FB (đã off).
-
----
-
-## 8. Unit economics tháng 7 (Sheet MTD)
-
-> Sheet MTD (06/07) vs Meta **6 ngày** (01–06/07) — ROAS full month cần spend cả tháng.
-
-| Chỉ số | Giá trị | Nguồn |
-|---|---:|---|
-| Doanh thu đạt (MTD) | **132.000.000 VND** | M9 |
-| Lợi nhuận đạt (MTD) | **32.091.273 VND** | K9 |
-| SL bán (MTD) | **8** | H9 |
-| Meta spend (01–06/07) | **1.399.459 VND** | account_insights_2026-07-01_2026-07-06.json |
-| Chi phí/đơn (partial) | **174.932 VND** | 1.399.459 / 8 |
-
-Chi tiết finance + tỉ suất ads: [`03-finance-summary.md`](03-finance-summary.md).
+**Verdict: Giữ** — freq window **1.142**; review「chốt đơn」sau **7 ngày** kể từ 13/07 (≈20/07).
 
 ---
 
-## 9. Khuyến nghị hành động (recency-based)
+## 8. Khuyến nghị hành động — tuần 14–20/07 (P0–P2)
 
-### Ưu tiên (verdict_window 05–06/07)
+### P0 — Creative / delivery Phễu (làm ngay)
 
-1. **Retarget — Giữ IG-only** — chi phí/tin nhắn **9.303 VND**, engaged **85,7%**. Monitor < 20k.
-2. **phễu — Giữ** — **22.652 VND**/tin nhắn; nếu volume mess < 5/ngày × 3 ngày → review creative.
-3. **1806 — Giữ + sunset watch** — CTR/link click tốt; không penalize mess.
+1. **Giữ**「Nỗi sợ」+「Nỗi sợ 3」ACTIVE.
+2. **Check/pause**「Nỗi sợ 2」(`120253690578970110`) nếu vẫn delivering (window spend = 0 nhưng PERIOD còn chi).
+3. Ghi **mess chất** vào [`08-dm-quality-log`](08-dm-quality-log.md) hàng ngày (phục vụ sunset 1806).
 
-### Measurement plan (7 ngày)
+### P1 — Sunset 1806 + scale Phễu có điều kiện
+
+1. **Sunset 1806** khi quality gate đạt **HOẶC** lifetime end ~**18/07**.
+2. Realloc ~**70k**/ngày sang Phễu sau khi tắt 1806.
+3. **Scale Phễu ≤20%** chỉ sau khi ổn định (cost/mess window dưới 25k + learning ổn) — **không** scale ngay.
+
+### P2 — Retarget
+
+1. **Giữ** Retarget (window cost **18.202**; freq **1.142**).
+2. Review ad「chốt đơn」sau **7 ngày** từ 13/07.
+
+### Measurement plan (GROW)
 
 | Metric | Campaign | Ngưỡng | Đọc lại |
 |---|---|---|---|
-| Chi phí/tin nhắn | phễu (campaign) | < 25.000 VND | 13/07/2026 |
-| Chi phí/tin nhắn | phễu per ad (Nỗi sợ / Nỗi sợ 2) | < 25.000 VND | 13/07/2026 |
-| Chi phí/tin nhắn | Retarget | < 20.000 VND | 13/07/2026 |
-| FB spend | Retarget | = 0 | 13/07/2026 |
-| Mess chất/ngày | phễu | ≥ 5 (manual) | 13/07/2026 |
-| % spend split ad-level | phễu | Ghi nhận | Daily đến 13/07 |
+| Chi phí/tin nhắn | phễu | &lt; 25.000 VND | **16/07**, **18/07**, **20/07** |
+| Chi phí/tin nhắn | Retarget window | &lt; 40.000 VND | **16/07**, **20/07** |
+| Nỗi sợ 2 delivery | phễu | pause nếu còn delivering | **14–15/07** |
+| Nỗi sợ 3 (learning) | phễu | giữ; đánh giá sau ≥7 ngày live | **20/07** |
+| Mess chất/ngày | phễu (manual) | ≥ 5 (sunset gate) | Daily → 08 |
+| Sunset 1806 | profile | quality gate **hoặc** ~18/07 | **18/07** |
+|「chốt đơn」review | Retarget | 7 ngày từ 13/07 | **20/07** |
+| Learning / scale Phễu | phễu | ổn định trước scale ≤20% | **20/07** |
+
+Policy (nếu sửa copy/creative): [`00-meta-ad-policy-ig.md`](00-meta-ad-policy-ig.md) · [`00-ig-ad-creative-guide.md`](00-ig-ad-creative-guide.md).
+
+---
+
+## 9. Knowledge sources (rule / strategy — không có policy copy mới trong handoff)
+
+| source_file | used_for |
+|---|---|
+| `.cursor/rules/quisirella-meta-kpi.mdc` | Primary KPI chi phí/tin nhắn; ngưỡng 25k; learning |
+| `.cursor/rules/quisirella-meta-ig-platform.mdc` | Placement / creative IG |
+| `.cursor/rules/quisirella-meta-breakdown.mdc` | Không pause chỉ vì average CPA |
+| `config/campaign_strategy.yaml` | funnel_role; sunset 1806; legacy_aliases; learning ~50 |
+| `output/00-meta-ad-policy-ig.md` | Tham chiếu nếu đổi copy |
+| `output/00-ig-ad-creative-guide.md` | Tham chiếu creative IG DM-first |
+
+> Analyst handoff không kèm bảng `rag_sources` — khuyến nghị P0–P2 là vận hành (giữ/pause/sunset/scale), không phải đề xuất copy policy mới.
 
 ---
 
@@ -275,19 +219,15 @@ Chi tiết finance + tỉ suất ads: [`03-finance-summary.md`](03-finance-summa
 
 | File | Nội dung |
 |---|---|
-| `data/meta_fetch/active/120253285175280110_insights.json` | phễu 01–06/07 |
-| `data/meta_fetch/active/120252531135370110_insights.json` | 1806 01–06/07 |
-| `data/meta_fetch/active/120252990977040110_insights.json` | Retarget 01–06/07 |
-| `data/meta_fetch/active/*_daily.json` | Daily per campaign |
-| `data/meta_fetch/active/120252990977040110_placement_daily.json` | Retarget platform/day |
-| `data/meta_fetch/account_insights_2026-07-01_2026-07-06.json` | Account 6 ngày |
-| `data/meta_fetch/fetch_manifest_2026-07-01_2026-07-06.json` | Manifest + metrics parsed |
-| `data/meta_fetch/active/120253285175280110_ads.json` | phễu — danh sách ad (2 ACTIVE) |
-| `data/meta_fetch/active/120253285175280110_ad_insights.json` | phễu — ad-level period 01–07/07 |
-| `data/meta_fetch/active/120253285175280110_ad_insights_2026-07-07.json` | phễu — ad-level full day 07/07 |
-| `data/meta_fetch/active/120253285175280110_ad_daily.json` | phễu — ad-level daily 01–07/07 |
-| `data/meta_fetch/active/120253285175280110_creatives.json` | phễu — creative per ad |
-| `data/meta_fetch/active/120253285175280110_adsets.json` | phễu — ad set config |
-| `data/meta_fetch/fetch_manifest_2026-07-01_2026-07-07.json` | Manifest ad-level 07/07 |
+| `data/meta_fetch/account_insights_7d_2026-07-08_2026-07-14.json` | Account PRIMARY 7d |
+| `data/meta_fetch/account_insights_mtd_2026-07-01_2026-07-14.json` | Account Jul MTD |
+| `data/meta_fetch/account_insights_verdict_2026-07-12_2026-07-13.json` | Account verdict window |
+| `data/meta_fetch/active/120253285175280110_insights*.json` | phễu |
+| `data/meta_fetch/active/120252531135370110_insights*.json` | 1806 |
+| `data/meta_fetch/active/120252990977040110_insights*.json` | Retarget |
+| `data/meta_fetch/active/*_ad_insights*.json` | Ad-level |
+| `data/meta_fetch/fetch_manifest.json` | Manifest fetch |
 
 Strategy: [`config/campaign_strategy.yaml`](../config/campaign_strategy.yaml)
+
+**Unit economics tháng:** không cập nhật trong báo cáo này — handoff không có finance Sheet (`sources: meta_graph_api` only). Xem [`03-finance-summary.md`](03-finance-summary.md) nếu cần số cũ.

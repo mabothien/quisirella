@@ -21,6 +21,8 @@ guards:
       - "không fetch"
       - "dung refresh"
       - "dừng refresh"
+      - "đọc cache"
+      - "doc cache"
     save_session:
       - "luu phien"
       - "lưu phiên"
@@ -50,7 +52,7 @@ intents:
     period_default: current_month
 
   meta_lookup:
-    description: "Tra cứu chi phí quảng cáo, spend, tin nhắn — Meta only"
+    description: "Tra cứu chi phí quảng cáo, spend, tin nhắn — Meta only; luôn fetch mới"
     examples:
       - "chi phí quảng cáo tháng này"
       - "spend bao nhiêu"
@@ -58,9 +60,10 @@ intents:
       - "tin nhắn bao nhiêu"
       - "chi phí tin nhắn"
     pipeline:
-      - meta-fetcher-or-read-output
+      - meta-fetcher
     output_mode: chat_short
-    skip_auto_refresh: true
+    skip_auto_refresh: false
+    force_fetch: true
     period_default: current_month
 
   ads_analysis:
@@ -76,6 +79,7 @@ intents:
       - meta-analyst
     output_mode: chat_analysis
     skip_auto_refresh: false
+    force_fetch: true
     may_update:
       - output/06-active-campaigns-analysis.md
 
@@ -90,6 +94,7 @@ intents:
       - "tong hop doanh thu sheet meta spend ROAS that"
       - "tình hình tháng này sao rồi"
       - "báo cáo tổng tháng"
+      - "báo cáo mới nhất"
     pipeline:
       - finance-fetcher
       - meta-fetcher
@@ -97,6 +102,7 @@ intents:
       - report-writer
     output_mode: reports_and_chat
     skip_auto_refresh: false
+    force_fetch: true
     parallel_fetch: true
     may_update:
       - output/01-meta-ads-performance.md
@@ -119,17 +125,17 @@ intents:
     skip_auto_refresh: true
 
   cached_read:
-    description: "Đọc báo cáo có sẵn khi data < 12h — không fetch"
+    description: "Chỉ khi user skip refresh — đọc output có sẵn, không fetch"
     examples:
-      - "số vừa phân tích"
-      - "kết quả hôm qua"
-      - "báo cáo mới nhất"
-      - "đọc lại phân tích"
+      - "skip refresh — đọc output 06"
+      - "không fetch — số vừa phân tích"
+      - "đọc cache — kết quả hôm qua"
+      - "đọc lại phân tích không fetch"
     pipeline:
       - read-output-06-or-01
     output_mode: chat_short
     skip_auto_refresh: true
-    requires_fresh_data_hours: 12
+    requires_skip_refresh: true
 
   save_session:
     description: "User chủ động lưu checkpoint phiên — ghi output/09"
@@ -151,6 +157,7 @@ intents:
 
 pipeline_notes:
   finance-fetcher: "python -m quisirella fetch-finance --month YYYY-MM"
-  meta-fetcher-or-read-output: "Đọc output/01 hoặc 06 nếu refresh <12h; else meta-fetcher MCP"
+  meta-fetcher: "Luôn gọi Meta MCP/Graph API read-only — không đọc output/ thay fetch"
+  read-output-06-or-01: "Chỉ khi modifier skip_refresh — đọc output/01 hoặc 06"
   write-checkpoint-09: "Append template vào output/09-session-checkpoints.md — xem quisirella-session-memory.mdc"
   parallel_fetch: "finance-fetcher + meta-fetcher song song cùng calendar month"

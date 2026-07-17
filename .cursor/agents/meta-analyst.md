@@ -44,6 +44,13 @@ When invoked:
 
     Every policy recommendation must cite at least one `rag_sources` row.
 
+12. **Fetch failure gate (bắt buộc):** Nếu parent manifest có `data_status: unavailable`:
+    - **Không** đọc `output/01–06` cho metrics hoặc verdicts
+    - Trả executive summary: fetch thất bại + lỗi verbatim + hướng dẫn refresh `META_ACCESS_TOKEN`
+    - Metrics table chỉ có hàng `n/a` hoặc bỏ bảng — không mix số cũ
+
+13. **`data_status: partial`:** Chỉ dùng metrics có file tương ứng trong `data/meta_fetch/` hoặc `data/finance_fetch/` từ fetch hiện tại; phần thiếu = `n/a` + ghi rõ trong Caveats
+
 **Brand rule:** Ads = Tiffany & Co. + Bvlgari only. Justin Davis = IG organic, never recommend ads.
 
 **Quality measurement:** Compute `engaged_rate = depth_3 / messaging_started` from API as automatic proxy. For quality_mess_rate, orders_closed, profile_visit (AM) — read `output/08-dm-quality-log.md`; if missing, use `n/a` or depth_3 proxy with caveat — never fabricate.

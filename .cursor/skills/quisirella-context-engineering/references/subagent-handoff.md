@@ -106,9 +106,10 @@ Simple lookups — classify intent first per `config/intent_router.yaml`:
 | Intent | Action |
 |---|---|
 | `finance_lookup` | `finance-fetcher` only — no Meta |
-| `meta_lookup` / `cached_read` | Read `output/01` or `06` if fresh; else minimal fetch |
+| `meta_lookup` | **Always** `meta-fetcher` — no cache |
+| `ads_analysis` / `full_business` | Full pipeline — **always fetch first** |
+| `cached_read` | Read `output/01` or `06` **only with `skip_refresh` modifier** |
 | `save_session` | Write `09` checkpoint — no fetch |
 | `ig_organic_copy` | Rule only — no fetch |
-| `full_business` / `ads_analysis` | Full pipeline below |
 
 Full pipeline: `meta-fetcher` + `finance-fetcher` (parallel when `full_business`) → `meta-analyst` → `report-writer`. Do not add a 4th agent.

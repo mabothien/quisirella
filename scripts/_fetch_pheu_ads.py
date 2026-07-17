@@ -106,6 +106,40 @@ def row_metrics(row: dict) -> dict:
     }
 
 
+def fetch_adsets_and_creatives(out: Path, ads_payload: dict) -> None:
+    adsets = api_get(
+        f"{CID}/adsets",
+        {
+            "fields": "id,name,status,daily_budget,lifetime_budget,optimization_goal,created_time",
+            "limit": 50,
+        },
+    )
+    save(out / f"{CID}_adsets.json", adsets)
+    if (adsets.get("paging") or {}).get("next"):
+        print("WARN: adsets paging.next exists — may be truncated")
+
+    creatives_by_ad: list[dict] = []
+    for ad in ads_payload.get("data", []):
+        ad_id = ad.get("id")
+        if not ad_id:
+            continue
+        try:
+            creative = api_get(
+                ad_id,
+                {"fields": "creative{id,name,object_type,thumbnail_url,object_story_spec}"},
+            )
+            creatives_by_ad.append(
+                {
+                    "ad_id": ad_id,
+                    "ad_name": ad.get("name"),
+                    "creative": creative.get("creative"),
+                }
+            )
+        except RuntimeError as exc:
+            creatives_by_ad.append({"ad_id": ad_id, "ad_name": ad.get("name"), "error": str(exc)})
+    save(out / f"{CID}_creatives.json", {"data": creatives_by_ad})
+
+
 def main(argv: list[str] | None = None) -> None:
     if not TOKEN:
         raise SystemExit("META_ACCESS_TOKEN missing")
@@ -119,6 +153,7 @@ def main(argv: list[str] | None = None) -> None:
         {"fields": "id,name,status,created_time,effective_status", "limit": 50},
     )
     save(out / f"{CID}_ads.json", ads)
+    fetch_adsets_and_creatives(out, ads)
 
     ad_ins = api_get(
         f"{CID}/insights",

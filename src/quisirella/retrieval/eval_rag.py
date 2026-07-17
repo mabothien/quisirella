@@ -42,10 +42,13 @@ def eval_intents(*, top_k: int = 3, session: RetrievalSession | None = None) -> 
     for case in cases:
         query = case["query"]
         expected = case["expect_intent"]
+        accept = case.get("accept_intents") or [expected]
         routed = route_intent(query, top_k=5, store=intent_store)
         got = routed.get("top_intent")
         candidates = [c.get("intent_id") for c in routed.get("candidates") or []]
-        hit = got == expected or _hit_at_k(candidates, expected, top_k)
+        hit = got in accept or _hit_at_k(candidates, expected, top_k) or any(
+            a in candidates[:top_k] for a in accept
+        )
         if hit:
             hits += 1
         results.append(

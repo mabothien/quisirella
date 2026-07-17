@@ -53,6 +53,24 @@ PoC runtime: [`docs/mcp-poc-placement-breakdown.md`](../docs/mcp-poc-placement-b
 
 If API fails: report error clearly — **never fabricate numbers**. Set `data_status: unavailable` or `partial` in your summary.
 
+## Token expiry (bắt buộc)
+
+Nếu API/MCP trả lỗi token hết hạn:
+
+- Message chứa `Error validating access token` hoặc `Session has expired`
+- Graph error code **190**, subcode **463**
+
+**Hành vi:**
+
+1. Ghi lỗi **verbatim** vào manifest (`errors` field)
+2. Set `data_status: unavailable` (không `partial` nếu toàn bộ fetch fail)
+3. Ghi file `data/run_meta_blocked/fetch_error.json` với `error`, `error_code`, `action`
+4. **Không** đọc `output/01–06` thay thế
+5. Hướng dẫn user refresh token:
+   - `META_ACCESS_TOKEN` trong `.env` (Graph API / scripts)
+   - Hoặc Pipeboard token trong `.cursor/mcp.json`
+   - Meta CLI: `meta auth login` hoặc System User token scope `ads_read` (xem `src/quisirella/tools/meta_mcp.py`)
+
 **Handoff contract** (see `.cursor/skills/quisirella-context-engineering/references/subagent-handoff.md`):
 
 Return a **fetch manifest**, never raw JSON bodies in your response:

@@ -84,21 +84,25 @@ Index missing: `python -m quisirella index-intents` (embed local `intfloat/multi
 
 ### Bước 3 — Pipeline (không tự sửa)
 
-| Intent | Pipeline | Output | skip_auto_refresh |
+| Intent | Pipeline | Output | force_fetch |
 |---|---|---|---|
-| `finance_lookup` | finance-fetcher | Chat 2–4 dòng, cite K/M/H | true |
-| `meta_lookup` | meta-fetcher hoặc đọc output/01,06 | Chat ngắn | true |
-| `ads_analysis` | meta-fetcher → meta-analyst | Chat, có thể 06 | false |
-| `full_business` | finance + meta song song → analyst → writer | output/01-06 + chat | false |
-| `ig_organic_copy` | rule ig-organic-copy | Caption A/B | true |
-| `cached_read` | đọc output/06 nếu data <12h | Chat | true |
-| `save_session` | ghi `09` theo session-memory rule | *Đã lưu checkpoint* | true |
-| `skip_refresh` | (modifier) — không auto-refresh | — | true |
+| `finance_lookup` | finance-fetcher | Chat 2–4 dòng, cite K/M/H | Sheet only |
+| `meta_lookup` | meta-fetcher | Chat ngắn | **bắt buộc** |
+| `ads_analysis` | meta-fetcher → meta-analyst | Chat, có thể 06 | **bắt buộc** |
+| `full_business` | finance + meta song song → analyst → writer | output/01-06 + chat | **bắt buộc** |
+| `ig_organic_copy` | rule ig-organic-copy | Caption A/B | không |
+| `cached_read` | đọc output/06 (chỉ khi `skip_refresh`) | Chat | không |
+| `save_session` | ghi `09` theo session-memory rule | *Đã lưu checkpoint* | không |
+| `skip_refresh` | (modifier) — đọc file, không fetch | — | không |
 
-### Auto-refresh (12h)
+### Fetch policy (bắt buộc)
 
-- **Chỉ** gợi ý refresh khi intent sẽ là `full_business` hoặc `ads_analysis` và user chưa nói skip
-- `finance_lookup`, `save_session`, `ig_organic_copy`, `cached_read` → **không** fetch Meta đầu chat
+- `meta_lookup` / `ads_analysis` / `full_business` → **bắt buộc** chạy fetcher trước khi trả số hoặc diagnosis
+- **Cấm** dùng `output/01–06` làm nguồn số khi fetch chưa chạy trong phiên hoặc `data_status: unavailable`
+- Token Meta error **190** / subcode **463** (`Session has expired`) → thông báo user refresh `META_ACCESS_TOKEN` trong `.env` (hoặc Pipeboard token trong `.cursor/mcp.json`), rồi chạy lại phân tích — **không** fallback số từ output cũ
+- `partial` → chỉ dùng metrics có file tương ứng trong `data/meta_fetch/`; phần thiếu = `n/a`
+- `skip_refresh` modifier → **duy nhất** ngoại lệ đọc `output/` hoặc `data/` đã có mà không fetch
+- `finance_lookup`, `save_session`, `ig_organic_copy` → không fetch Meta
 
 ### RAG knowledge (Phase C — chỉ analyst)
 

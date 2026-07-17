@@ -37,6 +37,7 @@ def _intent_documents(router: dict[str, Any]) -> list[Document]:
             "intent_id": intent_id,
             "pipeline": json.dumps(pipeline, ensure_ascii=False),
             "skip_auto_refresh": str(cfg.get("skip_auto_refresh", False)).lower(),
+            "force_fetch": str(cfg.get("force_fetch", False)).lower(),
             "description": description,
         }
         if description:
@@ -133,6 +134,7 @@ def search_intents(
                 "description": doc.metadata.get("description", ""),
                 "pipeline": json.loads(doc.metadata.get("pipeline", "[]")),
                 "skip_auto_refresh": doc.metadata.get("skip_auto_refresh") == "true",
+                "force_fetch": doc.metadata.get("force_fetch") == "true",
                 "matched_text": doc.page_content.removeprefix("passage: ").strip(),
             }
 
@@ -199,6 +201,7 @@ def route_intent(
     if guard.get("forced_intent") and guard["forced_intent"] != "skip_refresh":
         intent_id = guard["forced_intent"]
         cfg = (router.get("intents") or {}).get(intent_id, {})
+        force_fetch = bool(cfg.get("force_fetch")) and not guard.get("skip_refresh")
         return {
             "status": "ok",
             "query": query,
@@ -206,6 +209,8 @@ def route_intent(
             "top_intent": intent_id,
             "ambiguous": False,
             "skip_refresh": guard.get("skip_refresh", False),
+            "force_fetch": force_fetch,
+            "must_fetch": force_fetch,
             "pipeline": cfg.get("pipeline", []),
             "candidates": [{"intent_id": intent_id, "score": 1.0, "source": "guard"}],
         }
@@ -214,10 +219,17 @@ def route_intent(
     if search["status"] != "ok":
         return {**search, "source": "index_missing", "skip_refresh": guard.get("skip_refresh", False)}
 
+    top_cfg = {}
+    if search.get("top_intent"):
+        top_cfg = (router.get("intents") or {}).get(search["top_intent"], {})
+    force_fetch = bool(top_cfg.get("force_fetch")) and not guard.get("skip_refresh")
+
     result = {
         **search,
         "source": "semantic",
         "skip_refresh": guard.get("skip_refresh", False),
+        "force_fetch": force_fetch,
+        "must_fetch": force_fetch,
     }
     if guard.get("skip_refresh"):
         result["modifiers"] = ["skip_refresh"]

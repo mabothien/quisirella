@@ -1,0 +1,23 @@
+{
+  "audited_at": "2026-07-10T17:06:00+07:00",
+  "root_causes": [
+    "120253285175280110_adsets.json stale (mtime 07/07) — only 1 ad set; scripts never refresh adsets",
+    "_fetch_active_campaigns.py hardcoded SINCE/UNTIL 2026-07-01..06",
+    "1806/Retarget missing adsets.json, ads.json, daily.json in active/",
+    "Mixed manifest dates (01-05, 01-06, 01-07, 01-10) — partial fetches accumulated"
+  ],
+  "pheu_120253285175280110": {
+    "adsets_file_mtime": "2026-07-07",
+    "adsets_count": 1,
+    "adsets_names": ["Nhóm quảng cáo Lượt tương tác mới"],
+    "ads_count": 3,
+    "ads": [
+      {"name": "Nỗi sợ", "status": "ACTIVE", "created": "2026-06-29"},
+      {"name": "Nỗi sợ 2", "status": "ACTIVE", "created": "2026-07-08"},
+      {"name": "Nỗi sợ 2", "status": "PAUSED", "created": "2026-07-06"}
+    ],
+    "manifest_latest": "fetch_manifest_2026-07-01_2026-07-10.json"
+  },
+  "meta_fetch_file_count": 38,
+  "finance_fetch_file_count": 47
+}

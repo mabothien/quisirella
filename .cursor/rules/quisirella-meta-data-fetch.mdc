@@ -37,10 +37,15 @@ GET act_400356462876861/campaigns
 
 Voi moi campaign ID:
 
-1. Campaign insights 30d (+ actions, cost_per_action_type)
-2. Placement breakdown (`publisher_platform,platform_position`)
-3. Adset insights (`level=adset`, fields=adset_name,adset_id,spend,impressions,clicks,ctr,cpc,actions)
-4. Ad insights — chi khi user hoi creative cu the (`level=ad`)
+1. Campaign insights period (+ actions, cost_per_action_type)
+2. `{id}_daily.json` — `time_increment=1`
+3. `{id}_placement_daily.json` — `time_increment=1` + `breakdowns=publisher_platform`
+4. `{id}_adsets.json` — `GET {id}/adsets` (limit 50)
+5. `{id}_adset_insights.json` — `level=adset` + time_range
+6. `{id}_ads.json` — `GET {id}/ads` (limit 50)
+7. Ad insights — chi campaign phieu (`level=ad`): `_ad_insights.json`, `_ad_daily.json`, `_creatives.json`
+
+Scripts: `scripts/_fetch_active_campaigns.py` (3 ACTIVE), `scripts/_fetch_pheu_ads.py` (phieu ad-level).
 
 ## Action types bat buoc trong `actions`
 
@@ -62,12 +67,14 @@ Trich tu response, khong bia:
 ## Luu raw JSON
 
 - Account: `data/meta_fetch/`
-- ACTIVE campaigns: `data/meta_fetch/active/{campaign_id}_insights.json` (+ placement, adsets)
+- ACTIVE campaigns: `data/meta_fetch/active/{campaign_id}_insights.json`, `_daily.json`, `_placement_daily.json`, `_adsets.json`, `_adset_insights.json`, `_ads.json`
+- Phieu ad-level: `_ad_insights.json`, `_ad_daily.json`, `_creatives.json`
 
 ## Loi thuong gap
 
 | Loi | Cach xu ly |
 |---|---|
+| `190` / `Session has expired` / subcode `463` | `data_status: unavailable`; báo user refresh `META_ACCESS_TOKEN` hoặc Pipeboard token; ghi `data/run_meta_blocked/fetch_error.json`; **không** fallback `output/` |
 | `#200 ads_read permission` | Token thieu scope hoac chua gan ad account |
 | Account khong co trong `/me/adaccounts` | Dung `act_400356462876861`, khong phai account khac |
 | Khong co insights | Campaign moi chua co du lieu — ghi `data_status: partial` |

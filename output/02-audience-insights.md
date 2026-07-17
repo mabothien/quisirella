@@ -1,15 +1,15 @@
 ---
 title: Phân tích tệp khách hàng — Quisirella
-generated_at: 2026-07-02
-data_range: 2026-06-02 đến 2026-07-01
+generated_at: 2026-07-13
+data_range: 2026-07-07 đến 2026-07-13
 sources: [meta_graph_api]
-data_status: ok
+data_status: partial
 ad_account_id: act_400356462876861
 ---
 
-# 02 — Audience insights (30 ngày)
+# 02 — Audience insights (PRIMARY 07–13/07)
 
-Dữ liệu breakdown từ ad account `act_400356462876861`, kỳ 2026-06-02 → 2026-07-01.
+> **Lưu ý:** Fetch PRIMARY **chưa** gồm breakdown tuổi/giới account-level → `data_status: partial`. Phần dưới dùng **placement / platform từ ACTIVE** + khung tier Quisirella. Breakdown tuổi/giới archive giữ tham chiếu — không dùng cho quyết định budget.
 
 ---
 
@@ -23,70 +23,58 @@ Dữ liệu breakdown từ ad account `act_400356462876861`, kỳ 2026-06-02 →
 
 ---
 
-## Breakdown theo tuổi
+## Placement — ACTIVE campaigns (PRIMARY / verdict window)
 
-| Nhóm tuổi | Spend (VND) | % spend | Impressions | Clicks | CTR | CPC | Gợi ý tier |
-|---|---:|---:|---:|---:|---:|---:|---|
-| 18–24 | 1.133.786 | 13,3% | 27.326 | 877 | 3,21% | 1.293 | Tier 1 (một phần) |
-| **25–34** | **5.659.174** | **66,2%** | **115.763** | 4.042 | 3,49% | 1.400 | **Tier 1–2 (core)** |
-| 35–44 | 1.450.832 | 17,0% | 23.614 | 946 | 4,01% | 1.534 | Tier 2–3 |
-| 45–54 | 222.843 | 2,6% | 3.577 | 186 | 5,20% | 1.198 | Tier 2–3 |
-| 55–64 | 46.119 | 0,5% | 759 | 57 | 7,51% | 809 | Tier 3 (hiếm, mẫu nhỏ) |
-| 65+ | 32.979 | 0,4% | 688 | 20 | 2,91% | 1.649 | — |
+### Retarget (`120252990977040110`) — bottom
 
-**Insight:** **66% ngân sách** đang vào nhóm **25–34** — khớp Tier 1–2 của Quisirella. Nhóm **35–44** có CTR cao hơn (4,01%) với spend vừa phải — đáng test thêm creative trust-building cho Tier 2–3.
+| Trạng thái | Ghi chú |
+|---|---|
+| **IG-only** | FB spend = **0** trong verdict window (và từ 04/07) |
+| Chi phí/tin PERIOD | **30.200 VND** |
+| Chi phí/tin window 11–12 | **32.425 VND** |
+| Engaged rate PERIOD | **60,0%** |
 
----
+**Insight:** Đã IG-only — **không khuyên tắt Facebook** lần nữa. Theo dõi cost window (P3 trong [`05`](05-recommendations.md)).
 
-## Breakdown theo giới tính
+### Phễu (`120253285175280110`) — top_middle
 
-| Giới tính | Spend (VND) | % spend | Impressions | CTR | CPC | Ghi chú |
-|---|---:|---:|---:|---:|---:|---|
-| **Nữ** | **5.538.273** | **64,8%** | 104.699 | 3,48% | 1.520 | Tệp chính — phù hợp trang sức nữ |
-| Nam | 2.889.206 | 33,8% | 64.501 | 3,70% | 1.209 | CTR cao hơn nữ, CPC thấp hơn — có thể quà tặng / Justin Davis |
-| Unknown | 118.622 | 1,4% | 2.533 | 3,79% | 1.236 | Mẫu nhỏ |
+| Chỉ số | PERIOD 07–13 | Window 11–12 |
+|---|---:|---:|
+| Spend | 841.469 | 278.707 |
+| Tin nhắn | 36 | 15 |
+| Chi phí/tin | 23.374 | **18.580** |
+| Engaged | 30,6% | — |
 
-**Insight:** Nam chiếm **34% spend** với CPC thấp hơn nữ — không nên loại bỏ hoàn toàn, nhưng creative nên ưu tiên nữ 25–40 cho Tiffany/Elsa Peretti.
+**Insight:** Delivery tập trung IG (policy Quisirella). Adset HardWear **PAUSED** từ 11/07 — spend window = 「Nỗi sợ」ACTIVE.
 
----
+### 1806 Profile (`120252531135370110`) — top_only
 
-## Breakdown theo placement
-
-### Instagram (97,2% spend — ~8,31 triệu VND)
-
-| Placement | Spend (VND) | % IG spend | Impressions | CTR | CPC | Ghi chú |
-|---|---:|---:|---:|---:|---:|---|
-| Instagram Feed | 3.185.899 | 38,3% | 58.515 | 3,55% | 1.533 | Showcase ảnh chi tiết sản phẩm |
-| Instagram Stories | 3.054.415 | 36,8% | 60.914 | 2,77% | 1.808 | Chi tiêu cao nhất trên IG, CTR thấp nhất |
-| **Instagram Reels** | **2.068.339** | **24,9%** | 48.207 | **4,23%** | **1.014** | **CTR cao nhất, CPC thấp nhất** |
-| Instagram Explore | 71 | — | 6 | — | — | Không đáng kể |
-
-### Facebook (~2,8% spend — ~237k VND)
-
-| Placement | Spend (VND) | Impressions | CTR | Ghi chú |
-|---|---:|---:|---:|---|
-| Facebook Feed | 213.450 | 3.689 | 7,75% | Mẫu nhỏ, CTR cao nhưng không scale |
-| Facebook Reels | 22.082 | 376 | 9,31% | Rất ít volume |
-| Khác (Stories, Profile…) | ~1.845 | ~26 | — | Không đáng kể |
-
-**Insight placement:**
-- **Reels** hiệu quả nhất trên IG (CPC 1.014 vs Stories 1.808) — phù hợp test video macro chi tiết sản phẩm.
-- **Stories** đang hút 37% spend IG nhưng CTR thấp — review creative hoặc giảm tỷ trọng.
-- **Facebook** chỉ ~2,8% spend — phù hợp giữ tối thiểu hoặc loại khỏi placement nếu muốn tập trung IG.
+Campaign `top_only` — KPI profile visit. PERIOD: CTR **6,13%**, **575** link click · Window: **211** link click. Không đánh giá bằng chi phí/tin nhắn.
 
 ---
 
-## Đối chiếu audience × tier giá
+## Archive — breakdown account 30 ngày (06/02–01/07) — tham chiếu only
 
-| Tín hiệu từ data | Tier liên quan | Hành động gợi ý |
-|---|---|---|
-| 25–34 chiếm 66% spend, CTR ổn | Tier 1–2 | Giữ targeting hiện tại, tăng creative entry-tier (2–4tr) |
-| 35–44 CTR 4,01%, spend 17% | Tier 2–3 | Test adset riêng với carousel chi tiết authentic |
-| Nam 34% spend, CPC thấp | Tier 1 (Justin Davis) | Giữ một phần budget cho gift/ street-luxury angle |
-| Reels CPC thấp nhất | Tất cả tier | Ưu tiên Reels cho sản phẩm mới lên kệ |
+> Dữ liệu cũ, **không** dùng cho verdict PRIMARY 07–13.
+
+**Tuổi (archive):** 66% spend vào **25–34** — khớp Tier 1–2.
+
+**Giới (archive):** Nữ 64,8% spend — tệp chính phù hợp trang sức nữ; nam 33,8% CPC thấp hơn — có thể quà tặng / Justin Davis.
 
 ---
 
-## Xu hướng so với kỳ trước
+## Khuyến nghị audience (13/07)
 
-_Chưa có snapshot kỳ trước trong `data/quisirella.db`. Lần chạy tiếp theo sẽ so sánh MoM._
+1. **Giữ IG-first** — Retarget FB = 0; không mở lại FB.
+2. **Không mở rộng nam mass** — giữ creative phụ cả hai giới tính, không loại nam.
+3. **HardWear / Tier 3** — quyết định re-enable trong adset ACTIVE (không tạo adset mới) nếu còn SKU — xem [`06`](06-active-campaigns-analysis.md) §P0.
+
+---
+
+## Phụ lục
+
+| File | Nội dung |
+|---|---|
+| `data/meta_fetch/active/120253285175280110_placement_daily.json` | phễu placement |
+| `data/meta_fetch/active/120252990977040110_placement_daily.json` | Retarget placement |
+| `config/store_profile.yaml` | Tier giá + audience |

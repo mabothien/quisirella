@@ -6,6 +6,7 @@ import os
 import sys
 import urllib.parse
 import urllib.request
+from datetime import date
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -28,8 +29,12 @@ MONTHS = [
     ("2026-04", "2026-04-01", "2026-04-30"),
     ("2026-05", "2026-05-01", "2026-05-31"),
     ("2026-06", "2026-06-01", "2026-06-30"),
-    ("2026-07", "2026-07-01", "2026-07-06"),
 ]
+
+
+def jul_mtd_range() -> tuple[str, str]:
+    today = date.today()
+    return today.replace(day=1).isoformat(), today.isoformat()
 
 
 def messaging_started(actions: list | None) -> int:
@@ -50,7 +55,7 @@ def fetch(since: str, until: str) -> dict:
         }
     )
     url = f"https://graph.facebook.com/v21.0/{ACCT}/insights?{params}"
-    with urllib.request.urlopen(url) as resp:
+    with urllib.request.urlopen(url, timeout=60) as resp:
         payload = json.loads(resp.read())
     if "error" in payload:
         raise RuntimeError(payload["error"])
@@ -61,8 +66,11 @@ def main() -> None:
     if not TOKEN:
         raise SystemExit("META_ACCESS_TOKEN missing")
 
+    jul_since, jul_until = jul_mtd_range()
+    months = [*MONTHS, ("2026-07", jul_since, jul_until)]
+
     rows = []
-    for month_key, since, until in MONTHS:
+    for month_key, since, until in months:
         row = fetch(since, until)
         spend = float(row.get("spend", 0))
         mess = messaging_started(row.get("actions"))
@@ -77,16 +85,24 @@ def main() -> None:
             }
         )
 
-    out_path = Path("data/meta_fetch/monthly_spend_2026.json")
-    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_dir = Path("data/meta_fetch")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / "monthly_spend_2026.json"
     out_path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # Jul MTD account raw
-    jul_row = fetch("2026-07-01", "2026-07-06")
-    jul_path = Path("data/meta_fetch/account_insights_2026-07-01_2026-07-06.json")
+    jul_row = fetch(jul_since, jul_until)
+    jul_path = out_dir / f"account_insights_{jul_since}_{jul_until}.json"
     jul_path.write_text(
-        json.dumps({"data": [jul_row], "fetched_at": "2026-07-06"}, ensure_ascii=False, indent=2),
+        json.dumps({"data": [jul_row], "fetched_at": jul_until}, ensure_ascii=False, indent=2),
         encoding="utf-8",
+    )
+
+    manifest = {
+        "months": rows,
+        "jul_mtd": {"since": jul_since, "until": jul_until, "spend_vnd": rows[-1]["spend_vnd"]},
+    }
+    (out_dir / "fetch_manifest_roas_months.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
     print(json.dumps(rows, ensure_ascii=False, indent=2))

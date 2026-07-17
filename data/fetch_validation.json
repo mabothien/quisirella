@@ -1,0 +1,80 @@
+{
+  "status": "partial",
+  "checks": [
+    {
+      "check": "manifest_date_range",
+      "pass": false,
+      "detail": "missing"
+    },
+    {
+      "check": "120253285175280110_insights.json",
+      "pass": true,
+      "detail": "rows=1"
+    },
+    {
+      "check": "120253285175280110_adsets.json",
+      "pass": true,
+      "detail": "rows=2"
+    },
+    {
+      "check": "120253285175280110_ads.json",
+      "pass": true,
+      "detail": "rows=3"
+    },
+    {
+      "check": "120253285175280110_daily.json",
+      "pass": true,
+      "detail": "rows=7"
+    },
+    {
+      "check": "120252531135370110_insights.json",
+      "pass": true,
+      "detail": "rows=1"
+    },
+    {
+      "check": "120252531135370110_adsets.json",
+      "pass": true,
+      "detail": "rows=1"
+    },
+    {
+      "check": "120252531135370110_ads.json",
+      "pass": true,
+      "detail": "rows=4"
+    },
+    {
+      "check": "120252531135370110_daily.json",
+      "pass": true,
+      "detail": "rows=7"
+    },
+    {
+      "check": "120252990977040110_insights.json",
+      "pass": true,
+      "detail": "rows=1"
+    },
+    {
+      "check": "120252990977040110_adsets.json",
+      "pass": true,
+      "detail": "rows=1"
+    },
+    {
+      "check": "120252990977040110_ads.json",
+      "pass": true,
+      "detail": "rows=2"
+    },
+    {
+      "check": "120252990977040110_daily.json",
+      "pass": true,
+      "detail": "rows=7"
+    },
+    {
+      "check": "pheu_adsets_count",
+      "pass": true,
+      "detail": "adsets=2 (expect >=1; flag if AM has more after split)"
+    },
+    {
+      "check": "finance_summary",
+      "pass": true,
+      "detail": "data\\finance_fetch\\bao_gia_2026_summary.json"
+    }
+  ]
+}

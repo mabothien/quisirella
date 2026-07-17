@@ -19,17 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 LOG_PATH = ROOT / "output" / "07-session-log.md"
 CHECKPOINT_PATH = ROOT / "output" / "09-session-checkpoints.md"
-INDEX_PATH = ROOT / "output" / "00-index-claude-knowledge.md"
 INTENT_ROUTER_PATH = ROOT / "config" / "intent_router.yaml"
-INTENT_INDEX_DIR = ROOT / "data" / "intent_index"
-REFRESH_MARKER = ROOT / "data" / "meta_fetch" / ".last_refresh"
-
-# Auto-refresh khi mo chat moi: chi ep refresh neu lan ghi bao cao gan nhat
-# da qua nguong nay (tranh fetch trung khi mo nhieu chat trong ngay).
-REFRESH_INTERVAL_HOURS = 12
-
-# File bao cao dinh ky (ghi xong => danh dau refresh that su).
-REPORT_FILE_PREFIXES = tuple(f"0{n}-" for n in range(1, 7))  # 01- .. 06-
 
 WRITE_TOOL_PREFIXES = (
     "ads_create_",
@@ -37,6 +27,14 @@ WRITE_TOOL_PREFIXES = (
     "ads_activate_",
     "ads_delete_",
     "ads_manage_",
+)
+
+FETCH_POLICY_NOTE = (
+    "\n\nFETCH POLICY: Intent meta_lookup / ads_analysis / full_business "
+    "→ BẮT BUỘC chạy fetch trước khi trả số. "
+    "Không đọc output/01–06 thay cho fetch (trừ skip_refresh). "
+    "Token Meta lỗi 190/463 → báo user refresh META_ACCESS_TOKEN; "
+    "data_status unavailable; không bịa số."
 )
 
 
@@ -82,30 +80,6 @@ def _emit_json(payload: dict) -> None:
     sys.stdout.buffer.flush()
 
 
-def _hours_since_last_refresh() -> float | None:
-    """Gio troi qua ke tu lan ghi bao cao 01-06 gan nhat.
-
-    None = chua tung refresh (marker khong ton tai / khong doc duoc) => coi nhu due.
-    """
-    if not REFRESH_MARKER.exists():
-        return None
-    try:
-        raw = REFRESH_MARKER.read_text(encoding="utf-8").strip()
-        ts = datetime.fromisoformat(raw)
-    except (ValueError, OSError):
-        return None
-    if ts.tzinfo is None:
-        ts = ts.astimezone()
-    delta = datetime.now(timezone.utc).astimezone() - ts
-    return delta.total_seconds() / 3600
-
-
-def _mark_refresh_now() -> None:
-    REFRESH_MARKER.parent.mkdir(parents=True, exist_ok=True)
-    ts = datetime.now(timezone.utc).astimezone().isoformat()
-    REFRESH_MARKER.write_text(ts, encoding="utf-8")
-
-
 def _read_latest_checkpoint(max_lines: int = 40) -> str:
     """Return the most recent ## Checkpoint block from 09-session-checkpoints.md."""
     if not CHECKPOINT_PATH.exists():
@@ -147,26 +121,10 @@ def session_start() -> None:
         f"Session checkpoint (uu tien): {checkpoint_note}. "
         f"Index: {index_note}. Session log: {log_note}. "
         "KPI primary: chi phi/tin nhan (DM-first). Sheet = doanh thu; Meta = ads only."
+        + FETCH_POLICY_NOTE
+        + " Pipeline: meta-fetcher -> meta-analyst -> report-writer (read-only). "
+        "MCP loi -> data_status partial/unavailable, KHONG bia so."
     )
-
-    hours = _hours_since_last_refresh()
-    if hours is None or hours >= REFRESH_INTERVAL_HOURS:
-        age = "chua co bao cao truoc" if hours is None else f"{hours:.0f} gio truoc"
-        context += (
-            "\n\nAUTO-REFRESH NOTE (bao cao 01-06 cap nhat " + age + ", nguong "
-            f"{REFRESH_INTERVAL_HOURS}h): SAU KHI classify intent — chi refresh neu intent la "
-            "full_business hoac ads_analysis VA user khong noi skip refresh. "
-            "finance_lookup, save_session, ig_organic_copy, cached_read, skip_refresh "
-            "-> KHONG auto-refresh, KHONG fetch Meta dau chat. "
-            "Pipeline: meta-fetcher -> meta-analyst -> report-writer (read-only). "
-            "MCP loi -> data_status partial/unavailable, KHONG bia so."
-        )
-    else:
-        context += (
-            f"\n\nData con moi (refresh {hours:.0f} gio truoc, < {REFRESH_INTERVAL_HOURS}h) "
-            "-> KHONG auto-refresh. Doc output/06 co san; chi refresh khi user yeu cau "
-            "hoac intent full_business/ads_analysis."
-        )
 
     if checkpoint.strip():
         context += f"\n\nLatest session checkpoint (09 — doc truoc khi tiep tuc):\n{checkpoint}"
@@ -190,10 +148,6 @@ def log_file_edit() -> None:
     name = Path(file_path).name
     edit_count = len(data.get("edits") or [])
     _append_log(f"- **File updated:** `{name}` ({edit_count} edit(s))")
-
-    # Bao cao 01-06 vua duoc ghi => danh dau moc refresh that su (guard 12h).
-    if name.startswith(REPORT_FILE_PREFIXES):
-        _mark_refresh_now()
 
     sys.exit(0)
 

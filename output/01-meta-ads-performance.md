@@ -1,85 +1,104 @@
 ---
 title: Hiệu suất Meta Ads — Quisirella
-generated_at: 2026-07-02
-data_range: 2026-06-02 đến 2026-07-01
+generated_at: 2026-07-13
+data_range: 2026-07-07 đến 2026-07-13
 sources: [meta_graph_api]
 data_status: ok
 ad_account_id: act_400356462876861
 ---
 
-# 01 — Hiệu suất Meta Ads (30 ngày)
+# 01 — Hiệu suất Meta Ads (PRIMARY 07–13/07)
 
-## Tổng quan account
+## Tóm tắt executive
+
+| Campaign | funnel_role | Verdict | Chi phí/tin (PERIOD) | Chi phí/tin (window 11–12) |
+|---|---|---|---:|---:|
+| Phễu tin nhắn | top_middle | **Giữ** | 23.374 | **18.580** |
+| 1806 Profile | top_only | **Giữ + sunset watch** | n/a (profile KPI) | n/a |
+| Retarget Bán | bottom | **Giữ — theo dõi cost** | 30.200 | 32.425 |
+
+**Account PERIOD 07–13:** spend **1.581.287 VND** · 49 tin nhắn · **32.271 VND**/tin.  
+**Jul MTD 01–13 (tham chiếu):** spend **3.212.508 VND** · 118 tin nhắn · **27.225 VND**/tin.
+
+Deep-dive ACTIVE: [`06-active-campaigns-analysis.md`](06-active-campaigns-analysis.md).
+
+> Purchase Meta **không phản ánh doanh thu thật** (chốt qua Instagram DM).
+
+---
+
+## Tổng quan account — PERIOD 07–13/07
 
 | Chỉ số | Giá trị |
 |---|---:|
 | Ad account | `act_400356462876861` (quisirella) |
-| Khoảng thời gian | 2026-06-02 → 2026-07-01 |
-| Tổng chi tiêu (spend) | **8.546.101 VND** |
-| Impressions | 171.733 |
-| Reach | 85.413 |
-| Clicks | 6.128 |
-| CTR | 3,57% |
-| CPC | 1.395 VND |
-| CPM | 49.764 VND |
-| Tin nhắn bắt đầu (7 ngày) | 165 |
-| Chi phí / tin nhắn bắt đầu | 51.795 VND |
-| Lead (Meta) | 103 |
-| Chi phí / lead | 82.972 VND |
-| Purchase (Meta pixel) | 3 |
-| Chi phí / purchase (Meta) | ~2.848.700 VND |
-
-**Nhận xét nhanh:** Phần lớn ngân sách đi vào campaign **Lượt tương tác** và **Lưu lượng truy cập** (objective engagement/traffic), không phải campaign tin nhắn thuần. Campaign **"phễu - target tin nhắn"** mới (29/6) có hiệu quả tin nhắn tốt nhất trong các campaign đang chạy.
+| Khoảng thời gian PRIMARY | 2026-07-07 → 2026-07-13 |
+| Tổng chi tiêu (spend) | **1.581.287 VND** |
+| Tin nhắn bắt đầu (7 ngày) | **49** |
+| Chi phí / tin nhắn bắt đầu | **32.271 VND** |
+| CTR | 4,77% |
+| Engaged rate | 36,7% |
+| Link click | 676 |
 
 ---
 
-## Campaigns có chi tiêu trong kỳ (8 campaigns)
+## 3 campaign ACTIVE — PERIOD 07–13/07
 
-| Campaign | Trạng thái | Mục tiêu | Chi tiêu (VND) | Impressions | Clicks | CTR | CPC | Tin nhắn bắt đầu | Chi phí/tin nhắn |
-|---|---|---|---:|---:|---:|---:|---:|---:|---:|
-| Chiến dịch Lượt tương tác mới - 1806 | **ACTIVE** | Engagement | 2.789.505 | 65.311 | 2.720 | 4,16% | 1.026 | 50 | 55.790 |
-| Chiến dịch Lưu lượng truy cập mới | PAUSED | Traffic | 2.770.468 | 68.157 | 2.107 | 3,09% | 1.315 | 20 | 138.523 |
-| Chiến dịch Lượt tương tác mới - 2905 | PAUSED | Engagement | 1.665.199 | 20.221 | 561 | 2,77% | 2.968 | 45 | 37.004 |
-| Chiến dịch phễu - target tin nhắn | **ACTIVE** | Engagement | 487.178 | 5.845 | 317 | 5,42% | 1.537 | **29** | **16.799** |
-| Chiến dịch Lượt tương tác - Bán - Bản sao | **ACTIVE** | Engagement | 412.431 | 5.464 | 219 | 4,01% | 1.883 | 16 | 25.777 |
-| Chiến dịch Lượt tương tác mới - 1806 - Bản sao | PAUSED | Engagement | 177.101 | 3.495 | 133 | 3,81% | 1.332 | 1 | 177.101 |
-| Chiến dịch Lượt tương tác mới - 2905 - Bản sao | PAUSED | Engagement | 197.482 | 2.705 | 36 | 1,33% | 5.486 | 1 | 197.482 |
-| Chiến dịch Lượt tương tác - Bán | PAUSED | Engagement | 46.737 | 535 | 35 | 6,54% | 1.335 | 3 | 15.579 |
+| Campaign | ID | funnel_role | Chi tiêu (VND) | Tin nhắn | Chi phí/tin nhắn | CTR | Engaged | Link click | Verdict |
+|---|---|---|---:|---:|---:|---:|---:|---:|---|
+| Chiến dịch phễu - target tin nhắn | 120253285175280110 | top_middle | 841.469 | 36 | **23.374** | 4,20% | 30,6% | 79 | **Giữ** |
+| Chiến dịch Lượt tương tác mới - 1806 | 120252531135370110 | top_only | 437.817 | 3 | n/a (profile) | 6,13% | n/a | 575 | **Giữ + sunset watch** |
+| Chiến dịch Lượt tương tác - Bán - Bản sao | 120252990977040110 | bottom | 302.001 | 10 | **30.200** | 3,10% | 60,0% | 22 | **Giữ — watch cost** |
+
+**Verdict window (11–12/07):** Phễu **18.580**/tin → Retarget **32.425**/tin → 1806 (profile KPI, 211 link click).
 
 ---
 
-## Campaigns đang ACTIVE (3)
+## Jul MTD 01–13/07 (tham chiếu calendar)
 
-> Phân tích chi tiết: [`output/06-active-campaigns-analysis.md`](06-active-campaigns-analysis.md)
+| Chỉ số | Giá trị |
+|---|---:|
+| Meta spend | **3.212.508 VND** |
+| Tin nhắn bắt đầu | **118** |
+| Chi phí/tin nhắn | **27.225 VND** |
 
-| Campaign | Ngân sách | Ghi chú |
+Finance Sheet + ROAS thực: [`03-finance-summary.md`](03-finance-summary.md).
+
+---
+
+## Phễu — cấu trúc inventory (fetch 13/07)
+
+| Loại | Trạng thái | Ghi chú |
 |---|---|---|
-| Chiến dịch phễu - target tin nhắn | Lifetime 4.200.000 VND | Mới nhất (29/6), CTR cao nhất (5,42%), chi phí/tin nhắn thấp nhất (16.799) |
-| Chiến dịch Lượt tương tác - Bán - Bản sao | — | 16 lead + 16 tin nhắn, chi phí/tin nhắn 25.777 |
-| Chiến dịch Lượt tương tác mới - 1806 | Lifetime 3.950.000 VND | Chi tiêu lớn nhất (2,79M), ~71% lifetime đã dùng, chi phí/tin nhắn 55.790 |
+| Ad sets | **2** | ACTIVE: Lượt tương tác mới · PAUSED: nỗi sợ 2 (HardWear) |
+| Ads | 3 | Nỗi sợ ACTIVE · HardWear ADSET_PAUSED (last spend 10/07) · carousel PAUSED |
+
+Ad-level winner PERIOD: **「Nỗi sợ」19.731 VND/tin** (28 mess). Xem §7.1 [`06`](06-active-campaigns-analysis.md).
 
 ---
 
-## Phân bổ chi tiêu theo loại campaign
+## Campaigns PAUSED (không chi tiêu trong kỳ PRIMARY)
 
-| Nhóm | Chi tiêu (VND) | % tổng | Ghi chú |
-|---|---:|---:|---|
-| Engagement (Lượt tương tác / phễu) | 5.775.633 | 67,6% | Phù hợp mục tiêu IG DM |
-| Traffic (Lưu lượng truy cập) | 2.770.468 | 32,4% | Chi phí/tin nhắn cao (138k) — cân nhắc giảm |
+Các campaign cũ (Traffic, 2905, Bản sao…) **PAUSED** — không spend PRIMARY. Không đưa vào benchmark ACTIVE.
 
 ---
 
-## KPI conversion (Quisirella context)
+## Finance cross-ref (T7 MTD)
 
-Quisirella chốt đơn chủ yếu qua **Instagram DM**, không qua pixel. Do đó:
+| Chỉ số T7 MTD | Giá trị |
+|---|---:|
+| Doanh thu Sheet | 237.450.000 VND |
+| Meta spend | 3.212.508 VND |
+| Doanh thu / chi phí ads | **73,91×** *(partial)* |
 
-- **Tin nhắn bắt đầu (7 ngày)** là proxy conversion quan trọng hơn purchase Meta (chỉ 3).
-- **Lead Meta** (103) bao gồm cả lead form/messaging — cần đối chiếu Sheet để biết bao nhiêu thành đơn thật.
-- ROAS Meta (~2,8M/purchase) **không phản ánh thực tế** — xem file 03.
+Chi tiết: [`03-finance-summary.md`](03-finance-summary.md)
 
 ---
 
-## Lưu ý tracking
+## Phụ lục nguồn
 
-- 3 purchase Meta trong kỳ có thể là event tự động, không đại diện toàn bộ doanh thu.
-- Ưu tiên theo dõi: tin nhắn bắt đầu → DM chốt → ghi Sheet (khi tích hợp).
+| File | Nội dung |
+|---|---|
+| `data/meta_fetch/account_insights_2026-07-07_2026-07-13.json` | Account PRIMARY |
+| `data/meta_fetch/account_insights_2026-07-01_2026-07-13.json` | Account Jul MTD |
+| `data/meta_fetch/active/*_insights.json` | Campaign insights |
+| `data/meta_fetch/fetch_manifest_2026-07-07_2026-07-13.json` | Manifest fetch |

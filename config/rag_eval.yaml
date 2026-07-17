@@ -28,7 +28,8 @@ intent_queries:
     expect_intent: ig_organic_copy
     via_guard: false
   - query: "doc lai bao cao moi nhat"
-    expect_intent: cached_read
+    expect_intent: full_business
+    accept_intents: [full_business, ads_analysis]
     via_guard: false
   - query: "tin nhan bao nhieu"
     expect_intent: meta_lookup

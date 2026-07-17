@@ -1,9 +1,9 @@
 ---
 title: Tổng hợp tài chính — Quisirella
-generated_at: 2026-07-06
-data_range: 2026-07-01 đến 2026-07-06
+generated_at: 2026-07-13
+data_range: 2026-07-01 đến 2026-07-13
 sources: [google_sheets, meta_graph_api]
-data_status: partial
+data_status: ok
 profit_target_monthly_vnd: 70000000
 ad_account_id: act_400356462876861
 ---
@@ -14,38 +14,83 @@ ad_account_id: act_400356462876861
 
 | Nguồn | Trạng thái | Ghi chú |
 |---|---|---|
-| **Google Sheets** | ok | `finance-fetcher` → `bao_gia_2026_summary.json` (fetch **2026-07-06 11:49**) |
-| **Meta Ads API** | partial | Spend **01–06/07** (6 ngày) — calendar month T7 chưa hết |
+| **Google Sheets** | ok | `fetch-finance --month 2026-07` → `bao_gia_2026_summary.json` (fetch **2026-07-13**) |
+| **Meta Ads API** | ok | MTD 01–13/07 — `account_insights_2026-07-01_2026-07-13.json`; PRIMARY 07–13 |
 
-> Purchase Meta **không phản ánh doanh thu thật** (chốt qua Instagram DM).
+> Purchase Meta **không phản ánh doanh thu thật** (chốt qua Instagram DM). **Doanh thu / chi phí ads** = M ÷ Meta spend — *không* gọi "ROAS Meta".
+
+---
+
+## Executive summary — T7 MTD (01–13/07)
+
+| Chỉ số | Giá trị | Nhận xét |
+|---|---:|---|
+| **Doanh thu / chi phí ads** | **73,91×** † | Partial month — không dùng để scale |
+| Meta spend MTD | **3.212.508 VND** | Pace ~7,7M/tháng (13/31) |
+| Doanh thu Sheet (M9) | **237.450.000 VND** | Mẫu nhỏ (9 đơn) |
+| Lợi nhuận Sheet (K9) | **59.376.565 VND** | 84,8% target 70M |
+| Chi phí/đơn (ads) | **356.945 VND** | 3.212.508 / 9 |
+| Chi phí/tin nhắn MTD | **27.225 VND** | 118 tin nhắn |
+| LN sau ads | **56.164.057 VND** | K9 − Meta spend |
+
+† **T7 partial** — không dùng 73,91× để scale budget.
+
+**Verdict:** Quảng cáo **đáng tiền** — LN sau ads **56.164.057 VND** MTD; giữ budget pace ~7–8M/tháng; đọc lại **31/07** calendar month. Chi tiết ACTIVE: [`06`](06-active-campaigns-analysis.md).
 
 ---
 
 ## Tháng 7/2026 — Sheet MTD (BÁO GIÁ 2026)
 
-Nguồn: `data/finance_fetch/bao_gia_2026_summary.json` — cells M9, K9, H9. Sheet = **Tháng 7/2026 MTD** tại thời điểm fetch 06/07.
+Nguồn: `data/finance_fetch/bao_gia_2026_summary.json` — cells M9, K9, H9. Fetch **13/07/2026**.
 
 | Chỉ số | Giá trị | Nguồn |
 |---|---|---:|
-| **Doanh thu đạt được** | **132.000.000 VND** | M9 |
-| **Lợi nhuận đạt được** | **32.091.273 VND** | K9 |
-| **Số lượng bán theo tháng** | **8** | H9 |
-| Quảng cáo (Sheet YTD ref) | 44.597.147 VND | D8 — *không dùng cho ROAS* |
+| **Doanh thu đạt được** | **237.450.000 VND** | M9 |
+| **Lợi nhuận đạt được** | **59.376.565 VND** | K9 |
+| **Số lượng bán theo tháng** | **9** | H9 |
+| Quảng cáo (Sheet YTD ref) | 52.020.577 VND | D8 — *không dùng cho ROAS* |
+
+**Ghi chú kinh doanh:** T7 có **đơn lớn, biên lợi nhuận cao** — AOV cao trên 9 đơn. Doanh thu mạnh nhưng **mẫu nhỏ**; không dùng làm baseline scale ads.
 
 ---
 
-## ROAS thực vs Meta spend
+## ROAS thực vs Meta spend — T7 MTD
 
-| Chỉ số | Công thức | Tháng 7/2026 |
+| Chỉ số | Công thức | Tháng 7/2026 (01–13/07) |
 |---|---|---:|
-| Meta spend | `monthly_spend_2026.json` (01–06/07) | **1.399.459 VND** |
-| Doanh thu Sheet | M9 (MTD) | **132.000.000 VND** |
-| **Doanh thu / chi phí ads** | Doanh thu / Meta spend | **94,4×** *(partial — khác kỳ)* |
-| **Chi phí/đơn** | Meta spend / SL bán | **174.799 VND** *(partial)* |
-| Tin nhắn (7 ngày) | account insights | **61** |
-| Chi phí/tin nhắn | spend / mess | **22.924 VND** |
+| Meta spend | `account_insights_2026-07-01_2026-07-13.json` | **3.212.508 VND** |
+| Doanh thu Sheet | M9 (MTD) | **237.450.000 VND** |
+| **Doanh thu / chi phí ads** | Doanh thu / Meta spend | **73,91×** *(partial)* |
+| **Chi phí/đơn** | Meta spend / SL bán | **356.945 VND** |
+| Tin nhắn (7 ngày) | account insights MTD | **118** |
+| Chi phí/tin nhắn | spend / mess | **27.225 VND** |
+| Lợi nhuận − ads | K9 − Meta spend | **56.164.057 VND** |
 
-**Lưu ý:** Sheet MTD vs Meta 6 ngày — **không** coi 94× là ROAS tháng. Pace spend T7: **~7,2 triệu**/tháng (1.398.394 × 31÷6).
+**Lưu ý:** 9 đơn — SKU 1-của-1; không coi DT/CP raw là signal scale. Dòng **Quảng cáo** Sheet chỉ tham chiếu.
+
+---
+
+## So sánh — T7 vs 3 tháng gần nhất (T4, T5, T6)
+
+Nguồn Sheet: `bao_gia_2026_summary.json` (M, K, H). Meta T4–T6: `monthly_spend_2026.json` / archive insights.
+
+| Tháng | Doanh thu (M) | Lợi nhuận (K) | Đơn (H) | Meta spend | **DT/CP ads** | LN sau ads* |
+|---|---:|---:|---:|---:|---:|---:|
+| **T4** | 178.600.000 | 75.597.540 | 23 | 7.776.496 | **22,9×** | 67,8M |
+| **T5** | 67.840.000 | 61.081.014 | 34 | 8.059.708 | **8,4×** | 53,0M |
+| **T6** | 218.500.000 | 45.647.766 | 31 | 8.502.842 | **25,7×** | 37,1M |
+| **T7 MTD** | 237.450.000 | 59.376.565 | 9 | 3.212.508 | **73,91×**† | 56,2M |
+
+\* LN sau ads = lợi nhuận Sheet − Meta spend (tham chiếu).  
+† T7 partial (13/31 ngày) — không so sánh trực tiếp DT/CP raw với tháng full.
+
+**TB có trọng số T4–T6:** Doanh thu **464.940.000** ÷ Spend **24.339.046** = **~19,1×**.
+
+### Chẩn đoán
+
+1. **T7 doanh thu mạnh** (237,45M) trên 9 đơn — AOV cao; không kết luận scale.
+2. **LN MTD 59,4M** đã gần target 70M với ~42% tháng — pace tốt nhưng mẫu nhỏ.
+3. **Không scale budget** vì DT/CP 73,91× raw — chờ đủ tháng + đủ đơn.
 
 ---
 
@@ -54,60 +99,24 @@ Nguồn: `data/finance_fetch/bao_gia_2026_summary.json` — cells M9, K9, H9. Sh
 | Chỉ số | Giá trị | Ghi chú |
 |---|---:|---|
 | Target | **70.000.000 VND** | Mục tiêu kinh doanh |
-| Lợi nhuận MTD (06/07) | **32.091.273 VND** | K9 — **45,8%** target |
-| Ngày trong tháng | 6 / 31 | ~19% tháng |
-| Còn thiếu | **37.908.727 VND** | Cần thêm ~10 đơn nếu giữ ~4M lãi/đơn |
-| Meta spend MTD (01–06/07) | **1.399.459 VND** | account + 3 ACTIVE |
-| Meta spend pace | ~**7,2 triệu**/tháng | thấp hơn T6 (8,5M) |
-| Chi phí/tin nhắn MTD | **22.924 VND** | T6 full tháng: **54.505** |
-
-**Nhận xét:** Nhịp lợi nhuận **đang trên target theo lịch**, nhưng mẫu nhỏ (8 đơn) — không kết luận sớm.
+| Lợi nhuận MTD (13/07) | **59.376.565 VND** | K9 — **84,8%** target |
+| Ngày trong tháng | 13 / 31 | ~42% tháng |
+| Còn thiếu | **10.623.435 VND** | Pace LN **trên** target theo lịch |
+| Meta spend MTD | **3.212.508 VND** | pace ~7,7M/tháng |
+| Chi phí/tin nhắn MTD | **27.225 VND** | Account-level |
 
 ---
 
-## Tỉ suất quảng cáo vs lợi nhuận — 2026 (Sheet + Meta API)
+## ACTIVE campaigns — Meta PRIMARY 07–13/07
 
-Nguồn Meta: `data/meta_fetch/monthly_spend_2026.json` — calendar month T1–T6, T7 = **01–06/07**.
+| Campaign | Spend | Tin nhắn | Chi phí/tin nhắn | funnel_role |
+|---|---:|---:|---:|---|
+| phễu tin nhắn | 841.469 | 36 | **23.374** | top_middle |
+| Retarget Bán | 302.001 | 10 | **30.200** | bottom |
+| 1806 Profile | 437.817 | 3 | n/a (profile) | top_only |
+| **Account PRIMARY** | **1.581.287** | **49** | **32.271** | — |
 
-| Tháng | Lợi nhuận (K) | Doanh thu (M) | Đơn | Meta spend | Tin nhắn | CP mess | **Ads/LN** | **DT/CP ads** | LN sau ads* |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| T1 | 55.545.203 | 192.500.000 | 40 | 6.014.036 | 167 | 36.012 | **10,8%** | 32,0× | 49,5M |
-| T2 | 52.007.073 | 180.185.000 | 37 | 6.783.585 | 245 | 27.688 | **13,0%** | 26,6× | 45,2M |
-| T3 | 94.282.940 | 335.525.000 | 46 | 7.745.086 | 176 | 44.006 | **8,2%** | 43,3× | 86,5M |
-| T4 | 75.597.540 | 178.600.000 | 23 | 7.776.496 | 162 | 48.003 | **10,3%** | 23,0× | 67,8M |
-| T5 | 61.081.014 | 67.840.000 | 34 | 8.059.708 | 162 | 49.751 | **13,2%** | 8,4× | 53,0M |
-| T6 | 45.647.766 | 218.500.000 | 31 | 8.502.842 | 156 | 54.505 | **18,6%** | 25,7× | 37,1M |
-| T7 MTD | 32.091.273 | 132.000.000 | 8 | 1.398.394 | 61 | 22.924 | 4,4%† | 94,4×† | 30,7M |
-
-\* LN sau ads = lợi nhuận Sheet − Meta spend (tham chiếu, chưa trừ chi phí khác).  
-† T7 partial — không so sánh trực tiếp với tháng full.
-
-**Xu hướng spend:** 6,0M (T1) → 8,5M (T6), tăng dần ~+42% trong 6 tháng. T7 pace ~7,2M — **thấp hơn T6**.
-
-### Kết luận tỉ suất (số thật API)
-
-| Câu hỏi | Trả lời |
-|---|---|
-| **Tỉ suất ads/lợi nhuận đã tối ưu?** | **Ở mức hợp lý** — dao động **8–19%** LN; target 70M với ~8M ads = **11,4%**. T6 cao nhất (18,6%) vì **LN thấp**, không vì spend spike lớn (+4% vs T5). T7 CP mess **22.924** — tốt nhất 6 tháng qua. |
-| **Doanh thu phụ thuộc ngân sách ads?** | **Không tuyến tính.** T3: LN **94M** (CP mess 44k); T6: LN **46M** (CP mess 55k, spend cao nhất). T2 CP mess **tốt nhất** (28k) nhưng LN chỉ 52M. **Mix SKU + số đơn** quyết định, không phải spend. |
-| **Tăng budget để đạt 70M?** | **Chưa.** Spend đã tăng T1→T6 mà T6 LN yếu nhất. T7 funnel hiệu quả hơn — **giữ ~7–8M**, tối ưu chốt DM + inventory trước khi scale. |
-| **Insight bất ngờ** | Tháng **CP mess cao** (T3–T6) vẫn có thể LN cao nếu **đơn lớn/margin tốt** — đừng cắt ads chỉ vì CP mess khi inventory premium còn. |
-
-> **Attribution:** Đơn Sheet không map 1-1 ngày click ads. Bảng trên là **tham chiếu kinh doanh**, không phải causal ROAS.
-
----
-
-## So sánh với kỳ trước (tham chiếu)
-
-| Chỉ số | Tháng 6/2026 | Tháng 7 MTD (06/07) |
-|---|---:|---:|
-| Doanh thu đạt | 218.500.000 VND | 132.000.000 VND |
-| Lợi nhuận đạt | 45.647.766 VND | 32.091.273 VND |
-| SL bán | 31 | 8 |
-| Meta spend | 8.502.842 VND | 1.398.394 VND *(01–06/07)* |
-| Chi phí/tin nhắn | 54.505 VND | **22.924 VND** |
-
-SKU **1-của-1** — doanh thu tháng biến động; không benchmark như e-commerce volume.
+Chi tiết campaign: [`06-active-campaigns-analysis.md`](06-active-campaigns-analysis.md) · Performance: [`01`](01-meta-ads-performance.md).
 
 ---
 
@@ -115,31 +124,30 @@ SKU **1-của-1** — doanh thu tháng biến động; không benchmark như e-c
 
 | Chỉ số | Giá trị | Cell |
 |---|---|---:|
-| Doanh thu đạt được YTD | 1.305.150.000 VND | D6 |
-| Lợi nhuận đạt được YTD | 416.252.809 VND | D4 |
-| ROS | 31,89% | B2 |
-| Hàng tồn kho | 246.124.002 VND | D7 |
+| Doanh thu đạt được YTD | 1.410.600.000 VND | D6 |
+| Lợi nhuận đạt được YTD | 443.538.101 VND | D4 |
+| ROS | 31,44% | B2 |
+| Hàng tồn kho | 216.948.324 VND | D7 |
 
 ---
 
-## Liên kết phân tích ACTIVE
+## Measurement plan
 
-Chi tiết campaign + unit economics partial: [`06-active-campaigns-analysis.md`](06-active-campaigns-analysis.md)
-
-| Campaign | Spend 01–06/07 | Tin nhắn | Chi phí/tin nhắn |
-|---|---:|---:|---:|
-| phễu tin nhắn | 730.810 | 35 | 20.880 |
-| 1806 Profile | 394.183 | 11 | 35.835 |
-| Retarget | 274.466 | 16 | 17.154 |
-| **Account** | **1.399.459** | **62** | **22.572** |
+| Metric | Ngưỡng | Đọc lại |
+|---|---|---|
+| DT/CP ads (calendar month) | So sánh vs TB T4–T6 (~19×) | **31/07/2026** |
+| Lợi nhuận Sheet vs target 70M | ≥70M | 31/07/2026 |
+| Chi phí/tin nhắn account | <25k (phễu+retarget) | **16/07**, **19/07** |
+| LN sau ads | Ghi nhận trend | 31/07/2026 |
 
 ---
 
 ## Lưu ý Quisirella
 
 - Purchase Meta **không phản ánh doanh thu thật** (chốt qua Instagram DM).
-- Dòng **Quảng cáo** trên Sheet chỉ để tham chiếu — **ROAS dùng Meta API spend**.
-- **Không có** campaign-level ROAS từ Sheet — chỉ account-level.
+- Dòng **Quảng cáo** trên Sheet chỉ tham chiếu — **ROAS dùng Meta API spend**.
+- **Không có** campaign-level ROAS từ Sheet — account-level + campaign spend drill.
+- Đơn chốt DM **không** map 1-1 calendar month với ngày click ads.
 
 ---
 
@@ -147,7 +155,8 @@ Chi tiết campaign + unit economics partial: [`06-active-campaigns-analysis.md`
 
 ```bash
 python -m quisirella fetch-finance --month 2026-07
-python scripts/_fetch_monthly_meta.py   # account calendar month insights
+# meta-fetcher → data/meta_fetch/ (PRIMARY 07–13 + MTD 01–13)
 ```
 
-Raw: `data/finance_fetch/bao_gia_2026_summary.json` · Meta: `data/meta_fetch/monthly_spend_2026.json` · `account_insights_2026-07-01_2026-07-06.json`
+**Raw:** `data/finance_fetch/bao_gia_2026_summary.json` · `data/finance_fetch/manifest.json`  
+**Meta:** `data/meta_fetch/account_insights_2026-07-01_2026-07-13.json` · `data/meta_fetch/account_insights_2026-07-07_2026-07-13.json` · `data/meta_fetch/fetch_manifest_2026-07-07_2026-07-13.json`

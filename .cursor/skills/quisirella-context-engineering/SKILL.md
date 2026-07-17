@@ -56,7 +56,7 @@ A report fails if **any single dimension** fails — no averaging away problems.
 
 ### 6. Subagents only when isolation pays
 
-Multi-agent costs ~15x tokens vs single-agent. Use the pipeline for full analysis runs (fetch 30-day insights → diagnose → write reports). For simple questions ("chi phí/tin nhắn campaign phễu là bao nhiêu?"), the main agent reads `output/06` directly — no subagents. Three agents is the right count; do not add more.
+Multi-agent costs ~15x tokens vs single-agent. Use the pipeline for full analysis runs (fetch 30-day insights → diagnose → write reports). For Meta number lookups (`meta_lookup`, `ads_analysis`, `full_business`), **always launch meta-fetcher** — read `output/06` only when user sets `skip_refresh` modifier. Three agents is the right count; do not add more.
 
 ## References
 

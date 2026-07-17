@@ -55,9 +55,10 @@ cases:
   - id: L2-02
     tier: L2_medium
     prompt: "doc lai bao cao moi nhat campaign"
-    expect_intent: cached_read
+    expect_intent: full_business
+    accept_intents: [full_business, ads_analysis]
     needs_rag: false
-    verify: "Đọc output/06 hoặc 01 nếu <12h"
+    verify: "Bắt buộc fetch — không đọc cache output/"
 
   - id: L2-03
     tier: L2_medium
@@ -126,7 +127,7 @@ cases:
     accept_intents: [cached_read, ads_analysis]
     expect_modifiers: [skip_refresh]
     needs_rag: false
-    verify: "Modifier skip_refresh; không auto-fetch đầu chat"
+    verify: "Modifier skip_refresh; đọc output/, không fetch"
 
   - id: L4-02
     tier: L4_expert
